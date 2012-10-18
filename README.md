@@ -1,4 +1,4 @@
 whatup-website
 ==============
 
-Web client for Project WhatUp
+Web client for Project WhatUp.
