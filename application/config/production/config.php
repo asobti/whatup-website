@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://arena.projectwhatup.us/';
+$config['base_url']	= 'http://projectwhatup.us/';
 
 /*
 |--------------------------------------------------------------------------
@@ -224,7 +224,7 @@ $config['cache_path'] = '';
 | MUST set an encryption key.  See the user guide for info.
 |
 */
-$config['encryption_key'] = 'U5DC7Sb3eZKa25k6q748eGiJWAra9YeM';
+$config['encryption_key'] = '5p9UwgoQZRS5DXwDn1C502I9lYhSUSZ0';
 
 /*
 |--------------------------------------------------------------------------
