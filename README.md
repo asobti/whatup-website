@@ -14,3 +14,5 @@ Basically, config files in application/config/production override the config fil
 No changes should ever be made to any file in the system/ directory. Leaving that directory untouched makes it easy to update CI when new versions are released. Changes required in any file in the system/ directory should be made by extending that file in the application/ directory so that changes persist after updating.
 
 All controllers should extend MY_Controller and models should extend MY_Model. Neither of these should extend CI's CI_Controller or CI_Model classes. This makes the app easily extensible at a later stage.
+
+Deployments to production server are automatic when pushes are made to master branch.
