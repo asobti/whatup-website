@@ -6,18 +6,21 @@ class Posts extends MY_Controller {
 		parent::__construct();
 		$this->load->model('posts_model');
 	}
-	public function index()
-	{		
-		$posts = $this->posts_model->getPosts();
+	public function get($page = 1)
+	{
+		$posts = $this->posts_model->getPosts($page);
 
 		if (get_class($posts) === "Curl_Error") {
-			echo sprintf("There was an error: Error code: %d. Error string: %s."
-							, $posts->getErrorCode()
-							, $posts->getErrorString() 
-						);
+			$error = new stdClass();
+			$error->error_code = $posts->getErrorCode();
+			$error->error_string = $posts->getErrorString();
+
+			echo "<pre>";
+			print_r(json_encode($error));
+			echo "</pre>";
 		} else {
 			echo "<pre>";
-			print_r($posts);
+			print_r(json_encode($posts));
 			echo "</pre>";
 		}
 	}
