@@ -6,6 +6,7 @@ class Posts extends MY_Controller {
 		parent::__construct();
 		$this->load->model('posts_model');
 	}
+	
 	public function get($page = 1)
 	{
 		$posts = $this->posts_model->getPosts($page);
