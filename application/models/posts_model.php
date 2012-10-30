@@ -6,7 +6,7 @@ class Posts_model extends MY_Model {
 
 		public function __construct() {
 			parent::__construct();
-			$this->posts_endpoint = $this->endpoint . "post";
+			$this->posts_endpoint = $this->endpoint . "posts";
 		}
 
 
