@@ -49,7 +49,7 @@
       </div>
     </div>
 
-    <div class="container">
+    <div class="container" style="margin-top: 70px;">
 
       <!-- Example row of columns -->
       <div class="row">
@@ -66,7 +66,7 @@
         </div>
       </div>
 
-	<div> 
+	<div style="margin-top: 50px;"> 
 		<div class="row-fluid" style="border-bottom: 1px solid black">
 			<div class="span6">
 				Title
@@ -93,8 +93,8 @@ Ut vitae metus sit amet metus accumsan dapibus non in enim. Nulla vitae mauris n
 				@whatifmynameissuperlong
 				</div>
 			</div>	 
-			<div class="span9">
-				<div style="padding-top: 15px">
+			<div class="span3 pull-right">
+				<div class="pull-right" style="padding-top: 15px">
 				#tag1 #tag2
 				</div>
 			</div>	
