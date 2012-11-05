@@ -49,6 +49,40 @@
       </div>
     </div>
 
+
+
+<script type="text/template" id="post">
+	<div style="margin-top: 50px;"> 
+		<div class="row-fluid" style="border-bottom: 1px solid black">
+			<div class="span6">
+				<%= topic %>
+			</div>	
+			<div class="span6" style="text-align:right">
+				<%= created_at %>
+			</div>	
+		</div>
+		<div class="row-fluid">
+			<div class="span12" style="margin-top: 5px; line-height: 26px;">
+			<%= body %>
+			</div>	
+		</div>
+
+		<div class="row-fluid" style="vertical-align: middle">
+			<div class="span3">
+				<img src="http://placehold.it/50x50" style="margin-right: 5px;" class="pull-left" />
+				<div style="padding-top: 15px">
+				@<%= user_id %>
+				</div>
+			</div>	 
+			<div class="span3 pull-right">
+				<div class="pull-right" style="padding-top: 15px">
+				<%= tags %>
+				</div>
+			</div>	
+		</div>
+	</div>
+</script>
+
     <div class="container" style="margin-top: 70px;">
 
       <!-- Example row of columns -->
@@ -66,40 +100,9 @@
         </div>
       </div>
 
-	<div style="margin-top: 50px;"> 
-		<div class="row-fluid" style="border-bottom: 1px solid black">
-			<div class="span6">
-				Title
-			</div>	
-			<div class="span6" style="text-align:right">
-				Timestamp
-			</div>	
-		</div>
-		<div class="row-fluid">
-			<div class="span12" style="margin-top: 5px; line-height: 26px;">
-<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed felis et lacus adipiscing suscipit. Etiam id nibh arcu. Aliquam erat volutpat. Vivamus vehicula, sapien at adipiscing convallis, felis neque euismod arcu, in accumsan augue tellus in nisl. Integer scelerisque vulputate sapien porta malesuada. Curabitur vehicula lacus eget est commodo vitae egestas arcu pellentesque. Etiam sem enim, iaculis eget dignissim at, dignissim a sapien. Ut euismod tortor ut turpis fringilla aliquet.
-</p>
+   <div class="posts">
 
-<p>
-Ut vitae metus sit amet metus accumsan dapibus non in enim. Nulla vitae mauris nisl, nec egestas purus. Duis sed tellus sapien, quis mollis neque. Quisque interdum sapien sed ligula auctor varius. Donec dictum bibendum leo sit amet bibendum. Pellentesque nec fermentum justo. Mauris congue consectetur tellus sit amet tincidunt. Donec ut urna et felis convallis mattis sit amet ultrices lectus. Sed blandit ante eget magna rutrum eu hendrerit elit tincidunt. Praesent fermentum, nisl nec tempus pulvinar, odio mauris ultricies tellus, et fermentum enim quam vitae turpis. Vestibulum ac nibh quis metus tincidunt semper. Duis volutpat nulla id enim fringilla at venenatis nisi dignissim. Vivamus consequat ullamcorper augue non scelerisque. Morbi ultrices dapibus lacus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p> 
-
-			</div>	
-		</div>
-
-		<div class="row-fluid" style="vertical-align: middle">
-			<div class="span3">
-				<img src="http://placehold.it/50x50" style="margin-right: 5px;" class="pull-left" />
-				<div style="padding-top: 15px">
-				@whatifmynameissuperlong
-				</div>
-			</div>	 
-			<div class="span3 pull-right">
-				<div class="pull-right" style="padding-top: 15px">
-				#tag1 #tag2
-				</div>
-			</div>	
-		</div>
-	</div>
+   </div>
 
 
       <hr>
@@ -126,6 +129,15 @@ Ut vitae metus sit amet metus accumsan dapibus non in enim. Nulla vitae mauris n
     <script src="assets/js/bootstrap-collapse.js"></script>
     <script src="assets/js/bootstrap-carousel.js"></script>
     <script src="assets/js/bootstrap-typeahead.js"></script>
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
+<script type="text/javascript" src="assets/js/json2.js"></script>
+<script type="text/javascript" src="assets/js/underscore.js"></script>
+<script type="text/javascript" src="assets/js/backbone.js"></script>
+<script type="text/javascript" src="assets/js/models/post.js"></script>
+<script type="text/javascript" src="assets/js/views/post.js"></script>
+<script type="text/javascript" src="assets/js/routes/app.js"></script>
 
   </body>
 </html>
