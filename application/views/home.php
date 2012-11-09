@@ -95,7 +95,7 @@
 	  <input type="text" class="search-query" placeholder="Search">
 	</form>
        </div>
-        <div class="span2 pull-right">
+        <div class="span2 pull-right" style="text-align:right">
 	  <h3>Recent</h3>
         </div>
       </div>
