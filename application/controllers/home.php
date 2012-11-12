@@ -13,7 +13,7 @@ class Home extends MY_Controller {
 	public function posts()
 	{
 		$this->load->view("header");
-		$this->load->view("posts");
+		$this->load->view("post");
 		$this->load->view("footer");
 	}
 
