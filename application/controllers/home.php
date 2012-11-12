@@ -9,6 +9,14 @@ class Home extends MY_Controller {
 		$this->load->view("footer");
 	}
 
+
+	public function posts()
+	{
+		$this->load->view("header");
+		$this->load->view("posts");
+		$this->load->view("footer");
+	}
+
 }
 
 /* End of file home.php */
