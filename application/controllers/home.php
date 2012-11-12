@@ -10,7 +10,7 @@ class Home extends MY_Controller {
 	}
 
 
-	public function post()
+	public function posts()
 	{
 		$this->load->view("header");
 		$this->load->view("post");
