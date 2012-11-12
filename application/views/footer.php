@@ -1,5 +1,6 @@
 
 
+	<div class="clearfix"></div>
       <hr>
 
       <footer>

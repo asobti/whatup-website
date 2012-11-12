@@ -42,7 +42,7 @@
           </a>
           <a class="brand" href="#">WhatUp</a>
           <div class="nav-collapse collapse">
-		<button class="btn btn-primary pull-right">New Post</button>
+		<button class="btn btn-primary pull-right" id="new_post_btn">New Post</button>
           </div><!--/.nav-collapse -->
         </div>
       </div>

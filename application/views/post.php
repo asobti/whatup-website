@@ -1,13 +1,13 @@
       <!-- Example row of columns -->
       <div class="row">
-        <div class="span8">
+        <div class="span12">
           <h3>Post</h3>
         </div>
       </div>
 
    <div class="row">
-	<div class="span8">
-		<textarea id="new_post_content"></textarea>
+	<div>
+		<textarea id="new_post_content" class="field span12" rows="10"></textarea>
 	</div>
    </div>
 
