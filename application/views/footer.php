@@ -1,4 +1,15 @@
 
+
+      <hr>
+
+      <footer>
+        <p>&copy; Project WhatUp 2012</p>
+	<p>Version 1.0.4</p>
+      </footer>
+
+    </div> <!-- /container -->
+
+
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
