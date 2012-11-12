@@ -17,4 +17,3 @@ All controllers should extend MY_Controller and models should extend MY_Model. N
 
 Deployments to production server are automatic when pushes are made to master branch.
 
-// Testing webhook to arena - 2
