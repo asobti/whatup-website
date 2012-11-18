@@ -6,9 +6,9 @@ Post = Backbone.Model.extend({
 
 Posts = Backbone.Collection.extend({
 	model: Post,
-//	url: "http://projectwhatup.us:5000/api/posts",
+	//url: "http://projectwhatup.us:5000/api/posts",
 	url: "test.json",
-	
+
 	parse: function(data)
 	{
 		return data.objects;

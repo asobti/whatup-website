@@ -7,8 +7,8 @@ AppRouter = Backbone.Router.extend({
 	posts:function(){
 		console.log("posts route");
 		this.posts = new Posts();
-		this.postsView = new PostsView({model:this.posts});
 		this.posts.fetch();
+		this.postsView = new PostsView({model:this.posts});		
 		$('#posts').html(this.postsView.render().el);
 	},
 	

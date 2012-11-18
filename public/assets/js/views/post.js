@@ -1,9 +1,10 @@
-PostView = Backbone.View.extend({
-	template:_.template($('#tpl-post').html()),
+console.log('posts view loaded');
 
-	render:function(event_){
-		console.log("Post rendering~" + this.model.topic);
-		$(this.el).html(this.template(this.model.toJSON()));
+PostView = Backbone.View.extend({
+	//template:_.template($('#tpl-post').html()),
+
+	render:function(event_){		
+		//$(this.el).html(this.template(this.model.toJSON()));
 		return this;
 	}
 });
@@ -11,18 +12,15 @@ PostView = Backbone.View.extend({
 PostsView = Backbone.View.extend({
 	tagName:"div",
 
-	initialize:function(){
+	initialize : function(){
 		this.model.bind("reset", this.render, this);
+		console.log('posts view');
 	},
 
 	render:function(event_){
-		_.each(this.model.models, function(post){
-			console.log("Posts rendering~" + post);
+		_.each(this.model.models, function(post){			
 			$(this.el).append(new PostView({model:post}).render().el)
 		}, this);
 		return this;
 	}
-
 });
-
-
