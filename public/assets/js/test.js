@@ -26,7 +26,7 @@ function fib(num)
 	{
 		return 0;
 	}
-	for(int i = 0; i < num-2; i++)
+	for(var i = 0; i < num-2; i++)
 	{
 		var next = l[0] + l[1];
 		l.push(next);
