@@ -1,4 +1,4 @@
-<script type="text/template" id="tpl-post">
+<script type="text/template" id="tpl-post">	
 	<div style="margin-top: 50px;"> 
 		<div class="row-fluid" style="border-bottom: 1px solid black">
 			<div class="span6">

@@ -15,12 +15,46 @@ PostsView = Backbone.View.extend({
 	initialize : function(){
 		this.model.bind("reset", this.render, this);
 		console.log('posts view');
+		
+		this.model.on("add", this.refetch, this);
 	},
 
 	render:function(event_){
 		_.each(this.model.models, function(post){			
-			$(this.el).append(new PostView({model:post}).render().el)
+			this.renderPost(post);
 		}, this);
-		return this;
+
+		return this;	
+	},
+
+	renderPost : function(post) {
+		$(this.el).append(new PostView({model:post}).render().el)
+	},
+
+	events : {		
+		"click #new_post" : "createPost"
+	},
+
+	createPost : function(e){
+		console.log('in createPost');
+		e.preventDefault();
+		
+		var newPostData = {
+			topic : "New Post",
+			body : "new body",
+			created_at : "12345",
+			user_id : 123,
+			tags : []
+		};
+
+		var newPost = new Post(newPostData);
+
+		this.model.add(newPost);		
+		console.log('created new post');		
+	},
+
+	refetch : function(){		
+		console.log('refetching');
+		app.posts.fetch();
 	}
 });

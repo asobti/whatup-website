@@ -29,8 +29,8 @@
     <script src="<?= base_url('assets/js/bootstrap-carousel.js') ?>"></script>
     <script src="<?= base_url('assets/js/bootstrap-typeahead.js') ?>"></script>-->
 
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.js"></script>
-    <script type="text/javascript" src="http://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
+    
+    <!--<script type="text/javascript" src="http://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>-->
     <script type="text/javascript" src="assets/js/json2.js"></script>
     <script type="text/javascript" src="assets/js/underscore.js"></script>
     <script type="text/javascript" src="assets/js/backbone.js"></script>

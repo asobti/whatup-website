@@ -1,4 +1,5 @@
 
+
       <!-- Example row of columns -->
       <div class="row">
         <div class="span2">
@@ -14,8 +15,7 @@
         </div>
       </div>
 
-   <div class="posts">
 
-   </div>
-
-
+  <div class="posts">
+    <button class="btn" id="new_post">New Post</button>
+  </div>
