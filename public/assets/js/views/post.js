@@ -1,17 +1,17 @@
 console.log('posts view loaded');
 
 PostView = Backbone.View.extend({
-	//template:_.template($('#tpl-post').html()),
+	template:_.template($('#tpl-post').html()),
 
 	render:function(event_){		
-		//$(this.el).html(this.template(this.model.toJSON()));
+		$(this.el).html(this.template(this.model.toJSON()));
 		return this;
 	}
 });
 
 PostsView = Backbone.View.extend({
 	tagName:"div",
-
+	el : ".posts",
 	initialize : function(){
 		this.model.bind("reset", this.render, this);
 		console.log('posts view');

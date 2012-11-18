@@ -6,6 +6,7 @@ class Home extends MY_Controller {
 	{
 		$this->load->view("header");
 		$this->load->view("home");
+		$this->load->view('view_post_tpl');
 		$this->load->view("footer");
 	}
 
