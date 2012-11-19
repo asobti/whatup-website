@@ -16,7 +16,7 @@ PostsView = Backbone.View.extend({
 		this.model.bind("reset", this.render, this);
 		console.log('posts view');
 		
-		this.model.on("add", this.refetch, this);
+		//this.model.on("add", this.render, this);
 	},
 
 	render:function(event_){
@@ -41,15 +41,12 @@ PostsView = Backbone.View.extend({
 		
 		var newPostData = {
 			topic : "New Post",
-			body : "new body",
-			created_at : "12345",
-			user_id : 123,
-			tags : []
-		};
+			body : "new body",			
+			user_id : 1,
+		};	
 
-		var newPost = new Post(newPostData);
+		this.model.create(newPostData);
 
-		this.model.add(newPost);		
 		console.log('created new post');		
 	},
 
