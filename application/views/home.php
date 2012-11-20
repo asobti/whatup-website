@@ -15,7 +15,24 @@
         </div>
       </div>
 
+      <!-- Example row of columns -->
+      <div id="post_add" style="display:hidden">
+      <div class="row">
+        <div class="span12">
+          <h3>Post</h3>
+        </div>
+      </div>
 
-  <div class="posts">
-    <button class="btn" id="new_post">New Post</button>
-  </div>
+   <div class="row">
+	<div>
+		<textarea id="new_post_content" class="field span12" rows="10"></textarea>
+	</div>
+   </div>
+
+	<div class="pull-right">
+		<div class="span8">
+			<button class="btn btn-primary pull-right" id="post_add_submit">Submit</button>	
+			<button class="btn btn-primary pull-right" id="post_add_cancel">Cancel</button>	
+		</div>
+	</div>
+	</div>

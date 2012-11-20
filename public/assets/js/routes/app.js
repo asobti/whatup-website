@@ -1,10 +1,34 @@
+
+var MyViews = [];
+
+MyViews.push($('#posts'));
+MyViews.push($('#posts_add'));
+
+function hideViews()
+{
+	for(var i =0; i < MyViews.length; i++)
+	{
+		MyViews[i].hide();
+	}
+}
+
+
+
+
+
 AppRouter = Backbone.Router.extend({
 	routes:{
 		"":"posts",
-		"post/:id":"post"
+		"post/:id":"post",
+		"post/add":"post_add"
+	},
+	
+	cleanviews:function(){
+		hideViews();
 	},
 	
 	posts:function(){
+		this.cleanviews();
 		console.log("posts route");
 		this.posts = new Posts();
 		this.posts.fetch();
@@ -13,13 +37,25 @@ AppRouter = Backbone.Router.extend({
 	},
 	
 	post:function(id){
+		this.cleanviews();
 		console.log("post route");
 		this.post = new Post(id);
 		this.postView = new PostView({model:this.post});
 		this.post.fetch();
 		$('#posts').html(this.postView.render().el);
+	},
+	post_add:function(){
+		this.cleanviews();
+		console.log("post add");
+		$('#posts').hide();
+		$('#post_add').show();
+		$('#post_add_cancel').click(function(){
+			window.history.back();
+		}	
 	}
 });
+
+
 
 var app = new AppRouter();
 Backbone.history.start();
