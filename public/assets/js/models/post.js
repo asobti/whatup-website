@@ -6,15 +6,13 @@ Post = Backbone.Model.extend({
 	defaults : {
 		topic : 'Default title',
 		body : 'Default body',		
-		user_id : 1,
-		//tags : ['test', 'web']
+		user_id : 1
 	}
 });
 
 Posts = Backbone.Collection.extend({
 	model: Post,
-	url: "http://projectwhatup.us:5000/api/posts",
-	//url: "test.json",
+	url: "http://projectwhatup.us:5000/api/posts",	
 
 	parse: function(data) {
 		return data.objects;

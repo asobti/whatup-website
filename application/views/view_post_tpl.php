@@ -23,7 +23,7 @@
 			</div>	 
 			<div class="span3 pull-right">
 				<div class="pull-right" style="padding-top: 15px">
-				<%= tags %>
+				
 				</div>
 			</div>	
 		</div>
