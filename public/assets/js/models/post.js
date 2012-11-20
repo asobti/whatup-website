@@ -18,24 +18,5 @@ Posts = Backbone.Collection.extend({
 
 	parse: function(data) {
 		return data.objects;
-	},
-	create : function(data) {
-		console.log('overriden create');
-		
-		$.ajax({
-			"url" : this.url,						
-			"crossDomain" : true,			
-			"dataType" : 'json',
-			"type" : 'POST',
-			"data" : JSON.stringify(data),
-			"error" : function(err){
-				console.log('new post creation failed');
-				console.log(err);
-			},
-			"success" : function(resp){
-				console.log('new post created');
-				console.log(resp);
-			}
-		});
 	}
 });
