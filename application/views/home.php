@@ -15,6 +15,11 @@
         </div>
       </div>
 
+
+	<div class="posts">
+
+	</div>
+
       <!-- Example row of columns -->
       <div id="post_add" style="display:none">
       <div class="row">
