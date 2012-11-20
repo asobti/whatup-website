@@ -51,7 +51,7 @@ AppRouter = Backbone.Router.extend({
 		$('#post_add').show();
 		$('#post_add_cancel').click(function(){
 			window.history.back();
-		}	
+		});	
 	}
 });
 
