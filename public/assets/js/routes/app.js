@@ -1,4 +1,8 @@
 
+$('#new_post_btn').click(function(){
+	window.location = "#post/add'";
+});
+
 var MyViews = [];
 
 MyViews.push($('#posts'));
