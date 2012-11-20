@@ -16,7 +16,7 @@
       </div>
 
       <!-- Example row of columns -->
-      <div id="post_add" style="display:hidden">
+      <div id="post_add" style="display:none">
       <div class="row">
         <div class="span12">
           <h3>Post</h3>
@@ -31,8 +31,8 @@
 
 	<div class="pull-right">
 		<div class="span8">
-			<button class="btn btn-primary pull-right" id="post_add_submit">Submit</button>	
-			<button class="btn btn-primary pull-right" id="post_add_cancel">Cancel</button>	
+			<button class="btn btn-primary pull-right" id="post_add_submit" style="margin-left:5px;">Submit</button>	
+			<button class="btn btn-primary pull-right" id="post_add_cancel" style="margin-left:5px;">Cancel</button>	
 		</div>
 	</div>
 	</div>
