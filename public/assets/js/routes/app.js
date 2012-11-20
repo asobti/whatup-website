@@ -19,8 +19,8 @@ function hideViews()
 AppRouter = Backbone.Router.extend({
 	routes:{
 		"":"posts",
-		"post/:id":"post",
-		"post/add":"post_add"
+		"post/add":"post_add",
+		"post/:id":"post"
 	},
 	
 	cleanviews:function(){
