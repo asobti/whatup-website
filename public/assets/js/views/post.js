@@ -12,6 +12,7 @@ PostView = Backbone.View.extend({
 PostsView = Backbone.View.extend({
 	tagName:"div",
 	el : ".posts",
+	
 	initialize : function(){
 		this.model.bind("reset", this.render, this);
 		console.log('posts view');
@@ -36,20 +37,29 @@ PostsView = Backbone.View.extend({
 	},
 
 	createPost : function(e){
-		console.log('in createPost');
+		// not necessarry since 'button' element has no default action
+		// leaving it here anyways incase at some point we change it to an anchor element
 		e.preventDefault();
 		
+		// values of the object should be read in from a form
 		var newPostData = {
-			topic : "New Post",
+			topic : "New Post",	
 			body : "new body",			
 			user_id : 1,
 		};	
+		
+		var postCreationStatus = this.model.create(new Post(newPostData), {
+			wait : true 	// waits for server to respond with 200 before adding newly created model to collection
+		});
 
-		var newPostModel = new Post(newPostData);
-		//newPostModel.save();
-		this.model.create(newPostModel);
-
-		console.log('created new post');		
+		if (postCreationStatus !== false) {
+			// API responded with 200 OK
+			console.log('created new post');
+			console.log(postCreationStatus);
+		} else {	
+			// api did not respond with 200 OK
+			console.log('new post creation failed');
+		}		
 	},
 
 	refetch : function(){		
