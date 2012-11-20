@@ -1,5 +1,3 @@
-console.log('posts view loaded');
-
 PostView = Backbone.View.extend({
 	template:_.template($('#tpl-post').html()),
 
@@ -17,10 +15,10 @@ PostsView = Backbone.View.extend({
 		this.model.bind("reset", this.render, this);
 		console.log('posts view');
 		
-		//this.model.on("add", this.render, this);
+		//this.model.on("sync", this.refetch, this);
 	},
 
-	render:function(event_){
+	render: function(event_){
 		_.each(this.model.models, function(post){			
 			this.renderPost(post);
 		}, this);
@@ -46,9 +44,10 @@ PostsView = Backbone.View.extend({
 			topic : "New Post",	
 			body : "new body",			
 			user_id : 1,
-		};	
-		
-		var postCreationStatus = this.model.create(new Post(newPostData), {
+		};
+
+		var newPostModel = new Post(newPostData);
+		var postCreationStatus = this.model.create(newPostModel, {
 			wait : true 	// waits for server to respond with 200 before adding newly created model to collection
 		});
 
@@ -56,6 +55,8 @@ PostsView = Backbone.View.extend({
 			// API responded with 200 OK
 			console.log('created new post');
 			console.log(postCreationStatus);
+			newPostModel.attributes.created_at = 'Just now';
+			this.renderPost(newPostModel);
 		} else {	
 			// api did not respond with 200 OK
 			console.log('new post creation failed');
@@ -64,6 +65,8 @@ PostsView = Backbone.View.extend({
 
 	refetch : function(){		
 		console.log('refetching');
+		app.posts.models = [];
+		console.log(app.posts.models);
 		app.posts.fetch();
 	}
 });
