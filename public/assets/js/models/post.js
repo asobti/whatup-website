@@ -1,4 +1,4 @@
-Post = Backbone.Model.extend({
+Post = Backbone.Model.extend({	
 	initialize: function(){
 		//console.log("post init~" + this.get('topic'));
 	},
@@ -23,13 +23,8 @@ Posts = Backbone.Collection.extend({
 		console.log('overriden create');
 		
 		$.ajax({
-			"url" : this.url,
-			"async" : true,
-			"beforeSend" : function(obj){
-				console.log(obj);
-			},
-			"contentType" : 'application/json',
-			"crossDomain" : true,
+			"url" : this.url,						
+			"crossDomain" : true,			
 			"dataType" : 'json',
 			"type" : 'POST',
 			"data" : JSON.stringify(data),

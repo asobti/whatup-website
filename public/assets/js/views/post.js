@@ -45,7 +45,9 @@ PostsView = Backbone.View.extend({
 			user_id : 1,
 		};	
 
-		this.model.create(newPostData);
+		var newPostModel = new Post(newPostData);
+		//newPostModel.save();
+		this.model.create(newPostModel);
 
 		console.log('created new post');		
 	},
