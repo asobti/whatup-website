@@ -15,6 +15,7 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="<?= base_url('assets/js/jquery.js') ?>"></script>
+    <script src="<?= base_url('assets/js/timeago.js') ?>"></script>
     <script src="<?= base_url('assets/js/bootstrap.min.js') ?>"></script>
     <!--<script src="<?= base_url('assets/js/bootstrap-transition.js') ?>"></script>
     <script src="<?= base_url('assets/js/bootstrap-alert.js') ?>"></script>
@@ -38,6 +39,6 @@
     <script type="text/javascript" src="assets/js/views/post.js"></script>
     <script type="text/javascript" src="assets/js/routes/app.js"></script>
 
-  </body>
+    </body>
 </html>
 

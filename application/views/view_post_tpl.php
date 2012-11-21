@@ -5,7 +5,9 @@
 				<%= topic %>
 			</div>	
 			<div class="span6" style="text-align:right">
-				<%= created_at %>
+				<span class="timeago" title=<%= created_at %>>
+					<%= created_at %>
+				</span>
 			</div>	
 		</div>
 		<div class="row-fluid">
