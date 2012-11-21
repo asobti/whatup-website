@@ -22,12 +22,16 @@ PostsView = Backbone.View.extend({
 		_.each(this.model.models, function(post){			
 			this.renderPost(post);
 		}, this);
-
+		this.timeago();
 		return this;	
 	},
 
 	renderPost : function(post) {
-		$(this.el).append(new PostView({model:post}).render().el)
+		$(this.el).append(new PostView({model:post}).render().el)		
+	},
+
+	timeago : function(){
+		$('.timeago').timeago();
 	},
 
 	events : {		
@@ -55,8 +59,12 @@ PostsView = Backbone.View.extend({
 			// API responded with 200 OK
 			console.log('created new post');
 			console.log(postCreationStatus);
-			newPostModel.attributes.created_at = 'Just now';
+
+			// now that the post has been successfully created it
+			// render it to the view
+			newPostModel.attributes.created_at = (new Date()).toISOString();
 			this.renderPost(newPostModel);
+			this.timeago();			
 		} else {	
 			// api did not respond with 200 OK
 			console.log('new post creation failed');
