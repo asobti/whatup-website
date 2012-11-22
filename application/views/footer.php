@@ -38,6 +38,7 @@
     <script type="text/javascript" src="assets/js/models/post.js"></script>
     <script type="text/javascript" src="assets/js/views/post.js"></script>
     <script type="text/javascript" src="assets/js/routes/app.js"></script>
+    <script type="text/javascript" src="assets/js/view/new_post.js"></script>
 
     </body>
 </html>
