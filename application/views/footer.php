@@ -35,10 +35,12 @@
     <script type="text/javascript" src="assets/js/json2.js"></script>
     <script type="text/javascript" src="assets/js/underscore.js"></script>
     <script type="text/javascript" src="assets/js/backbone.js"></script>
+    <script type="text/javascript" src="assets/js/views/new_post.js"></script>
+    <script type="text/javascript" src="assets/js/views/form.js"></script>
     <script type="text/javascript" src="assets/js/models/post.js"></script>
     <script type="text/javascript" src="assets/js/views/post.js"></script>
     <script type="text/javascript" src="assets/js/routes/app.js"></script>
-    <script type="text/javascript" src="assets/js/view/new_post.js"></script>
+    
 
     </body>
 </html>

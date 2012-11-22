@@ -1,19 +1,23 @@
-NewPost = Backbone.View.extend({
-	el: "#new_post_btn",
+NewPostView = Backbone.View.extend({	
+	el: "#new_post_btn_container",
+	template:_.template($('#tpl-new-btn').html()),
 
 	initialize: function(){
-
+		console.log('init');
 	},
 
 	events : {		
-		"click " + this.el : "test_me"
+		"click #new_post_btn" : "showForm"
 	},
 
 	render: function(){
-
+		console.log('rendering');
+		$(this.el).html(this.template());
+		return this;
 	},
 
-	test_me : function(){
-		alert("tested");
+	 showForm: function(){
+		window.location = "#post/add";
+
 	}
 });

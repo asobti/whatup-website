@@ -1,64 +1,68 @@
-
-$('#new_post_btn').click(function(){
-	window.location = "#post/add";
-});
-
-var MyViews = [];
-
-MyViews.push($('#posts'));
-MyViews.push($('#posts_add'));
-
-function hideViews()
-{
-	for(var i =0; i < MyViews.length; i++)
-	{
-		MyViews[i].hide();
-	}
-}
-
-
-
-
-
 AppRouter = Backbone.Router.extend({
 	routes:{
 		"":"posts",
-		"post/add":"post_add",
-		"post/:id":"post"
+		"post/add":"post_add"
+		//"post/:id":"post"
 	},
-	
-	cleanviews:function(){
-		hideViews();
+
+	initialize : function(){		
+
 	},
-	
+
 	posts:function(){
-		this.cleanviews();
-		console.log("posts route");
-		this.posts = new Posts();
-		this.posts.fetch();
-		this.postsView = new PostsView({model:this.posts});		
+		console.log("posts route");	
+
+		if (typeof this.fetchedPosts === 'undefined') {
+			this.fetchedPosts = new Posts();
+			this.fetchedPosts.fetch();	
+		}
+		
+		if (typeof this.postsView === 'undefined') {
+			console.log('is undefined');
+			this.postsView = new PostsView({model: this.fetchedPosts});				
+		}			
+
+		console.log(this.postsView);
+
+		if (typeof this.newPost === 'undefined') {
+			this.newPost = new NewPostView();	
+			this.newPost.render();
+		} else {
+			$(this.newPost.el).show();
+		}
+		
 		$('#posts').html(this.postsView.render().el);
+		
 	},
 	
 	post:function(id){
-		this.cleanviews();
 		console.log("post route");
 		this.post = new Post(id);
 		this.postView = new PostView({model:this.post});
 		this.post.fetch();
+		this.newPost = new NewPostView();
 		$('#posts').html(this.postView.render().el);
 	},
+
 	post_add:function(){
-		this.cleanviews();
-		console.log("post add");
-		$('#posts').hide();
-		$('#post_add').show();
-		$('#post_add_cancel').click(function(){
-			window.history.back();
-		});	
+
+		if (typeof this.fetchedPosts === 'undefined') {
+			this.fetchedPosts = new Posts();
+			this.fetchedPosts.fetch();	
+		}
+		
+		if (typeof this.postsView === 'undefined') {
+			this.postsView = new PostsView({model: this.fetchedPosts});	
+		}
+
+		if (typeof this.newPost !== 'undefined') {
+			console.log('here');
+			$(this.newPost.el).hide();
+		}
+
+		this.formView = new FormView().render();
 	}
 });
-
 
 
 var app = new AppRouter();

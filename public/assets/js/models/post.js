@@ -7,6 +7,10 @@ Post = Backbone.Model.extend({
 		topic : 'Default title',
 		body : 'Default body',		
 		user_id : 1
+	},
+
+	validate : function(){
+		
 	}
 });
 

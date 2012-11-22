@@ -41,9 +41,8 @@
             <span class="icon-bar"></span>
           </a>
           <a class="brand" href="#">WhatUp</a>
-          <div class="nav-collapse collapse">
-		        <button class="btn btn-primary pull-right" id="new_post_btn">New Post</button>
-          </div><!--/.nav-collapse -->
+          <div id="new_post_btn_container">
+          </div>
         </div>
       </div>
     </div>
