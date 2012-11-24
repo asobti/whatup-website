@@ -12,7 +12,7 @@ PostsView = Backbone.View.extend({
 	el : ".posts",
 	
 	initialize : function(){
-		this.model.on("reset", this.render, this);
+		this.model.on("reset", this.render, this);		
 		console.log('init posts view');		
 	},
 

@@ -1,16 +1,21 @@
-Post = Backbone.Model.extend({	
-	initialize: function(){
-		//console.log("post init~" + this.get('topic'));
+Post = Backbone.Model.extend({
+
+	initialize : function(){
+		this.on("error", this.error, this);	
 	},
 
-	defaults : {
-		topic : 'Default title',
-		body : 'Default body',		
-		user_id : 1
+	validate : function(attrs){
+		console.log('validating');
+		if (!(attrs.topic || attrs.body)) {
+			console.log('validation failed');
+			return "You must enter a topic and a body";
+			console.log('validation failed1');
+		}
 	},
 
-	validate : function(){
-		
+	error : function(model, err){
+		console.log('error event');
+		alert(err);
 	}
 });
 

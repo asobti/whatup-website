@@ -2,11 +2,6 @@ FormView = Backbone.View.extend({
 	template:_.template($('#tpl-new-post-form').html()),
 	el: ".posts",
 
-	initialize : function(){
-
-
-	},
-
 	render : function(){
 		console.log('rendering form');
 		$(this.el).html(this.template());
@@ -36,13 +31,11 @@ FormView = Backbone.View.extend({
 			wait : true 	// waits for server to respond with 200 before adding newly created model to collection
 		});
 
-		if (postCreationStatus !== false) {
-			// API responded with 200 OK			
-			//newPostModel.attributes.created_at = (new Date()).toISOString();
-			//this.renderPost(newPostModel);
-			//this.timeago();
+		console.log(postCreationStatus);
+
+		if (postCreationStatus !== false) {			
 			console.log("REDIRECTING");
-			window.location = "/";
+			//redirectHomePage();
 		} else {	
 			// api did not respond with 200 OK
 			console.log('new post creation failed');
@@ -55,12 +48,14 @@ FormView = Backbone.View.extend({
 		console.log(contents);
 		if (contents) {
 			if (confirm("Are you sure you want to discard this post")) {
-				window.history.back();
+				redirectHomePage();
 			}			
 		} else {
-			window.history.back();
-		}
+			redirectHomePage();			
+		}		
+	},
 
-		
+	redirectHomePage : function(){
+		window.location = "/";
 	}
 });
