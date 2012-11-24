@@ -1,66 +1,38 @@
 AppRouter = Backbone.Router.extend({
 	routes:{
 		"":"posts",
+		"posts/:page_id":"posts",
 		"post/add":"post_add"
 		//"post/:id":"post"
 	},
 
 	initialize : function(){		
-
+		this.postsModel = new Posts();		
+		this.postsView = new PostsView({model: this.postsModel});
+		this.newPostView = new NewPostView();		
 	},
 
-	posts:function(){
-		console.log("posts route");	
-
-		if (typeof this.fetchedPosts === 'undefined') {
-			this.fetchedPosts = new Posts();
-			this.fetchedPosts.fetch();	
-		}
-		
-		if (typeof this.postsView === 'undefined') {
-			console.log('is undefined');
-			this.postsView = new PostsView({model: this.fetchedPosts});				
-		}			
-
-		console.log(this.postsView);
-
-		if (typeof this.newPost === 'undefined') {
-			this.newPost = new NewPostView();	
-			this.newPost.render();
-		} else {
-			$(this.newPost.el).show();
-		}
-		
-		$('#posts').html(this.postsView.render().el);
-		
+	posts:function(page_id){
+		console.log("posts(" + page_id + ") called.");	
+		this.postsModel.fetch();
+		this.newPostView.render();
+		$(this.newPostView.el).show();
+		$('.wrapper').html(this.postsView.render().el);
 	},
 	
 	post:function(id){
-		console.log("post route");
+		console.log("post("+id+") called.");	
 		this.post = new Post(id);
 		this.postView = new PostView({model:this.post});
 		this.post.fetch();
 		this.newPost = new NewPostView();
-		$('#posts').html(this.postView.render().el);
+		$('.wrapper').html(this.postView.render().el);
 	},
 
 	post_add:function(){
-
-		if (typeof this.fetchedPosts === 'undefined') {
-			this.fetchedPosts = new Posts();
-			this.fetchedPosts.fetch();	
-		}
-		
-		if (typeof this.postsView === 'undefined') {
-			this.postsView = new PostsView({model: this.fetchedPosts});	
-		}
-
-		if (typeof this.newPost !== 'undefined') {
-			console.log('here');
-			$(this.newPost.el).hide();
-		}
-
-		this.formView = new FormView().render();
+		console.log("post_add() called.");	
+		$(this.newPostView.el).hide();
+		this.formView = new FormView({model: this.postsModel}).render();
 	}
 });
 
