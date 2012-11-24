@@ -13,8 +13,12 @@ AppRouter = Backbone.Router.extend({
 	},
 
 	posts:function(page_id){
+		if (typeof page_id === 'undefined') {
+			page_id = 1;
+		}
+
 		console.log("posts(" + page_id + ") called.");	
-		this.postsModel.fetch();
+		this.postsModel.fetch({data : { page : page_id }});
 		this.newPostView.render();
 		$(this.newPostView.el).show();
 		$('.wrapper').html(this.postsView.render().el);

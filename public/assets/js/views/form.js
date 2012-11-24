@@ -1,6 +1,6 @@
 FormView = Backbone.View.extend({
 	template:_.template($('#tpl-new-post-form').html()),
-	el: ".posts",
+	el: ".wrapper",
 
 	render : function(){
 		console.log('rendering form');
