@@ -2,8 +2,8 @@ AppRouter = Backbone.Router.extend({
 	routes:{
 		"":"posts",
 		"posts/:page_id":"posts",
-		"post/add":"post_add"
-		//"post/:id":"post"
+		"post/add":"post_add",
+		"post/:id":"post"
 	},
 
 	initialize : function(){		
@@ -22,11 +22,24 @@ AppRouter = Backbone.Router.extend({
 	
 	post:function(id){
 		console.log("post("+id+") called.");	
-		this.post = new Post(id);
-		this.postView = new PostView({model:this.post});
-		this.post.fetch();
-		this.newPost = new NewPostView();
-		$('.wrapper').html(this.postView.render().el);
+		
+		this.post = new Post();		
+		this.post.id = id;
+		this.post.fetch({			
+			success : function(model, response, options) {
+				console.log('success callback');
+				console.log(model);
+				this.postView = new PostView({"model" : model});				
+				$('.wrapper').html(this.postView.render().el);
+			},
+			error : function(model, xhr, options) {
+				console.log('error');
+				console.log(xhr);
+			}
+		});
+		
+		this.newPostView.render();
+		$(this.newPostView.el).show();		
 	},
 
 	post_add:function(){

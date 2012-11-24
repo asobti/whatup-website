@@ -1,7 +1,8 @@
 PostView = Backbone.View.extend({
-	template:_.template($('#tpl-post').html()),
+	template:_.template($('#tpl-post').html()),	
 
-	render:function(event_){				
+	render:function(event_){
+		console.log('rendering post');		
 		$(this.el).html(this.template(this.model.toJSON()));
 		return this;
 	}
