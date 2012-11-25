@@ -1,6 +1,7 @@
 AppRouter = Backbone.Router.extend({
 	routes:{
 		"":"posts",
+		"posts" : "posts",
 		"posts/:page_id":"posts",
 		"post/add":"post_add",
 		"post/:id":"post"
@@ -13,11 +14,13 @@ AppRouter = Backbone.Router.extend({
 	},
 
 	posts:function(page_id){
+		console.log("posts(" + page_id + ") called.");	
+		console.log("page_id: " + page_id);
+
 		if (typeof page_id === 'undefined') {
 			page_id = 1;
 		}
 
-		console.log("posts(" + page_id + ") called.");	
 		this.postsModel.fetch({data : { page : page_id }});
 		this.newPostView.render();
 		$(this.newPostView.el).show();
