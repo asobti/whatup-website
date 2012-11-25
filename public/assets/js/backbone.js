@@ -1321,8 +1321,11 @@
   // instead of `application/json` with the model in a param named `model`.
   // Useful when interfacing with server-side languages like **PHP** that make
   // it difficult to read the body of `PUT` requests.
-  Backbone.sync = function(method, model, options) {
+  Backbone.sync = function(method, model, options) {    
     var type = methodMap[method];
+
+    console.log('using method: ' + method);
+    console.log('using type: ' + type);
 
     // Default options, unless specified.
     options || (options = {});
@@ -1350,6 +1353,8 @@
     if (Backbone.forceContentTypeApplication) {
     	params.contentType = 'application/x-www-form-urlencoded';
     }
+
+    console.log(params.contentType);
 
     // For older servers, emulate HTTP by mimicking the HTTP method with `_method`
     // And an `X-HTTP-Method-Override` header.

@@ -12,6 +12,11 @@ Post = Backbone.Model.extend({
 		//this.on("error", this.error, this);	
 	},
 
+	defaults : {
+		topic : "",
+		body : ""
+	},
+
 	validate : function(attrs){
 		console.log('validating');
 		console.log(attrs);

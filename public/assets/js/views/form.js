@@ -2,9 +2,17 @@ FormView = Backbone.View.extend({
 	template:_.template($('#tpl-new-post-form').html()),
 	el: ".wrapper",
 
+	initialize: function(){
+		if(typeof this.model === "undefined") {
+			this.model = new Post();
+		}
+
+		console.log(this.model);
+	},
+
 	render : function(){
 		console.log('rendering form');
-		$(this.el).html(this.template());
+		$(this.el).html(this.template(this.model.toJSON()));
 	},
 
 	events : {
@@ -25,9 +33,10 @@ FormView = Backbone.View.extend({
 			user_id : 1,
 		};
 
-		console.log(newPostData);	
-		var newPostModel = new Post(newPostData);
-		var postCreationStatus = this.model.create(newPostModel, {
+		console.log(newPostData);			
+		console.log("isNew:");
+		console.log(this.model.isNew());
+		var postCreationStatus = this.model.save(newPostData, {
 			wait : true 	// waits for server to respond with 200 before adding newly created model to collection
 		});
 

@@ -4,7 +4,9 @@ AppRouter = Backbone.Router.extend({
 		"posts" : "posts",
 		"posts/:page_id":"posts",
 		"post/add":"post_add",
+		"post/edit/:id":"post_edit",
 		"post/:id":"post"
+
 	},
 
 	initialize : function(){		
@@ -58,8 +60,26 @@ AppRouter = Backbone.Router.extend({
 		console.log("post_add() called.");	
 		$(this.newPostView.el).hide();
 		$(this.paginationView.el).hide();
-		this.formView = new FormView({model: this.postsModel}).render();
-	}
+		this.formView = new FormView().render();
+	},
+
+	post_edit:function(id){
+		console.log("post_edit() called.");	
+		$(this.newPostView.el).hide();
+		$(this.paginationView.el).hide();
+		this.post = new Post();		
+		this.post.id = id;
+		this.post.fetch({			
+			success : function(model, response, options) {
+				console.log('success callback');
+				this.formView = new FormView({"model": model}).render();
+			},
+			error : function(model, xhr, options) {
+				console.log('error');
+				console.log(xhr);
+			}
+		});
+	},
 });
 
 

@@ -8,8 +8,8 @@
 
    <div class="row">
 	<div>
-		<input type="text" id="post_title" placeholder="Post Title" style="width: 100%; padding: 10px" />
-		<textarea id="post_content" class="field span12" style="width: 100%; min-height: 250px; resize: vertical; padding: 10px" placeholder="Insert your content here"></textarea>
+		<input type="text" id="post_title" placeholder="Post Title" style="width: 100%; padding: 10px" value="<%= topic %>" />
+		<textarea id="post_content" class="field span12" style="width: 100%; min-height: 250px; resize: vertical; padding: 10px" placeholder="Insert your content here"><%= body %></textarea>
 	</div>
    </div>
 
