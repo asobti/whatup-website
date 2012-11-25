@@ -10,6 +10,8 @@ AppRouter = Backbone.Router.extend({
 	initialize : function(){		
 		this.postsModel = new Posts();		
 		this.postsView = new PostsView({model: this.postsModel});
+		this.paginationModel = new PaginationModel();
+		this.paginationView = new PaginationView({model: this.paginationModel});
 		this.newPostView = new NewPostView();		
 	},
 
@@ -22,6 +24,8 @@ AppRouter = Backbone.Router.extend({
 		}
 
 		this.postsModel.fetch({data : { page : page_id }});
+		this.paginationModel.fetch({data : {page : page_id}});
+
 		this.newPostView.render();
 		$(this.newPostView.el).show();
 		$('.wrapper').html(this.postsView.render().el);
@@ -46,12 +50,14 @@ AppRouter = Backbone.Router.extend({
 		});
 		
 		this.newPostView.render();
-		$(this.newPostView.el).show();		
+		$(this.newPostView.el).show();
+		$(this.paginationView.el).hide();
 	},
 
 	post_add:function(){
 		console.log("post_add() called.");	
 		$(this.newPostView.el).hide();
+		$(this.paginationView.el).hide();
 		this.formView = new FormView({model: this.postsModel}).render();
 	}
 });

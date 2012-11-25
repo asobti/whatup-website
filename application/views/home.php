@@ -18,7 +18,10 @@
   <div class="wrapper">
   	<div class="posts">
 
-  	</div>
+  	</div>    
+  </div>
+  <div id="pagination_container"> <!-- pagination -->
+
   </div>
 
       <!-- Example row of columns -->

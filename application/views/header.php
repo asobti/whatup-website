@@ -16,6 +16,7 @@
       }
     </style>
     <link href="<?= base_url('assets/css/bootstrap-responsive.css') ?>" rel="stylesheet">
+    <link href="<?= base_url('assets/css/style.css') ?>" rel="stylesheet">
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>

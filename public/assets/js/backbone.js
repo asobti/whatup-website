@@ -365,12 +365,11 @@
 
       // If we're "wait"-ing to set changed attributes, validate early.
       if (options.wait) {
-        if (!this._validate(attrs, options))
-        {
+        if (!this._validate(attrs, options)) {
           console.log("RETURNING FALSE");
           return false;
         }
-        console.log("MAYBE _VALIDATE IS WRONG?");
+        
         current = _.clone(this.attributes);
       }
 

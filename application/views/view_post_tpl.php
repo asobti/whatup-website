@@ -32,4 +32,10 @@
 	</div>
 </script>
 
+<script type="text/template" id="tpl-pagination">	
+	<div class="pagination"> 
+
+	</div>
+</script>
+
 

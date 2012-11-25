@@ -35,7 +35,7 @@ FormView = Backbone.View.extend({
 
 		if (postCreationStatus !== false) {			
 			console.log("REDIRECTING");
-			//redirectHomePage();
+			this.redirectHomePage();
 		} else {	
 			// api did not respond with 200 OK
 			console.log('new post creation failed');
@@ -48,10 +48,10 @@ FormView = Backbone.View.extend({
 		console.log(contents);
 		if (contents) {
 			if (confirm("Are you sure you want to discard this post")) {
-				redirectHomePage();
+				this.redirectHomePage();
 			}			
 		} else {
-			redirectHomePage();			
+			this.redirectHomePage();			
 		}		
 	},
 
