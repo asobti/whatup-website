@@ -39,6 +39,12 @@ Posts = Backbone.Collection.extend({
 	}
 });
 
+/*
+	Model that holds all data regarding pagination
+	The model is located in this file because it is
+	tightly coupled with the Post model and Posts
+	collection and will never be used by itself.
+*/
 PaginationModel = Backbone.Model.extend({
 	url: "http://projectwhatup.us:5000/api/posts",	
 

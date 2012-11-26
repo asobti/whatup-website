@@ -43,8 +43,21 @@ PostsView = Backbone.View.extend({
 	}
 });
 
+/*
+	The view that handles and renders the pagination buttons
+	and the bottom of posts view. 
+	PaginationView is located in this file because it will 
+	always be used only in conjunction with PostsView.
+*/
 PaginationView = Backbone.View.extend({
 	template:_.template($('#tpl-pagination').html()),
+
+	// inline template for pagination buttons (links)
+	pagBtn: _.template('<a class=" btn btn-info <%= btnClass %>" href="<%= btnHref %>" title="<%= btnTitle %>" > <%= btnText %> </a>'),
+	// inline template for pagination span for current page
+	pagCur: _.template('<span class="current_page btn btn-info btn-small disabled" title="<%= btnTitle %>"> <%= btnText %> </span>'),
+	
+
 	el: "#pagination_container",
 	innerEl: ".pagination",
 
@@ -55,11 +68,11 @@ PaginationView = Backbone.View.extend({
 
 	render: function(event_) {
 		console.log("pagination render() called.");
-		$(this.el).html(this.template());
+		this.$el.html(this.template());
 		console.log('pagination model:');
 		console.log(this.model.hasNext());
 
-		var prevClass = "prev btn btn-info";
+		var prevClass = "prev";
 		var prevHref = '/#posts/' + this.model.prevPage();
 
 		if(!this.model.hasPrev()) { //do we have previous		
@@ -67,27 +80,47 @@ PaginationView = Backbone.View.extend({
 			prevHref = "javascript:void()";
 		}
 
-		$(this.innerEl).append('<a class="' + prevClass + '" href="' + prevHref + '" title="Previous page">Prev</a>');
+		// use pagBtn template to generate previous button		
+		$(this.innerEl).append(this.pagBtn({
+			btnClass: prevClass,
+			btnHref: prevHref,
+			btnTitle : 'Previous page',
+			btnText : 'Prev'
+		}));
 
 		if(this.model.get("totalPages") > 2) {		
 			for(var i = 1; i <= this.model.get("totalPages"); i++) {			
-				if(i == this.model.get("currentPage")) {				
-					//placeholder
-					$(this.innerEl).append('<span class="current_page btn btn-info btn-small disabled">' + i + '</span>');
-				} else {
-					$(this.innerEl).append('<a class="btn btn-info btn-small" href="/#posts/' + i + '">' + i + '</a>');
+				if(i == this.model.get("currentPage")) {									
+					//$(this.innerEl).append('<span class="current_page btn btn-info btn-small disabled">' + i + '</span>');
+					$(this.innerEl).append(this.pagCur({
+						btnTitle : 'Page ' + i,
+						btnText : i
+					}));
+				} else {					
+					// use template to generate page number buttons
+					$(this.innerEl).append(this.pagBtn({
+						btnClass: "btn-small",
+						btnHref: "/#posts/" + i,
+						btnTitle : 'Page ' + i,
+						btnText : i
+					}));
 				}
 			}
 		}
 
-		var nextClass = "next btn btn-info";
+		var nextClass = "next";
 		var nextHref = '/#posts/' + this.model.nextPage();
 
-		if(!this.model.hasNext()) { //do we have previous		
+		if(!this.model.hasNext()) { //do we have next
 			nextClass += " disabled";			
 			nextHref = "javascript:void()";
 		}
-
-		$(this.innerEl).append('<a class="' + nextClass + '" href="' + nextHref + '" title="Next page">Next</a>');
+		
+		$(this.innerEl).append(this.pagBtn({
+			btnClass: nextClass,
+			btnHref: nextHref,
+			btnTitle : 'Next page',
+			btnText : 'Next'
+		}));
 	}
 });
