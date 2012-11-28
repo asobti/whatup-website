@@ -2,13 +2,6 @@ FormView = Backbone.View.extend({
 	template:_.template($('#tpl-new-post-form').html()),
 	el: ".wrapper",
 
-	initialize : function(){
-		// bind the sync and error events. These events function as 
-		// success and error callbacks for the collection.create method
-		this.model.on("sync", this.collSynced, this);
-		this.model.on("error", this.collError, this);
-	},
-
 	render : function(){
 		console.log('rendering form');
 		$(this.el).html(this.template());
@@ -34,15 +27,22 @@ FormView = Backbone.View.extend({
 
 		console.log(newPostData);	
 		var newPostModel = new Post(newPostData);
+
+		// store this for use in the callback
+		var that = this;
+
 		var postCreationStatus = this.model.create(newPostModel, {
-			wait : true 	// waits for server to respond with 200 before adding newly created model to collection
-		}, {
+			wait : true, 	// waits for server to respond with 200 before adding newly created model to collection
+
 			success : function(resp){
 				console.log('success callback');
 				console.log(resp);
+				that.redirectHomePage();
 			},
 			error : function(err) {
 				console.log('error callback');
+				// this error message for dev only
+				alert('There was an error. See console for details');
 				console.log(err);
 			}
 		});
@@ -73,16 +73,5 @@ FormView = Backbone.View.extend({
 
 	redirectHomePage : function() {
 		window.location = "/";
-	},
-
-	collSynced : function(e) {
-		console.log("in collSynced()");		
-		this.redirectHomePage();
-	},
-
-	collError : function(e) {
-		// this message is only for development
-		alert('There was an error. See console for details');
-		console.log(e);
 	}
 });

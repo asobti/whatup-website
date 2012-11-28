@@ -788,6 +788,7 @@
           nextModel.trigger('sync', model, resp, options);
         }
       };
+
       if(model.save(null, options) === false) {
         return false;
       }
