@@ -29,6 +29,15 @@ FormView = Backbone.View.extend({
 		var newPostModel = new Post(newPostData);
 		var postCreationStatus = this.model.create(newPostModel, {
 			wait : true 	// waits for server to respond with 200 before adding newly created model to collection
+		}, {
+			success : function(resp){
+				console.log('success callback');
+				console.log(resp);
+			},
+			error : function(err) {
+				console.log('error callback');
+				console.log(err);
+			}
 		});
 
 		console.log(postCreationStatus);
