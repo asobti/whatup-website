@@ -75,3 +75,19 @@
 .post .post-image-info-wrap {
 	width: 30%;
 }
+.pagination .next {
+	margin-left: 30px;
+}
+
+#working-dialog .modal-body,
+#working-dialog .modal-header {
+	text-align: center;
+}
+#working-dialog .modal-body img {
+	margin-bottom: 20px;
+	max-height: 50px;
+	max-width: 50px;
+}
+#working-dialog .modal-body p {	
+	font-size: 12px;
+}
