@@ -13,22 +13,20 @@
 			<img src="http://placehold.it/50x50" class="post-user-image" />
 			<div class="post-info-wrap">
 				<p class="post-info post-user-name">
-					<a href="#">@xbonez</a>
+					<a href="#">@<%= author.name %></a>
 				</p>
 				<p class="post-info post-user-time timeago" title="<%= created_at %>">
 					<%= created_at %>
 				</p>
 			</div>
 		</div>	 
-		<div class="span3 post-tags-wrapper pull-right">
-			
-				<!-- tags go here -->
-				<% for(var i = 0; i < 8; i++) { %>				
-					<span class="label label-info post-tag">
-						<% print('tag' + i); %>
-					</span>
-				<% } %>
-			
+		<div class="span3 post-tags-wrapper pull-right">			
+			<!-- tags go here -->
+			<% for(var i = 0; i < 8; i++) { %>				
+				<span class="label label-info post-tag">
+					<% print('tag' + i); %>
+				</span>
+			<% } %>			
 		</div>	
 	</div>	
 </script>
