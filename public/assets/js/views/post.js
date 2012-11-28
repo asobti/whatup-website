@@ -1,5 +1,6 @@
 PostView = Backbone.View.extend({
 	template:_.template($('#tpl-post').html()),	
+	className: 'post',
 
 	render:function(event_){
 		console.log('rendering post');		
@@ -10,7 +11,7 @@ PostView = Backbone.View.extend({
 
 PostsView = Backbone.View.extend({
 	tagName:"div",
-	el : ".posts",
+	el : ".posts",	
 	
 	initialize : function(){
 		this.model.on("reset", this.render, this);		
@@ -53,13 +54,17 @@ PaginationView = Backbone.View.extend({
 	template:_.template($('#tpl-pagination').html()),
 
 	// inline template for pagination buttons (links)
-	pagBtn: _.template('<a class=" btn btn-info <%= btnClass %>" href="<%= btnHref %>" title="<%= btnTitle %>" > <%= btnText %> </a>'),
+	pagBtn: _.template('<a class="btn btn-info btn-small <%= btnClass %>" href="<%= btnHref %>" title="<%= btnTitle %>" > <%= btnText %> </a>'),
 	// inline template for pagination span for current page
 	pagCur: _.template('<span class="current_page btn btn-info btn-small disabled" title="<%= btnTitle %>"> <%= btnText %> </span>'),
 	
 
 	el: "#pagination_container",
 	innerEl: ".pagination",
+
+	events : {
+		'click a' : 'scrollTop'
+	},
 
 	initialize : function() {
 		console.log("paginiation init() called.");
@@ -85,7 +90,7 @@ PaginationView = Backbone.View.extend({
 			btnClass: prevClass,
 			btnHref: prevHref,
 			btnTitle : 'Previous page',
-			btnText : 'Prev'
+			btnText : '&larr;'
 		}));
 
 		if(this.model.get("totalPages") > 2) {		
@@ -120,7 +125,16 @@ PaginationView = Backbone.View.extend({
 			btnClass: nextClass,
 			btnHref: nextHref,
 			btnTitle : 'Next page',
-			btnText : 'Next'
+			btnText : '&rarr;'
 		}));
+	},
+
+	scrollTop : function(e) {
+		// only scroll top if the event target is not disabled		
+		if (!($(e.target).hasClass('disabled'))) {
+		 	$("document, html, body").animate({ 
+		 								scrollTop: 0 
+		 							}, 700);	
+		}		
 	}
 });

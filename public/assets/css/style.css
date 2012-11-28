@@ -6,19 +6,72 @@
 	display: inline-block;
 }
 
-.pagination span,.pagination a {
-	/*padding: 10px;*/
-	margin: 0 5px;
-}
-
 .pagination span: hover {
 	cursor: pointer !important;
 }
 
-.pagination .prev {
-	margin-right: 30px;
+.pagination .prev,
+.pagination .next {
+	padding: 1px 15px 5px 15px;
+	font-size: 20px;
 }
 
-.pagination .next {
-	margin-left: 30px;
+.posts {
+	padding-top: 50px;
+}
+.post {
+	padding: 10px;
+	padding-bottom: 20px;
+	border-radius: 4px;
+	background: #FFF;
+	-webkit-transition: background-color 300ms linear;
+	-moz-transition: background-color 300ms linear;
+	-o-transition: background-color 300ms linear;
+	-ms-transition: background-color 300ms linear;
+	transition: background-color 300ms linear;
+}
+.post:hover {
+	background: #D8E4E6;	
+}
+.timeago {
+	font-size: 12px;
+	vertical-align: -10px;
+	padding-right: 10px;
+}
+.topic {
+	padding-left: 10px;
+}
+.post-body {
+	max-height: 150px;
+	display: hidden;
+}
+.info-tags-row {
+	padding: 0 10px;
+}
+.post .post-info-wrap {
+	padding-left: 10px;
+	display: inline-block;
+}
+.post .post-user-image {
+	display: inline-block;
+	vertical-align: top;
+}
+.post .post-user-name {
+	font-weight: bold;
+	letter-spacing: 1px;
+	padding-top: 5px;
+	margin-bottom: 0;
+}
+.post .post-tag {
+	padding: 5px 10px;
+	margin-right: 5px;	
+}
+.post .post-tags-wrapper {
+	width: 50%;
+	padding-top: 15px;
+	margin-right: 10px;
+	text-align: right;
+}
+.post .post-image-info-wrap {
+	width: 30%;
 }
