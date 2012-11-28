@@ -13,6 +13,9 @@ FormView = Backbone.View.extend({
 	},
 
 	createPost : function(e){
+		// show progress dialog
+		this.showProgressDialog();
+		
 		console.log("createPost() called.");
 		// not necessarry since 'button' element has no default action
 		// leaving it here anyways incase at some point we change it to an anchor element
@@ -37,10 +40,19 @@ FormView = Backbone.View.extend({
 			success : function(resp){
 				console.log('success callback');
 				console.log(resp);
-				that.redirectHomePage();
+
+				$('.modal-body p').html('Post added successfully! <br /> Redirecting...');
+				$('.modal-body img').attr('src', 'assets/img/loaders/check.png');
+
+				setTimeout(function(){
+					that.redirectHomePage();	
+				}, 1000);
+				
 			},
+
 			error : function(err) {
 				console.log('error callback');
+				that.hideProgressDialog();
 				// this error message for dev only
 				alert('There was an error. See console for details');
 				console.log(err);
@@ -49,13 +61,10 @@ FormView = Backbone.View.extend({
 
 		console.log(postCreationStatus);
 
-		if (postCreationStatus !== false) {			
-			console.log("REDIRECTING");
-			//this.redirectHomePage();
-		} else {	
-			// api did not respond with 200 OK
+		if (postCreationStatus === false) {			
+			// validation failed
 			console.log('new post creation failed');
-		}		
+		}
 	},
 
 	cancelPost : function(e) {
@@ -73,5 +82,21 @@ FormView = Backbone.View.extend({
 
 	redirectHomePage : function() {
 		window.location = "/";
+	},
+
+	showProgressDialog : function() {
+		// show the progress dialog
+		var template = _.template($('#tpl-post-working').html());
+		this.$el.append(template({
+			header : 'Project WhatUp',
+			body : 'Adding your post...',
+			image : 'working.gif'
+		}));
+		$('#working-dialog').modal();
+	},
+
+	hideProgressDialog : function() {
+		// hide the progress dialog		
+		$('#working-dialog').modal('close');	
 	}
 });
