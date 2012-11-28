@@ -32,7 +32,7 @@ Post = Backbone.Model.extend({
 
 Posts = Backbone.Collection.extend({
 	model: Post,
-	url: "http://projectwhatup.us:5000/api/posts",	
+	url: 'http://projectwhatup.us:5000/api/posts?q={"order_by":[{"field":"created_at","direction":"desc"}]}',
 
 	parse: function(data) {
 		return data.objects;

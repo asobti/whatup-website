@@ -35,7 +35,7 @@ FormView = Backbone.View.extend({
 
 		if (postCreationStatus !== false) {			
 			console.log("REDIRECTING");
-			this.redirectHomePage();
+			//this.redirectHomePage();
 		} else {	
 			// api did not respond with 200 OK
 			console.log('new post creation failed');
