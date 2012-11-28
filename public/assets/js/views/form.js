@@ -2,6 +2,13 @@ FormView = Backbone.View.extend({
 	template:_.template($('#tpl-new-post-form').html()),
 	el: ".wrapper",
 
+	initialize : function(){
+		// bind the sync event . This event is trigerred when the aync call
+		// when creating a new model completes
+		this.model.on("sync", this.collSynced, this);
+		this.mode.on("error", this.collError, this);
+	},
+
 	render : function(){
 		console.log('rendering form');
 		$(this.el).html(this.template());
@@ -51,7 +58,7 @@ FormView = Backbone.View.extend({
 		}		
 	},
 
-	cancelPost : function(e){
+	cancelPost : function(e) {
 		console.log("cancelPost() called.");
 		var contents = $('textarea').val();	
 		console.log(contents);
@@ -64,7 +71,16 @@ FormView = Backbone.View.extend({
 		}		
 	},
 
-	redirectHomePage : function(){
+	redirectHomePage : function() {
 		window.location = "/";
+	},
+
+	collSynced : function() {
+		console.log("in collSynced()");
+		this.redirectHomePage();
+	},
+
+	collError : function() {
+		alert('Oops. There was an error creating your post. Please try again');
 	}
 });
