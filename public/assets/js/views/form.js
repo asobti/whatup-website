@@ -3,10 +3,10 @@ FormView = Backbone.View.extend({
 	el: ".wrapper",
 
 	initialize : function(){
-		// bind the sync event . This event is trigerred when the aync call
-		// when creating a new model completes
+		// bind the sync and error events. These events function as 
+		// success and error callbacks for the collection.create method
 		this.model.on("sync", this.collSynced, this);
-		this.mode.on("error", this.collError, this);
+		this.model.on("error", this.collError, this);
 	},
 
 	render : function(){
@@ -75,12 +75,14 @@ FormView = Backbone.View.extend({
 		window.location = "/";
 	},
 
-	collSynced : function() {
-		console.log("in collSynced()");
+	collSynced : function(e) {
+		console.log("in collSynced()");		
 		this.redirectHomePage();
 	},
 
-	collError : function() {
-		alert('Oops. There was an error creating your post. Please try again');
+	collError : function(e) {
+		// this message is only for development
+		alert('There was an error. See console for details');
+		console.log(e);
 	}
 });
