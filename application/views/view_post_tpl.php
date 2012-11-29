@@ -13,7 +13,7 @@
 			<img src="http://placehold.it/50x50" class="post-user-image" />
 			<div class="post-info-wrap">
 				<p class="post-info post-user-name">
-					<a href="#">@<%= author.name %></a>
+					<a href="#">@<%= author.alias %></a>
 				</p>
 				<p class="post-info post-user-time timeago" title="<%= created_at %>">
 					<%= created_at %>
