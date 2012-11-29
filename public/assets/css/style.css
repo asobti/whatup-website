@@ -91,3 +91,12 @@
 #working-dialog .modal-body p {	
 	font-size: 12px;
 }
+.popover-content {
+	font-size: 12px;
+	letter-spacing: 0;
+	line-height: 16px;
+}
+.popover-title {
+	font-weight: bold;
+	text-transform: uppercase;
+}

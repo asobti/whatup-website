@@ -2,10 +2,43 @@ PostView = Backbone.View.extend({
 	template:_.template($('#tpl-post').html()),	
 	className: 'post',
 
+	events : {
+		"hover .post-tag" : "tagHover"
+	},
+
 	render:function(event_){
 		console.log('rendering post');		
 		$(this.el).html(this.template(this.model.toJSON()));
 		return this;
+	},
+
+	tagHover : function(e) {
+		// once we stop using placeholder tags, this
+		// logic will need to be changed to get tag information
+
+		var $target = $(e.target);
+		var summary = $target.data('content');
+
+		// fetch tag summary from API only if it hasn't been fetched already
+		if (!summary) {
+			$target.data('content', "You are hovering over " + $target.text() + ". This space will be used to show a summary of the tag." );			
+		}
+
+		// var popoverOptions = {
+		// 	animation : true,
+		// 	html : true,
+		// 	placement : 'top',
+		// 	trigger : 'hover',
+		// 	title : "<strong>" + $target.text() + "</strong>",
+		// 	content : "You are hovering over " + $target.text() + ". This space will be used to show a summary of the tag." 
+		// };
+
+		// // create pop-over
+		// $target.popover(popoverOptions);
+
+		//toggle visibility
+		$target.popover('toggle');
+
 	}
 });
 

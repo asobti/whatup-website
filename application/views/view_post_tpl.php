@@ -23,9 +23,9 @@
 		<div class="span3 post-tags-wrapper pull-right">			
 			<!-- tags go here -->
 			<% for(var i = 0; i < 8; i++) { %>				
-				<span class="label label-info post-tag">
+				<a href="#" class="label label-info post-tag" data-tag-id="<% print(i) %>" data-title="<% print('tag' + i); %>" rel="popover" data-placement="top" >
 					<% print('tag' + i); %>
-				</span>
+				</a>
 			<% } %>			
 		</div>	
 	</div>	
