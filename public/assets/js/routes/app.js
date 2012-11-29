@@ -29,6 +29,14 @@ AppRouter = Backbone.Router.extend({
 		this.newPostView.render();
 		$(this.newPostView.el).show();
 		$('.wrapper').html(this.postsView.render().el);
+
+		// begin watching for new posts continuously
+		// this requires postsModel to have a reference to
+		// paginationModel so it can re-fetch the appropriate
+		// page
+		this.postsModel.setPaginationModel(this.paginationModel);
+		this.postsModel.beginWatch();
+		
 	},
 	
 	post:function(id){

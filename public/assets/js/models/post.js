@@ -36,6 +36,40 @@ Posts = Backbone.Collection.extend({
 
 	parse: function(data) {
 		return data.objects;
+	},
+
+	setPaginationModel : function(pag) {
+		this.paginationModel = pag;
+	},
+
+	beginWatch : function() {
+		if (typeof this.paginationModel === 'undefined') {
+			// if pagination model hasn't been set, we're unable to refetch
+			// fail silently since this is not a fatal error
+			console.log('paginationModel undefined in Posts collection. Unable to watch API.');
+			return;
+		}
+
+		// store reference of this for use within setInterval
+		var that = this;
+		
+		setInterval(function() {
+			that.refetch();
+		}, 5000);
+	},
+
+	refetch : function() {
+		var page_num = this.paginationModel.get("currentPage");
+
+		// (Ayush) Only refetch if user is on first page. This is because if user is on second page, and
+		// a new post is added, it will be added to the first page, and the user will see the last
+		// post on the first page now on the second page. I don't think there's much utility to this
+		// but I'm open to discuss it
+
+		if (page_num === 1) {
+			console.log("refetching page 1");
+			this.fetch({ data : { page : page_num }});
+		}
 	}
 });
 
