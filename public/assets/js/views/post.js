@@ -108,6 +108,8 @@ PaginationView = Backbone.View.extend({
 		console.log("pagination render() called.");
 		this.$el.html(this.template());
 		console.log('pagination model:');
+		console.log(this.model.get("totalPages"));
+
 		console.log(this.model.hasNext());
 
 		var prevClass = "prev";
@@ -126,25 +128,25 @@ PaginationView = Backbone.View.extend({
 			btnText : '&larr;'
 		}));
 
-		if(this.model.get("totalPages") > 2) {		
-			for(var i = 1; i <= this.model.get("totalPages"); i++) {			
-				if(i == this.model.get("currentPage")) {									
-					//$(this.innerEl).append('<span class="current_page btn btn-info btn-small disabled">' + i + '</span>');
-					$(this.innerEl).append(this.pagCur({
-						btnTitle : 'Page ' + i,
-						btnText : i
-					}));
-				} else {					
-					// use template to generate page number buttons
-					$(this.innerEl).append(this.pagBtn({
-						btnClass: "btn-small",
-						btnHref: "/#posts/" + i,
-						btnTitle : 'Page ' + i,
-						btnText : i
-					}));
-				}
+		
+		for(var page = 1; page <= this.model.get("totalPages"); page++) {
+
+			if(page == this.model.get("currentPage")) {				
+				$(this.innerEl).append(this.pagCur({
+					btnTitle : 'Page ' + page,
+					btnText : page
+				}));
+			} else {					
+				// use template to generate page number buttons
+				$(this.innerEl).append(this.pagBtn({
+					btnClass: "btn-small",
+					btnHref: "/#posts/" + page,
+					btnTitle : 'Page ' + page,
+					btnText : page
+				}));
 			}
 		}
+		
 
 		var nextClass = "next";
 		var nextHref = '/#posts/' + this.model.nextPage();
