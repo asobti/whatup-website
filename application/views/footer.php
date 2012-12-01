@@ -4,8 +4,8 @@
       <hr>
 
       <footer>
-        <p>&copy; Project WhatUp 2012</p>
-	<p>Version 1.0.7</p>
+        <p>&copy; Project WhatUp, 2012</p>
+        <p>Version 1.1.0</p>
       </footer>
 
     </div> <!-- /container -->
