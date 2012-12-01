@@ -1,14 +1,27 @@
 PostView = Backbone.View.extend({
-	template:_.template($('#tpl-post').html()),	
-	className: 'post',
+	template: _.template($('#tpl-post').html()),	
+	listItemTemplate: _.template($('#tpl-post-list-item').html()),	
 
 	events : {
 		"hover .post-tag" : "tagHover"
 	},
 
+	/*
+		Used to render a single post view when vieweing
+		individual posts at theur URLs
+	*/
 	render:function(event_){
 		console.log('rendering post');		
 		$(this.el).html(this.template(this.model.toJSON()));
+		return this;
+	},
+
+	/*
+		User to render a post list item when viewing a collection of posts
+	*/
+	renderListItem : function(event_) {
+		console.log('rendering post list item');
+		$(this.el).html(this.listItemTemplate(this.model.toJSON()));
 		return this;
 	},
 
@@ -62,7 +75,7 @@ PostsView = Backbone.View.extend({
 	},
 
 	renderPost : function(post) {
-		$(this.el).append(new PostView({model:post}).render().el)		
+		$(this.el).append(new PostView({model:post}).renderListItem().el)		
 	},
 
 	timeago : function(){

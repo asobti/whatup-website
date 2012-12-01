@@ -1,7 +1,7 @@
 
 
 	<div class="clearfix"></div>
-      <hr>
+
 
       <footer>
         <p>&copy; Project WhatUp, 2012</p>

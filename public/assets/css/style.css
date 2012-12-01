@@ -1,3 +1,8 @@
+body {
+	padding: 0;
+	padding-bottom: 20px;
+	margin: 0;
+}
 #pagination_container {
 	text-align: center;
 }
@@ -30,8 +35,16 @@
 	-ms-transition: background-color 300ms linear;
 	transition: background-color 300ms linear;
 }
+
 .post:hover {
 	background: #D8E4E6;	
+}
+.single-post {
+	padding: 10px;
+	padding-bottom: 20px;
+	margin-top: 50px;	
+	border-radius: 4px;
+	background: #D8E4E6;
 }
 .timeago {
 	font-size: 12px;
@@ -41,39 +54,48 @@
 .topic {
 	padding-left: 10px;
 }
-.post-body {
+.post .post-body {
 	max-height: 150px;
 	display: hidden;
 }
 .info-tags-row {
 	padding: 0 10px;
 }
-.post .post-info-wrap {
+.post .post-info-wrap,
+.single-post .post-info-wrap {
 	padding-left: 10px;
 	display: inline-block;
 }
-.post .post-user-image {
+.post .post-user-image,
+.single-post .post-user-image {
 	display: inline-block;
 	vertical-align: top;
 }
-.post .post-user-name {
+.post .post-user-name,
+.single-post .post-user-name {
 	font-weight: bold;
 	letter-spacing: 1px;
 	padding-top: 5px;
 	margin-bottom: 0;
 }
-.post .post-tag {
+.post .post-tag,
+.single-post .post-tag {
 	padding: 5px 10px;
 	margin-right: 5px;	
 }
-.post .post-tags-wrapper {
+.post .post-tags-wrapper,
+.single-post .post-tags-wrapper {
 	width: 50%;
 	padding-top: 15px;
 	margin-right: 10px;
 	text-align: right;
 }
-.post .post-image-info-wrap {
+.post .post-image-info-wrap,
+.single-post .post-image-info-wrap {
 	width: 30%;
+}
+.pagination {
+	margin-top: 40px;
 }
 .pagination .next {
 	margin-left: 30px;
@@ -109,4 +131,9 @@ footer {
 footer p {
 	padding: 0;
 	margin: 0;	
+}
+
+.post h4,
+.single-post h4 {
+	display: inline-block;
 }
