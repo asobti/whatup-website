@@ -90,5 +90,5 @@ AppRouter = Backbone.Router.extend({
 
 
 var app = new AppRouter();
-Backbone.forceContentTypeApplication = true;
+// Backbone.forceContentTypeApplication = true;
 Backbone.history.start();

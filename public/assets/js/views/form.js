@@ -57,8 +57,6 @@ FormView = Backbone.View.extend({
 
 		console.log(JSON.stringify(newPostData));
 
-		return;
-
 		var newPostModel = new Post(newPostData);
 
 		// store this for use in the callback
