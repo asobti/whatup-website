@@ -180,3 +180,20 @@ span.post-action-delete:hover {
 img.main-loader {
 	margin: 30px;	
 }
+.new-post-buttons {
+	margin-top: 30px;
+	margin-bottom: 60px;
+}
+.new-post-buttons button {
+	margin-left : 5px;
+}
+#post_content {
+	width: 100%; 
+	min-height: 250px; 
+	resize: vertical; 
+	padding: 10px
+}
+#post_title {
+	width: 100%; 
+	padding: 10px
+}
