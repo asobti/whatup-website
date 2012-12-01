@@ -1,9 +1,12 @@
 PostView = Backbone.View.extend({
 	template: _.template($('#tpl-post').html()),	
 	listItemTemplate: _.template($('#tpl-post-list-item').html()),	
+	deleteAlertTemplate: _.template($('#tpl-post-delete-alert').html()),
 
 	events : {
-		"hover .post-tag" : "tagHover"
+		"hover .post-tag" : "tagHover",
+		"click .post-action-delete" : "postDelete",
+		"click .post-delete-confirm" : "postDeleteConfirmed"
 	},
 
 	/*
@@ -52,7 +55,76 @@ PostView = Backbone.View.extend({
 		//toggle visibility
 		$target.popover('toggle');
 
-	}
+	},
+
+	postDelete : function(e) {
+		console.log('called postDelete()');
+		console.log(this.model.toJSON());
+
+		/*
+			Show alert to user to confirm he really does want to delete the post
+		*/
+		var that = this;
+
+		$(this.el).prepend(this.deleteAlertTemplate({
+			header : "",
+			body : "Are you sure you want to delete the post: '" + this.model.get("topic") + "' ?"
+		}));
+		$(".post-delete-alert")	.alert()	// show the alert (doesn't actually show it since it is set to display:none )
+					.bind('close', function(e){ that.postDeleteAlertClose(e); })
+					.slideDown(400);		// show the alert
+	},
+
+	postDeleteAlertClose : function(e) {
+		e.preventDefault();	// prevent the default closing action
+		
+		$(e.target).slideUp(400, function() {	// do the slideUp animation
+			$(e.target).remove();	// when animation completed, delete the alert box
+		});
+	},
+
+	postDeleteConfirmed : function(e) {
+		// user has confirmed deletion request
+		
+		// prevent default 
+		e.preventDefault();
+
+		// hide delete confirmation alert
+		var alert = {
+			preventDefault : function(){},
+			target : $(".post-delete-alert")
+		};
+
+		this.postDeleteAlertClose(alert);
+
+		// show deletion modal
+		this.showProgressDialog();
+
+		// issue the deletion request
+		this.model.destroy({
+			wait : true,	// wait for server to confirm before deleting from collection
+			success : function(model, response) {
+				$('.modal-body p').html('Post deleted successfully! <br /> Redirecting...');
+				$('.modal-body img').attr('src', 'assets/img/loaders/check.png');
+
+				// redirect to home page
+				setTimeout(function(){
+					window.location = "/";
+				}, 1000);
+			}
+		});
+	},
+
+	showProgressDialog : function() {
+		// show the progress dialog
+		var template = _.template($('#tpl-post-working').html());
+		this.$el.append(template({
+			header : 'Project WhatUp',
+			body : "Deleting '" + this.model.get("topic") + "'",
+			image : 'working.gif'
+		}));
+		$('#working-dialog').modal();
+	},
 });
 
 PostsView = Backbone.View.extend({

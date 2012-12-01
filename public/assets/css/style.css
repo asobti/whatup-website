@@ -144,3 +144,36 @@ footer p {
 .single-post h4 {
 	display: inline-block;
 }
+.single-post h4 {
+	width: 85%;
+}
+.single-post .post-actions {
+	display: inline-block;
+	float: right;
+	text-align: right;
+	margin-top: 5px;
+	margin-right: 20px;
+	font-size: 12px;
+}
+span.post-action {
+	padding-left: 10px;
+	padding-right: 10px;
+	cursor: pointer;
+	-webkit-transition: background-color 250ms linear;
+	-moz-transition: background-color 250ms linear;
+	-o-transition: background-color 250ms linear;
+	-ms-transition: background-color 250ms linear;
+	transition: background-color 250ms linear;
+}
+span.post-action-edit:hover {
+	background: #F89406;
+}
+span.post-action-delete:hover {
+	background: #B94A48;
+}
+.post-delete-alert {
+	text-align: center;
+}
+.post-delete-alert .alert-buttons {
+	margin-top: 20px;
+}

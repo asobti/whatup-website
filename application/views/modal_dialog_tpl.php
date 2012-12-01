@@ -5,7 +5,22 @@
 		</div>
 		<div class="modal-body">
 			<img src='assets/img/loaders/<%= image %>' />
-			<p><%= body %></p>
+			<p><strong><%= body %></strong></p>
 		</div>		
+	</div>
+</script>
+
+<script type="text/template" id="tpl-post-delete-alert">
+	<div class="alert alert-block alert-error hide post-delete-alert">
+		<button type="button" class="close" data-dismiss="alert">&times;</button>
+		<h4 class="alert-heading">
+			<%= header %>
+		</h4>
+		<p>
+			<strong> <%= body %> </strong>
+		</p>
+		<p class="alert-buttons">
+		  <a class="btn btn-danger post-delete-confirm" href="#">Delete</a>
+		</p>
 	</div>
 </script>

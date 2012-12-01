@@ -37,7 +37,12 @@
 	<div class="single-post">
 		<div class="row-fluid topic">
 			<h4><%= topic %></h4>
+			<span class="post-actions">
+				<span class="label post-action post-action-edit" title="Edit this post">Edit</span>
+				<span class="label post-action post-action-delete" title="Delete this post">Delete</span>
+			</span>
 		</div>
+		<div class="clearfix"></div>
 		<div class="row-fluid">
 			<div class="span12 well post-body">
 				<%= body %>
