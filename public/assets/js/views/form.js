@@ -1,3 +1,4 @@
+
 FormView = Backbone.View.extend({
 	template:_.template($('#tpl-new-post-form').html()),
 	el: ".wrapper",
@@ -27,6 +28,9 @@ FormView = Backbone.View.extend({
 		// get the select element
 		var select = $(this.el).find('#new-post-user').first();
 
+		// remove the 'Loading...' option
+		select.children('option').remove();
+		
 		var optionTemplate = _.template('<option value="<%= id %>"><%= name %> (@<%= alias %>)</option>');
 		
 		// add each user to it

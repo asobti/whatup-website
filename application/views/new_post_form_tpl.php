@@ -12,7 +12,9 @@
 	</div>
 	<div class="row new-post-footer">
 		<div class="pull-left">
-			<select id="new-post-user"></select>
+			<select id="new-post-user">
+				<option value="-1">Loading...</option>
+			</select>
 		</div>   
 		<div class="pull-right">
 			<div class="span8">
