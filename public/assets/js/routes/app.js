@@ -23,28 +23,40 @@ AppRouter = Backbone.Router.extend({
 			page_id = 1;
 		}
 
-		this.postsModel.fetch({data : { page : page_id }});
+		var that = this;
+
+		this.postsModel.fetch({
+			data : { 
+				page : page_id 
+			},
+			success : function() {
+				// render postsView only after collection has finished fetching
+				$('.wrapper').html(that.postsView.render().el);
+			}
+		});
+
 		this.paginationModel.fetch({data : {page : page_id}});
 
 		this.newPostView.render();
 		$(this.newPostView.el).show();
-		$('.wrapper').html(this.postsView.render().el);
-
+		
 		// begin watching for new posts continuously
 		// this requires postsModel to have a reference to
 		// paginationModel so it can re-fetch the appropriate
 		// page
 		this.postsModel.setPaginationModel(this.paginationModel);
+
+		// begin watching for changes
 		this.postsModel.beginWatch();
 		
 	},
 	
-	post:function(id){
+	post:function(id) {
 		console.log("post("+id+") called.");	
 		
 		this.post = new Post();		
 		this.post.id = id;
-		this.post.fetch({			
+		this.post.fetch({
 			success : function(model, response, options) {
 				console.log('success callback');
 				console.log(model);

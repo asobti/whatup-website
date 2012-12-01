@@ -177,3 +177,6 @@ span.post-action-delete:hover {
 .post-delete-alert .alert-buttons {
 	margin-top: 20px;
 }
+img.main-loader {
+	margin: 30px;	
+}

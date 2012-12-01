@@ -17,7 +17,9 @@
 
   <div class="wrapper">
   	<div class="posts">
-
+        <center>
+          <img class="main-loader" src="assets/img/loaders/working.gif" />
+        </center>
   	</div>    
   </div>
   <div id="pagination_container"> <!-- pagination -->
