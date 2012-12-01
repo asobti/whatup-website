@@ -75,10 +75,16 @@ AppRouter = Backbone.Router.extend({
 	},
 
 	post_add:function(){
-		console.log("post_add() called.");	
+		console.log("post_add() called.");
 		$(this.newPostView.el).hide();
 		$(this.paginationView.el).hide();
-		this.formView = new FormView({model: this.postsModel}).render();
+
+		var users = new UserCollection();
+
+		this.formView = new FormView({
+			model: this.postsModel,
+			users : users
+		}).render();
 	}
 });
 

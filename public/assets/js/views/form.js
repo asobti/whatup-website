@@ -5,11 +5,34 @@ FormView = Backbone.View.extend({
 	render : function(){
 		console.log('rendering form');
 		$(this.el).html(this.template());
+
+		var that = this;
+
+		this.options.users.fetch({
+			success : function() {
+				that.addUsers();
+			}
+		});		
+
+		return this;
 	},
 
 	events : {
 		"click #post_add_cancel" : "cancelPost",
 		"click #post_add_submit" : "createPost",		
+	},
+
+	// add users to dropdown
+	addUsers : function() {
+		// get the select element
+		var select = $(this.el).find('#new-post-user').first();
+
+		var optionTemplate = _.template('<option value="<%= id %>"><%= name %> (@<%= alias %>)</option>');
+		
+		// add each user to it
+		_.each(this.options.users.models, function(user) {			
+			select.append(optionTemplate(user.toJSON()));
+		});
 	},
 
 	createPost : function(e){
@@ -25,10 +48,13 @@ FormView = Backbone.View.extend({
 		var newPostData = {
 			topic : $('#post_title').val(),	
 			body : $('#post_content').val(),			
-			user_id : 1,
+			user_id : parseInt($('#new-post-user').val(), 10),
 		};
 
-		console.log(newPostData);	
+		console.log(JSON.stringify(newPostData));
+
+		return;
+
 		var newPostModel = new Post(newPostData);
 
 		// store this for use in the callback
@@ -50,9 +76,9 @@ FormView = Backbone.View.extend({
 				
 			},
 
-			error : function(err) {
+			error : function(coll, err) {
 				console.log('error callback');
-				that.hideProgressDialog();
+				//that.hideProgressDialog();
 				// this error message for dev only
 				alert('There was an error. See console for details');
 				console.log(err);

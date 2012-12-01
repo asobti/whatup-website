@@ -16,6 +16,9 @@ PostView = Backbone.View.extend({
 	render:function(event_){
 		console.log('rendering post');		
 		$(this.el).html(this.template(this.model.toJSON()));
+
+		// add users to dropdown
+		console.log(this.options.users);
 		return this;
 	},
 
