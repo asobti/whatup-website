@@ -56,8 +56,7 @@
 					</p>
 				</div>
 			</div>	 
-			<div class="span3 post-tags-wrapper pull-right">			
-				<!-- tags go here -->
+			<div class="span3 post-tags-wrapper pull-right">
 				<% _.each(tags, function(tag) { %>				
 					<a href="#" class="label label-info post-tag" data-title="<%= tag %>" rel="popover" data-placement="top" >
 						<%= tag %>
