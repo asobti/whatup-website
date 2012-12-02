@@ -5,10 +5,7 @@
         <div class="span2">
           <h3>Subscriptions</h3>
         </div>
-        <div class="span5">
-	<form class="navbar-search offset2">
-	  <input type="text" class="search-query" placeholder="Search">
-	</form>
+        <div class="span5" id="search_container">
        </div>
         <div class="span2 pull-right" style="text-align:right">
 	  <h3>Recent</h3>
