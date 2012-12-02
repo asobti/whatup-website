@@ -51,8 +51,7 @@ FormView = Backbone.View.extend({
 		
 		var newPostData = this.getFormData();		
 
-		console.log(newPostData);
-		console.log('is new(): ' + this.model.isNew());
+		var createdNewPost = this.model.isNew();		
 
 		// store this for use in the callback
 		var that = this;
@@ -71,7 +70,12 @@ FormView = Backbone.View.extend({
 				console.log('success callback');
 				console.log(resp);
 
-				$('.modal-body p').html('Post added successfully! <br /> Redirecting...');
+				if (createdNewPost) {
+					$('.modal-body p').html('Post added successfully! <br /> Redirecting...');
+				} else {
+					$('.modal-body p').html('Post edited successfully! <br /> Redirecting...');
+				}
+				
 				$('.modal-body img').attr('src', 'assets/img/loaders/check.png');
 
 				setTimeout(function(){

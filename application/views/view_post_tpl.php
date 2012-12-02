@@ -24,8 +24,8 @@
 			<div class="span3 post-tags-wrapper pull-right">			
 				<!-- tags go here -->
 				<% _.each(tags, function(tag) { %>				
-					<a href="#" class="label label-info post-tag" data-title="<%= tag %>" rel="popover" data-placement="top" >
-						<%= tag %>
+					<a href="#" class="label label-info post-tag" data-id="<%= tag.id %>" data-content="<%= tag.summary %>" data-title="<%= tag.name %>" rel="popover" data-placement="top" >
+						<%= tag.name %>
 					</a>
 				<% }); %>			
 			</div>	
@@ -63,10 +63,10 @@
 			</div>	 
 			<div class="span3 post-tags-wrapper pull-right">
 				<% _.each(tags, function(tag) { %>				
-					<a href="#" class="label label-info post-tag" data-title="<%= tag %>" rel="popover" data-placement="top" >
-						<%= tag %>
+					<a href="#" class="label label-info post-tag" data-id="<%= tag.id %>" data-content="<%= tag.summary %>" data-title="<%= tag.name %>" rel="popover" data-placement="top" >
+						<%= tag.name %>
 					</a>
-				<% }); %>			
+				<% }); %>
 			</div>	
 		</div>	
 	</div>

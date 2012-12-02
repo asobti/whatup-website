@@ -1,13 +1,6 @@
 Post = Backbone.Model.extend({	
 
-	/*url: function() {
-		if (typeof this.id === 'undefined') {
-			return 'http://projectwhatup.us:5000/api/posts';	
-		} else {
-			return 'http://projectwhatup.us:5000/api/posts/' + this.id;	
-		}    	
-  	},*/
-  	urlRoot : "http://projectwhatup.us:5000/api/posts",
+	urlRoot : "http://projectwhatup.us:5000/api/posts",
 
 	initialize : function(){			
 		//this.on("error", this.error, this);	

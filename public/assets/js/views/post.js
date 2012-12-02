@@ -3,6 +3,8 @@ PostView = Backbone.View.extend({
 	listItemTemplate: _.template($('#tpl-post-list-item').html()),	
 	deleteAlertTemplate: _.template($('#tpl-post-delete-alert').html()),
 
+	hoveredOn : [],
+
 	events : {
 		"hover .post-tag" : "tagHover",
 		"click .post-action-delete" : "postDelete",
@@ -14,8 +16,8 @@ PostView = Backbone.View.extend({
 		Used to render a single post view when vieweing
 		individual posts at theur URLs
 	*/
-	render:function(event_){
-		console.log('rendering post');		
+	render:function(event_){		
+		console.log('rendering post');				
 		$(this.el).html(this.template(this.model.toJSON()));
 
 		// add users to dropdown
@@ -28,21 +30,28 @@ PostView = Backbone.View.extend({
 	*/
 	renderListItem : function(event_) {
 		console.log('rendering post list item');
+		//this.clearHover();
 		$(this.el).html(this.listItemTemplate(this.model.toJSON()));
 		return this;
+	},
+
+	clearHover : function() {
+		console.log('clearHover()');
+		console.log(this.hoveredOn);
+		_.each(this.hoveredOn, function(item) {
+			item.popover('close');
+		});
+
+		//this.hoveredOn = [];
 	},
 
 	tagHover : function(e) {
 		// once we stop using placeholder tags, this
 		// logic will need to be changed to get tag information
 
-		var $target = $(e.target);
-		var summary = $target.data('content');
-
-		// fetch tag summary from API only if it hasn't been fetched already
-		if (!summary) {
-			$target.data('content', "You are hovering over " + $target.text() + ". This space will be used to show a summary of the tag." );			
-		}
+		var $target = $(e.target);		
+		this.hoveredOn.push($target);
+		console.log(this.hoveredOn);
 
 		// var popoverOptions = {
 		// 	animation : true,
