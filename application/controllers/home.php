@@ -11,6 +11,7 @@ class Home extends MY_Controller {
 		$this->load->view('view_post_tpl');
 		$this->load->view('new_post_btn_tpl');
 		$this->load->view('new_post_form_tpl');
+		$this->load->view('search_form_tpl');
 		$this->load->view('modal_dialog_tpl');
 
 		$this->load->view("footer");

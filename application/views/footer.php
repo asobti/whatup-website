@@ -30,6 +30,7 @@
     <!-- Post model and view -->
     <script type="text/javascript" src="assets/js/models/post.js"></script>
     <script type="text/javascript" src="assets/js/views/post.js"></script>
+    <script type="text/javascript" src="assets/js/views/search.js"></script>
 
     <!-- User model -->
     <script type="text/javascript" src="assets/js/models/users.js"></script>

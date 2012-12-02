@@ -15,6 +15,8 @@ AppRouter = Backbone.Router.extend({
 		this.paginationModel = new PaginationModel();
 		this.paginationView = new PaginationView({model: this.paginationModel});
 		this.newPostView = new NewPostView();
+		this.searchView = new SearchView();
+		this.searchView.render();
 	},
 
 	posts:function(page_id){
