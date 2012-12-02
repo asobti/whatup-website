@@ -5,10 +5,9 @@
 			<h3>Post</h3>
 		</div>
 	</div>
-
 	<div class="row">		
-		<input type="text" id="post_title" placeholder="Post Title" />
-		<textarea id="post_content" class="field span12" placeholder="Insert your content here"></textarea>		
+		<input type="text" id="post_title" placeholder="Post Title" value="<%= topic %>" />
+		<textarea id="post_content" class="field span12" placeholder="Insert your content here"><%= body %></textarea>
 	</div>
 	<div class="row new-post-footer">
 		<div class="pull-left">

@@ -365,8 +365,7 @@
 
       // If we're "wait"-ing to set changed attributes, validate early.
       if (options.wait) {
-        if (!this._validate(attrs, options)) {
-          console.log("RETURNING FALSE");
+        if (!this._validate(attrs, options)) {          
           return false;
         }
         
@@ -1322,8 +1321,8 @@
   // instead of `application/json` with the model in a param named `model`.
   // Useful when interfacing with server-side languages like **PHP** that make
   // it difficult to read the body of `PUT` requests.
-  Backbone.sync = function(method, model, options) {
-    var type = methodMap[method];
+  Backbone.sync = function(method, model, options) {    
+    var type = methodMap[method];    
 
     // Default options, unless specified.
     options || (options = {});
@@ -1350,7 +1349,7 @@
 
     if (Backbone.forceContentTypeApplication) {
     	params.contentType = 'application/x-www-form-urlencoded';
-    }
+    }    
 
     // For older servers, emulate HTTP by mimicking the HTTP method with `_method`
     // And an `X-HTTP-Method-Override` header.

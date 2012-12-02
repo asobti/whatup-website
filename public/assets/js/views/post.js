@@ -6,6 +6,7 @@ PostView = Backbone.View.extend({
 	events : {
 		"hover .post-tag" : "tagHover",
 		"click .post-action-delete" : "postDelete",
+		"click .post-action-edit"	: "editRedirect",
 		"click .post-delete-confirm" : "postDeleteConfirmed"
 	},
 
@@ -128,6 +129,12 @@ PostView = Backbone.View.extend({
 		}));
 		$('#working-dialog').modal();
 	},
+
+	editRedirect : function(e) { 		
+		e.preventDefault();
+		var editUrl = "#/post/edit/" + this.model.get("id");
+		window.location = editUrl;
+	}
 });
 
 PostsView = Backbone.View.extend({

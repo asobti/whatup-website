@@ -3,9 +3,18 @@ FormView = Backbone.View.extend({
 	template:_.template($('#tpl-new-post-form').html()),
 	el: ".wrapper",
 
+	initialize: function(){
+		if(typeof this.model === "undefined") {
+			this.model = new Post();
+		}
+
+		console.log(this.model);
+	},
+
 	render : function(){
 		console.log('rendering form');
-		$(this.el).html(this.template());
+
+		$(this.el).html(this.template(this.model.toJSON()));
 
 		var that = this;
 
@@ -16,6 +25,7 @@ FormView = Backbone.View.extend({
 		});		
 
 		return this;
+
 	},
 
 	events : {
@@ -46,26 +56,30 @@ FormView = Backbone.View.extend({
 		console.log("createPost() called.");
 		// not necessarry since 'button' element has no default action
 		// leaving it here anyways incase at some point we change it to an anchor element
-		e.preventDefault();
+		e.preventDefault();		
 		
-		// values of the object should be read in from a form
 		var newPostData = {
 			topic : $('#post_title').val(),	
 			body : $('#post_content').val(),			
 			user_id : parseInt($('#new-post-user').val(), 10),
 		};
 
-		console.log(JSON.stringify(newPostData));
-
-		var newPostModel = new Post(newPostData);
+		console.log(newPostData);
+		console.log('is new(): ' + this.model.isNew());		
 
 		// store this for use in the callback
 		var that = this;
+		
+		if (this.model.isNew()) {
+			console.log('creating new model');
+		} else {
+			console.log('editing existing model');
+		}
 
-		var postCreationStatus = this.model.create(newPostModel, {
+		var postCreationStatus = this.model.save(newPostData, {
 			wait : true, 	// waits for server to respond with 200 before adding newly created model to collection
 
-			success : function(resp){
+			success : function(model, resp, options){
 				console.log('success callback');
 				console.log(resp);
 
@@ -78,15 +92,16 @@ FormView = Backbone.View.extend({
 				
 			},
 
-			error : function(coll, err) {
+			error : function(model, err, options) {
 				console.log('error callback');
+				console.log(model);
 				//that.hideProgressDialog();
 				// this error message for dev only
 				alert('There was an error. See console for details');
 				console.log(err);
 			}
 		});
-
+					
 		console.log(postCreationStatus);
 
 		if (postCreationStatus === false) {			

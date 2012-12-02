@@ -1,15 +1,21 @@
 Post = Backbone.Model.extend({	
 
-	url: function() {
+	/*url: function() {
 		if (typeof this.id === 'undefined') {
 			return 'http://projectwhatup.us:5000/api/posts';	
 		} else {
 			return 'http://projectwhatup.us:5000/api/posts/' + this.id;	
 		}    	
-  	},
+  	},*/
+  	urlRoot : "http://projectwhatup.us:5000/api/posts",
 
 	initialize : function(){			
 		//this.on("error", this.error, this);	
+	},
+
+	defaults : {
+		topic : "",
+		body : ""
 	},
 
 	validate : function(attrs){
@@ -53,7 +59,7 @@ Posts = Backbone.Collection.extend({
 		// store reference of this for use within setInterval
 		var that = this;
 		
-		setInterval(function() {
+		this.watcher = setInterval(function() {
 			that.refetch();
 		}, 5000);
 	},
@@ -70,6 +76,14 @@ Posts = Backbone.Collection.extend({
 			console.log("refetching page 1");
 			this.fetch({ data : { page : page_num }});
 		}
+	},
+
+	stopWatch : function() {
+		if (typeof this.watcher === 'undefined') {
+			return;
+		}
+
+		clearInterval(this.watcher);
 	}
 });
 

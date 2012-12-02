@@ -4,7 +4,9 @@ AppRouter = Backbone.Router.extend({
 		"posts" : "posts",
 		"posts/:page_id":"posts",
 		"post/add":"post_add",
+		"post/edit/:id":"post_edit",
 		"post/:id":"post"
+
 	},
 
 	initialize : function(){		
@@ -12,7 +14,7 @@ AppRouter = Backbone.Router.extend({
 		this.postsView = new PostsView({model: this.postsModel});
 		this.paginationModel = new PaginationModel();
 		this.paginationView = new PaginationView({model: this.paginationModel});
-		this.newPostView = new NewPostView();		
+		this.newPostView = new NewPostView();
 	},
 
 	posts:function(page_id){
@@ -53,6 +55,7 @@ AppRouter = Backbone.Router.extend({
 	
 	post:function(id) {
 		console.log("post("+id+") called.");	
+		this.postsModel.stopWatch();
 		
 		this.post = new Post();		
 		this.post.id = id;
@@ -77,15 +80,38 @@ AppRouter = Backbone.Router.extend({
 	post_add:function(){
 		console.log("post_add() called.");
 		$(this.newPostView.el).hide();
-		$(this.paginationView.el).hide();
+		$(this.paginationView.el).hide();		
 
-		var users = new UserCollection();
+		this.postsModel.stopWatch();
 
 		this.formView = new FormView({
-			model: this.postsModel,
-			users : users
+			model: new Post(),
+			users : new UserCollection()
 		}).render();
-	}
+	},
+
+	post_edit:function(id){
+		console.log("post_edit() called.");	
+		$(this.newPostView.el).hide();
+		$(this.paginationView.el).hide();
+		this.postsModel.stopWatch();
+
+		this.post = new Post();		
+		this.post.id = id;
+		this.post.fetch({			
+			success : function(model, response, options) {
+				console.log('success callback');
+				this.formView = new FormView({
+					"model": model,
+					users : new UserCollection()
+				}).render();
+			},
+			error : function(model, xhr, options) {
+				console.log('error');
+				console.log(xhr);
+			}
+		});
+	},
 });
 
 
