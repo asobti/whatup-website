@@ -1,15 +1,6 @@
-
 FormView = Backbone.View.extend({
 	template:_.template($('#tpl-new-post-form').html()),
 	el: ".wrapper",
-
-	initialize: function(){
-		if(typeof this.model === "undefined") {
-			this.model = new Post();
-		}
-
-		console.log(this.model);
-	},
 
 	render : function(){
 		console.log('rendering form');
@@ -58,14 +49,10 @@ FormView = Backbone.View.extend({
 		// leaving it here anyways incase at some point we change it to an anchor element
 		e.preventDefault();		
 		
-		var newPostData = {
-			topic : $('#post_title').val(),	
-			body : $('#post_content').val(),			
-			user_id : parseInt($('#new-post-user').val(), 10),
-		};
+		var newPostData = this.getFormData();		
 
 		console.log(newPostData);
-		console.log('is new(): ' + this.model.isNew());		
+		console.log('is new(): ' + this.model.isNew());
 
 		// store this for use in the callback
 		var that = this;
@@ -76,8 +63,9 @@ FormView = Backbone.View.extend({
 			console.log('editing existing model');
 		}
 
+
 		var postCreationStatus = this.model.save(newPostData, {
-			wait : true, 	// waits for server to respond with 200 before adding newly created model to collection
+			//wait : true, 	// waits for server to respond with 200 before adding newly created model to collection
 
 			success : function(model, resp, options){
 				console.log('success callback');
@@ -112,15 +100,19 @@ FormView = Backbone.View.extend({
 
 	cancelPost : function(e) {
 		console.log("cancelPost() called.");
-		var contents = $('textarea').val();	
-		console.log(contents);
-		if (contents) {
-			if (confirm("Are you sure you want to discard this post")) {
-				this.redirectHomePage();
-			}			
-		} else {
-			this.redirectHomePage();			
+		if (confirm("Are you sure you want to discard this post")) {
+			this.redirectHomePage();
 		}		
+	},
+
+	getFormData : function() {
+		var data = {
+			topic : $('#post_title').val(),	
+			body : $('#post_content').val(),			
+			user_id : parseInt($('#new-post-user').val(), 10),
+		};
+
+		return data;
 	},
 
 	redirectHomePage : function() {
