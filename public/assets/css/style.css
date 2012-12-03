@@ -202,3 +202,13 @@ img.main-loader {
 #new-post-user {
 	width: 250px;
 }
+div.navbar-inner {
+	height: 60px;
+}
+#new_post_btn {
+	padding-bottom: 8px;
+}
+#new_post_btn > i.icon-pencil {
+	margin-top: 4px;
+	margin-right: 5px;	
+}
