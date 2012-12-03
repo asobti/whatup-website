@@ -1,10 +1,5 @@
 <script id="tpl-new-post-form" type="text/template">
-<div id="post_add">
-	<div class="row">
-		<div class="span12">
-			<h3>Post</h3>
-		</div>
-	</div>
+<div id="post_add">	
 	<div class="row">		
 		<input type="text" id="post_title" placeholder="Post Title" value="<%= topic %>" />
 		<textarea id="post_content" class="field span12" placeholder="Insert your content here"><%= body %></textarea>

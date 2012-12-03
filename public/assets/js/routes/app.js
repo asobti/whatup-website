@@ -84,7 +84,7 @@ AppRouter = Backbone.Router.extend({
 		$(this.newPostView.el).hide();
 		$(this.paginationView.el).hide();		
 
-		this.postsModel.stopWatch();
+		this.postsModel.stopWatch();	
 
 		this.formView = new FormView({
 			model: new Post(),

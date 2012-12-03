@@ -215,3 +215,6 @@ div.navbar-inner {
 .new-post-attachment .btn {
 	width: 160px;	
 }
+#post_add {
+	margin-top: 40px;
+}
