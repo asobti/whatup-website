@@ -24,7 +24,9 @@ body {
 
 .pagination .prev,
 .pagination .next {
-	padding: 1px 15px 5px 15px;
+	/*padding: 1px 15px 5px 15px;*/
+	padding-top: 0;
+	padding-bottom: 4px;
 	font-size: 20px;
 }
 
