@@ -15,13 +15,34 @@
 				<option value="-1">Loading...</option>
 			</select>
 		</div>   
-		<div class="pull-right">
-			<div class="span8">
-				<div class="button_containter pull-right new-post-buttons">
-					<button class="btn btn-primary" id="post_add_submit" >Submit</button>	
-					<button class="btn btn-primary" id="post_add_cancel" >Cancel</button>	
-				</div>			
+		<div class="pull-left new-post-attachment">
+			<div class="btn-group dropup">
+				<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+					<i class="icon-folder-open"></i>
+					Add attachments
+					<span class="caret"></span>
+				</a>
+				<ul class="dropdown-menu">
+					<li>						
+						<a href="#"> 
+							<i class="icon-hdd"></i>
+							Upload from computer
+						</a>
+					</li>
+					<li>						
+						<a href="#"> 
+							<i class="icon-globe"></i>
+							Upload from URL
+						</a>
+					</li>
+				</ul>
 			</div>
+		</div>   
+		<div class="pull-right">			
+			<div class="button_containter pull-right new-post-buttons">
+				<button class="btn btn-primary" id="post_add_submit" >Submit</button>	
+				<button class="btn btn-primary" id="post_add_cancel" >Cancel</button>	
+			</div>			
 		</div>
 	</div>
 </div>

@@ -199,9 +199,6 @@ img.main-loader {
 	width: 100%; 
 	padding: 10px
 }
-#new-post-user {
-	width: 250px;
-}
 div.navbar-inner {
 	height: 60px;
 }
@@ -211,4 +208,10 @@ div.navbar-inner {
 #new_post_btn > i.icon-pencil {
 	margin-top: 4px;
 	margin-right: 5px;	
+}
+.new-post-attachment {	
+	margin-left: 30px;
+}
+.new-post-attachment .btn {
+	width: 160px;	
 }
