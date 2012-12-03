@@ -127,6 +127,6 @@ PaginationModel = Backbone.Model.extend({
 	},
 
 	changeCurrentPage : function(page) {
-		this.currentPage = page;
+		this.set("currentPage") = page;
 	}
 });
