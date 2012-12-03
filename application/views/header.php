@@ -33,7 +33,7 @@
 
   <body>
 
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <header class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
         <div class="header-container">
           <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -46,6 +46,6 @@
           </div>
         </div>
       </div>
-    </div>
+    </header>
 
     <div class="container">
