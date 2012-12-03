@@ -38,8 +38,8 @@
 		<div class="row-fluid topic">
 			<h4><%= topic %></h4>
 			<span class="post-actions">
-				<span class="label post-action post-action-edit" title="Edit this post"><i class="icon-edit"></i></span>
-				<span class="label post-action post-action-delete" title="Delete this post"><i class="icon-trash"></i></span>
+				<span class="label label-inverse post-action post-action-edit" title="Edit this post"><i class="icon-edit icon-white"></i></span>
+				<span class="label label-inverse post-action post-action-delete" title="Delete this post"><i class="icon-trash icon-white"></i></span>
 			</span>
 		</div>
 		<div class="clearfix"></div>
