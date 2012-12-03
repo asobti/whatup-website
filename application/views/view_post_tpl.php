@@ -39,7 +39,7 @@
 			<h4><%= topic %></h4>
 			<span class="post-actions">
 				<span class="label post-action post-action-edit" title="Edit this post"><i class="icon-edit"></i></span>
-				<span class="label post-action post-action-delete" title="Delete this post"><i class="icon-ban-circle"></i></span>
+				<span class="label post-action post-action-delete" title="Delete this post"><i class="icon-trash"></i></span>
 			</span>
 		</div>
 		<div class="clearfix"></div>
