@@ -175,6 +175,7 @@ span.post-action-delete:hover {
 }
 .post-delete-alert {
 	text-align: center;
+	margin-top: 20px;
 }
 .post-delete-alert .alert-buttons {
 	margin-top: 20px;
