@@ -7,6 +7,10 @@ var whatUp = angular.module('projectWhatUp', [])
 							templateUrl : 'partials/posts.html',
 							controller : PostsCtrl
 						})
+						.when('/posts/:page', {
+							templateUrl : 'partials/posts.html',
+							controller : PostsCtrl
+						})
 						.otherwise({
 							redirectTo : '/posts'
 						})
