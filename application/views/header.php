@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="projectWhatUp">
   <head>
     <meta charset="utf-8">
     <title>WhatUp</title>
@@ -35,14 +35,15 @@
 
     <header class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
-        <div class="header-container">
-          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </a>
+        <div class="header-container">          
           <a class="brand" href="#">WhatUp</a>
           <div id="new_post_btn_container">
+            <div class="nav-collapse collapse">
+              <button class="btn btn-primary pull-right" id="new_post_btn">
+                <i class="icon-pencil"></i>
+                New Post
+              </button>
+            </div>
           </div>
         </div>
       </div>

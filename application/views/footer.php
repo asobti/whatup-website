@@ -16,27 +16,17 @@
     <!-- Placed at the end of the document so the pages load faster -->
 
     <!-- Dependencies -->
-    <script src="<?= base_url('assets/js/jquery.js') ?>"></script>
-    <script src="<?= base_url('assets/js/timeago.js') ?>"></script>
-    <script src="<?= base_url('assets/js/bootstrap.min.js') ?>"></script>    
-    <script type="text/javascript" src="assets/js/json2.js"></script>
-    <script type="text/javascript" src="assets/js/underscore.js"></script>
-    <script type="text/javascript" src="assets/js/backbone.js"></script>
-
-    <!-- New Post Button and form -->
-    <script type="text/javascript" src="assets/js/views/new_post.js"></script>
-    <script type="text/javascript" src="assets/js/views/form.js"></script>
-
-    <!-- Post model and view -->
-    <script type="text/javascript" src="assets/js/models/post.js"></script>
-    <script type="text/javascript" src="assets/js/views/post.js"></script>
-    <script type="text/javascript" src="assets/js/views/search.js"></script>
-
-    <!-- User model -->
-    <script type="text/javascript" src="assets/js/models/users.js"></script>
-
-    <!-- app.js -->
-    <script type="text/javascript" src="assets/js/routes/app.js"></script>
+    <script src="<?= base_url('assets/js/libs/jquery.js') ?>"></script>
+    <script src="<?= base_url('assets/js/libs/timeago.js') ?>"></script>
+    <script src="<?= base_url('assets/js/libs/bootstrap.min.js') ?>"></script>    
+    
+    <!-- angular -->
+    <script type="text/javascript" src="<?= base_url('assets/js/angular/angular.js') ?>"></script>
+    <script type="text/javascript" src="<?= base_url('assets/js/angular/angular-resource.js') ?>"></script>
+    
+    <!-- angular files -->
+    <script type="text/javascript" src="<?= base_url('assets/js/app.js') ?>"></script>
+    <script type="text/javascript" src="<?= base_url('assets/js/controllers/PostsCtrl.js') ?>"></script>
     
 
     </body>
