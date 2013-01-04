@@ -39,10 +39,10 @@
           <a class="brand" href="#">WhatUp</a>
           <div id="new_post_btn_container">
             <div class="nav-collapse collapse">
-              <button class="btn btn-primary pull-right" id="new_post_btn">
+              <a href="#posts/new" class="btn btn-primary pull-right" id="new_post_btn">
                 <i class="icon-pencil"></i>
                 New Post
-              </button>
+              </a>
             </div>
           </div>
         </div>

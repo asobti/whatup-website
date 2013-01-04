@@ -27,7 +27,10 @@
     <!-- angular files -->
     <script type="text/javascript" src="<?= base_url('assets/js/app.js') ?>"></script>
     <script type="text/javascript" src="<?= base_url('assets/js/services.js') ?>"></script>
+
+    <!-- angular controllers -->
     <script type="text/javascript" src="<?= base_url('assets/js/controllers/PostsCtrl.js') ?>"></script>
+    <script type="text/javascript" src="<?= base_url('assets/js/controllers/PostCtrl.js') ?>"></script>
     <script type="text/javascript" src="<?= base_url('assets/js/controllers/PaginationCtrl.js') ?>"></script>
     
 
