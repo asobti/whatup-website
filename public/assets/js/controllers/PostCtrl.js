@@ -48,6 +48,9 @@ function PostCtrl($scope, $http) {
 		}
 	};
 
+	/*
+		TODO : Replace $http with custom REST service
+	*/
 	var createPost = function(post) {
 		showProgressDialog();		
 		
@@ -71,6 +74,9 @@ function PostCtrl($scope, $http) {
 		});
 	};
 
+	/*
+		TODO - Complete
+	*/
 	var savePost = function(post) {
 		if (original == post) {
 			console.log('no changes made');
@@ -80,6 +86,16 @@ function PostCtrl($scope, $http) {
 		// code to make http put request
 	};
 
+	/*
+		TODO - Complete
+	*/
+	var deletePost = function() {
+
+	};
+
+	/*
+		TODO - Run validation on post inputs
+	*/
 	var validatePost = function(post) {
 
 	};
