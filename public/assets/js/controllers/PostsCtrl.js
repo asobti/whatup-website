@@ -1,6 +1,6 @@
 'use strict';
 
-function PostsCtrl($scope, $http, $routeParams) {
+function PostsCtrl($scope, $http, $routeParams, eventBus) {
 		$scope.posts = [];
 		$scope.fetchingPosts = true;
 
@@ -14,9 +14,16 @@ function PostsCtrl($scope, $http, $routeParams) {
 
 		$http.get(postsUrl).success(function(posts) {			
 			$scope.posts = posts.objects;
-			$scope.fetchingPosts = false;			
+			$scope.fetchingPosts = false;
+
+			var paginationObj = {
+				currentPage : posts.page,
+				totalPages : posts.total_pages
+			};
+
+			eventBus.pageChanged(paginationObj);
 		});		
 }
 
 // define injections
-PostsCtrl.$inject = ['$scope', '$http', '$routeParams'];
+PostsCtrl.$inject = ['$scope', '$http', '$routeParams', 'EventBus'];
