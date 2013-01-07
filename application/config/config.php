@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://arena.projectwhatup.us/';
+$config['base_url']	= 'http://anthony.projectwhatup.us/';
 
 /*
 |--------------------------------------------------------------------------

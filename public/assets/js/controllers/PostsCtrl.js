@@ -1,6 +1,18 @@
 'use strict';
 
-function PostsCtrl($scope, $http, $routeParams, eventBus) {
+function PostsCtrl($scope, $http, $routeParams, eventBus, Posts) {
+		$scope.fetchingPosts = true;
+		var page = $routeParams.page || 1;
+		var data = Posts.query({"page":page, "q":"{\"order_by\":[{\"field\":\"created_at\",\"direction\":\"desc\"}]}"}, function(){
+			$scope.posts = data.objects;
+			$scope.fetchingPosts = false;
+			var paginationObj = {
+				currentPage: data.page,
+				totalPages: data.total_pages
+			}
+			eventBus.pageChanged(paginationObj);
+		});
+	/*	
 		$scope.posts = [];
 		$scope.fetchingPosts = true;
 
@@ -12,18 +24,19 @@ function PostsCtrl($scope, $http, $routeParams, eventBus) {
 						+ '?page=' + page
 						+ '&q={"order_by":[{"field":"created_at","direction":"desc"}]}';
 
-		$http.get(postsUrl).success(function(posts) {			
-			$scope.posts = posts.objects;
+		$http.get(postsUrl).success(function(posts1) {			
+			$scope.posts = posts1.objects;
 			$scope.fetchingPosts = false;
 
 			var paginationObj = {
-				currentPage : posts.page,
-				totalPages : posts.total_pages
+				currentPage : posts1.page,
+				totalPages : posts1.total_pages
 			};
 
 			eventBus.pageChanged(paginationObj);
 		});		
+	*/
 }
 
 // define injections
-PostsCtrl.$inject = ['$scope', '$http', '$routeParams', 'EventBus'];
+PostsCtrl.$inject = ['$scope', '$http', '$routeParams', 'EventBus', 'Posts'];
