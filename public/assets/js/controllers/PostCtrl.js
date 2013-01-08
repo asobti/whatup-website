@@ -4,11 +4,11 @@ function PostCtrl($scope, $http, $routeParams, Posts) {
 
 	if (typeof $routeParams.postId === 'undefined') {
 		$scope.post = new Posts({
-					topic : '',
-					body : '',
-					user_id : '',
-					tags : []
-				});		
+			topic : '',
+			body : '',
+			user_id : '',
+			tags : []
+		});		
 	} else {
 		$scope.post = Posts.get({'postId' : $routeParams.postId});
 		console.log($scope.post);
