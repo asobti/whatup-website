@@ -42,12 +42,5 @@
 		</div>
 	</div>
 </div>
-<div id="working-dialog" class="modal hide fade">
-	<div class="modal-header">			
-		<h4>{{ modal.header }}</h4>
-	</div>
-	<div class="modal-body">
-		<img ng-src="{{ modal.image }}" />
-		<p><strong>{{ modal.body }}</strong></p>
-	</div>		
-</div>
+
+<div ng-include="'partials/working_dialog.html'"></div>

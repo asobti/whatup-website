@@ -1,30 +1,29 @@
 'use strict';
 
 function PostCtrl($scope, $http, $routeParams, Posts) {
-	var postId = $routeParams.postId || -1;	
 
-	if (postId === -1) {
-		$scope.post = {
-			topic : '',
-			body : '',
-			user_id : '',
-			tags : []
-		};
+	if (typeof $routeParams.postId === 'undefined') {
+		$scope.post = new Posts({
+					topic : '',
+					body : '',
+					user_id : '',
+					tags : []
+				});		
 	} else {
-		$scope.post = Posts.get({'postId' : postId});
-		console.log($scope.post);		
-	}	
+		$scope.post = Posts.get({'postId' : $routeParams.postId});		
+	}
 
 	// fetch users
 	var usersUrl = whatUp.apiRoot + 'users';
-	
+	var that = this;
+
 	$http.get(usersUrl).success(function(users) {
-		$scope.users = users.objects;		
+		$scope.users = users.objects;			
 	});
 
 	// submit the post to save it
 	$scope.submit = function() {
-		if(postId === -1) {
+		if(typeof $scope.id === 'undefined') {
 			console.log('creating new post');
 			createPost();
 		} else {
@@ -43,24 +42,16 @@ function PostCtrl($scope, $http, $routeParams, Posts) {
 		TODO : Replace $http with custom REST service
 	*/
 	var createPost = function() {
-		showProgressDialog();		
+		showProgressDialog("Adding your post...");		
 		
-		$http({
-			method : 'POST',
-			data : JSON.stringify($scope.post),
-			url : whatUp.apiRoot + 'posts'
-		})
-		.success(function(resp) {
-			console.log('Post created successfully');
-
+		$scope.post.$create(function(resp){
 			$scope.modal.body = 'Post added successfully. Redirecting...';
 			$scope.modal.image = 'assets/img/loaders/check.png';
 
 			// redirect to homepage
 			setTimeout(function() { redirectHomepage(); }, 1000);
-		})
-		.error(function(err) {
-			console.log('Error creating post');
+		}, function(err){
+			alert('Error. See console for details');
 			console.log(err);
 		});
 	};
@@ -70,7 +61,7 @@ function PostCtrl($scope, $http, $routeParams, Posts) {
 	*/
 	var savePost = function(post) {
 		//console.log($scope.post);
-		showProgressDialog();
+		showProgressDialog("Editing your post...");
 
 		$scope.post.$save(function(resp) {
 			$scope.modal.body = 'Post added successfully. Redirecting...';
@@ -81,36 +72,28 @@ function PostCtrl($scope, $http, $routeParams, Posts) {
 		}, function(err) {
 			alert('Error. See console for details');
 			console.log(err);
-		});
-		
-		/*
-		showProgressDialog();
-		$http({
-			method : 'PUT',
-			data : JSON.stringify($scope.post),
-			url : whatUp.apiRoot + 'posts/' + postId
-		})
-		.success(function(resp) {
-			console.log('Post created successfully');
-
-			$scope.modal.body = 'Post added successfully. Redirecting...';
-			$scope.modal.image = 'assets/img/loaders/check.png';
-
-			// redirect to homepage
-			setTimeout(function() { redirectHomepage(); }, 1000);
-		})
-		.error(function(err) {
-			console.log('Error creating post');
-			console.log(err);
-		});
-		*/
+		});		
 	};
 
 	/*
 		TODO - Complete
 	*/
-	var deletePost = function() {
+	$scope.deletePost = function() {
+		if (confirm("Are you sure you want to delete this post?")) {
+			
+			showProgressDialog("Deleting post...");
+				$scope.modal.body = 'Post deleted successfully. Redirecting...';
+				$scope.modal.image = 'assets/img/loaders/check.png';
 
+				// redirect to homepage
+				setTimeout(function() { redirectHomepage(); }, 1000);
+			$scope.post.$delete(function(resp) {
+				console.log(resp);
+			}, function(err) {
+				alert('Error. See console for details');
+				console.log(err);
+			});	
+		}	
 	};
 
 	/*
@@ -120,10 +103,10 @@ function PostCtrl($scope, $http, $routeParams, Posts) {
 
 	};
 
-	var showProgressDialog = function() {
+	var showProgressDialog = function(msg) {
 		$scope.modal = {
 			header : "Project WhatUp",
-			body : "Adding your post...",
+			body : msg,
 			image : 'assets/img/loaders/working.gif'
 		};
 

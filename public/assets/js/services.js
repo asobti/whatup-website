@@ -39,6 +39,9 @@ angular.module('whatUpServices', ['ngResource'])
 				isArray:false},
 			save:{
 				method:"PUT"
+			},
+			create:{
+				method:"POST"
 			}
 		})
 	})

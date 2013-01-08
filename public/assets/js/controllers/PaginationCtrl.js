@@ -13,8 +13,7 @@ function PaginationCtrl($scope, eventBus) {
 		if (pagination !== null) {
 			$scope.currentPage = pagination.currentPage;
 			$scope.totalPages = pagination.totalPages;
-
-			console.log('Page Changed. Currently on page ' + $scope.currentPage + ' of ' + $scope.totalPages);
+			
 			generatePages();
 		}
 	});

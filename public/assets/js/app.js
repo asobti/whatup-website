@@ -11,6 +11,10 @@ var whatUp = angular.module('projectWhatUp', ['whatUpServices'])
 							templateUrl : 'partials/new_post.html',
 							controller : PostCtrl
 						})
+						.when('/posts/view/:postId', {
+							templateUrl : 'partials/view_post.html',
+							controller : PostCtrl
+						})
 						.when('/posts/new', {
 							templateUrl : 'partials/new_post.html',
 							controller : PostCtrl
