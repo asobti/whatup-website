@@ -10,7 +10,8 @@ function PostCtrl($scope, $http, $routeParams, Posts) {
 					tags : []
 				});		
 	} else {
-		$scope.post = Posts.get({'postId' : $routeParams.postId});		
+		$scope.post = Posts.get({'postId' : $routeParams.postId});
+		console.log($scope.post);
 	}
 
 	// fetch users
@@ -23,7 +24,7 @@ function PostCtrl($scope, $http, $routeParams, Posts) {
 
 	// submit the post to save it
 	$scope.submit = function() {
-		if(typeof $scope.id === 'undefined') {
+		if(typeof $scope.post.id === 'undefined') {
 			console.log('creating new post');
 			createPost();
 		} else {
