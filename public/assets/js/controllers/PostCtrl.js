@@ -65,7 +65,7 @@ function PostCtrl($scope, $http, $routeParams, Posts) {
 		showProgressDialog("Editing your post...");
 
 		$scope.post.$save(function(resp) {
-			$scope.modal.body = 'Post added successfully. Redirecting...';
+			$scope.modal.body = 'Post edited successfully. Redirecting...';
 			$scope.modal.image = 'assets/img/loaders/check.png';
 
 			// redirect to homepage
