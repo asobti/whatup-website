@@ -1,13 +1,13 @@
 <div id="post_add">
 	<div class="row">
 		<h3>Create a New Post</h3>		
-		<input type="text" id="post_title" placeholder="Post Title" value="" ng-model="topic" />
-		<textarea id="post_content" class="field span12" placeholder="Insert your content here" ng-model="body" ></textarea>
-		<input type="text" id="post_tags" placeholder="Tags" value="" />
+		<input type="text" id="post_title" placeholder="Post Title" ng-model="post.topic" />
+		<textarea id="post_content" class="field span12" placeholder="Insert your content here" ng-model="post.body" ></textarea>
+		<input type="text" id="post_tags" placeholder="Tags" value="" ng-model="post.tags" />
 	</div>
 	<div class="row new-post-footer">
 		<div class="pull-left">
-			<select id="new-post-user" ng-model="user_id" >
+			<select id="new-post-user" ng-model="post.user_id" >
 				<option ng-repeat="user in users" value="{{ user.id }}">@{{ user.alias }}</option>				
 			</select>
 		</div>   

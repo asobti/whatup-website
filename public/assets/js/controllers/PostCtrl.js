@@ -1,62 +1,53 @@
 'use strict';
 
-function PostCtrl($scope, $http) {
-	var original = {};
-	$scope.foobar = "foo";
+function PostCtrl($scope, $http, $routeParams, Posts) {
+	var postId = $routeParams.postId || -1;	
+
+	if (postId === -1) {
+		$scope.post = {
+			topic : '',
+			body : '',
+			user_id : '',
+			tags : []
+		};
+	} else {
+		$scope.post = Posts.get({'postId' : postId});
+		console.log($scope.post);		
+	}	
+
 	// fetch users
 	var usersUrl = whatUp.apiRoot + 'users';
+	
 	$http.get(usersUrl).success(function(users) {
 		$scope.users = users.objects;		
 	});
 
 	// submit the post to save it
 	$scope.submit = function() {
-		
-		var post = getPost();
-
-		if($.isEmptyObject(original)) {
+		if(postId === -1) {
 			console.log('creating new post');
-			createPost(post);
+			createPost();
 		} else {
 			console.log('editing post');
 			savePost();
 		}
 	};
 
-	$scope.cancel = function() {
-		if ($.isEmptyObject(getPost())) {
+	$scope.cancel = function() {		
+		if (confirm("Are you sure you want to discard this post?")) {
 			redirectHomepage();
-		} else {
-			if (confirm("Are you sure you want to discard this post?")) {
-				redirectHomepage();
-			}
-		}
-	};
-
-	var getPost = function() {		
-		var post = {
-			topic : $scope.topic,
-			body : $scope.body,
-			user_id : parseInt($scope.user_id, 10),
-			tags : []
-		};
-		
-		if (!post.topic && !post.body) {
-			return {};
-		} else {
-			return post;
-		}
+		}		
 	};
 
 	/*
 		TODO : Replace $http with custom REST service
 	*/
-	var createPost = function(post) {
+	var createPost = function() {
 		showProgressDialog();		
 		
 		$http({
 			method : 'POST',
-			data : JSON.stringify(post),
+			data : JSON.stringify($scope.post),
 			url : whatUp.apiRoot + 'posts'
 		})
 		.success(function(resp) {
@@ -78,12 +69,41 @@ function PostCtrl($scope, $http) {
 		TODO - Complete
 	*/
 	var savePost = function(post) {
-		if (original == post) {
-			console.log('no changes made');
-			return;
-		}
+		//console.log($scope.post);
+		showProgressDialog();
 
-		// code to make http put request
+		$scope.post.$save(function(resp) {
+			$scope.modal.body = 'Post added successfully. Redirecting...';
+			$scope.modal.image = 'assets/img/loaders/check.png';
+
+			// redirect to homepage
+			setTimeout(function() { redirectHomepage(); }, 1000);
+		}, function(err) {
+			alert('Error. See console for details');
+			console.log(err);
+		});
+		
+		/*
+		showProgressDialog();
+		$http({
+			method : 'PUT',
+			data : JSON.stringify($scope.post),
+			url : whatUp.apiRoot + 'posts/' + postId
+		})
+		.success(function(resp) {
+			console.log('Post created successfully');
+
+			$scope.modal.body = 'Post added successfully. Redirecting...';
+			$scope.modal.image = 'assets/img/loaders/check.png';
+
+			// redirect to homepage
+			setTimeout(function() { redirectHomepage(); }, 1000);
+		})
+		.error(function(err) {
+			console.log('Error creating post');
+			console.log(err);
+		});
+		*/
 	};
 
 	/*
@@ -117,4 +137,4 @@ function PostCtrl($scope, $http) {
 
 }
 
-PostCtrl.$inject = ['$scope', '$http'];
+PostCtrl.$inject = ['$scope', '$http', '$routeParams', 'Posts'];

@@ -29,15 +29,21 @@ var resourceUsersUrl = 	"http://projectwhatup.us\\:5000/api/"
 
 
 
-angular.module('whatUpServices', ['ngResource']).
-	factory('Posts', function($resource){
-	return $resource(resourcePostsUrl, {}, {
-		query:{method:"GET", isArray:false}
-		save:{method:"PUT"}}
+angular.module('whatUpServices', ['ngResource'])
+	.factory('Posts', function($resource){
+		return $resource(resourcePostsUrl, {
+			postId:"@id"
+		}, {
+			query:{
+				method:"GET", 
+				isArray:false},
+			save:{
+				method:"PUT"
+			}
+		})
+	})
+	.factory('Users', function($resource){
+		return $resource(resourceUsersUrl, {}, {
+			query:{method:"GET", isArray:false}
+		})
 	});
-	factory('Users'), function($resource){
-	return $resource(resourceUsersUrl, {}, {
-		query:{method:"GET", isArray:false}
-	});
-});
-
