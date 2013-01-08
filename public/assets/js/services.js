@@ -23,6 +23,8 @@ whatUp.factory('EventBus', function($rootScope) {
 
 var resourcePostsUrl = 	"http://projectwhatup.us\\:5000/api/"
 		+ 'posts/:postId';
+var resourceUsersUrl = 	"http://projectwhatup.us\\:5000/api/"
+		+ 'users/:userId';
 //		+ '?q={"order_by":[{"field"\\:"created_at","direction"\\:"desc"}]}';
 
 
@@ -31,7 +33,11 @@ angular.module('whatUpServices', ['ngResource']).
 	factory('Posts', function($resource){
 	return $resource(resourcePostsUrl, {}, {
 		query:{method:"GET", isArray:false}
+		save:{method:"PUT"}}
+	});
+	factory('Users'), function($resource){
+	return $resource(resourceUsersUrl, {}, {
+		query:{method:"GET", isArray:false}
 	});
 });
-
 
