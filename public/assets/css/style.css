@@ -197,10 +197,12 @@ img.main-loader {
 	resize: vertical; 
 	padding: 10px
 }
-#post_title,
-#post_tags {
+#post_title {
 	width: 100%; 
 	padding: 10px
+}
+#post_tags {
+	padding: 6px;
 }
 div.navbar-inner {
 	height: 60px;
@@ -222,5 +224,14 @@ div.navbar-inner {
 	margin-top: 40px;
 }
 .post-tag > i {
+	margin-left: 5px;
+	cursor: pointer;
+}
+.tag-row {
+	margin-left: 0px;
+}
+.tag-row > .post-tag {
+	vertical-align: top;
+	padding: 10px;
 	margin-right: 5px;
 }

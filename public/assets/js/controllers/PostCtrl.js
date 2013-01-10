@@ -27,7 +27,7 @@ function PostCtrl($scope, $http, $routeParams, Posts) {
 
 	// submit the post to save it
 	$scope.submit = function() {
-		processTags();
+		//processTags();
 		
 		if(typeof $scope.post.id === 'undefined') {
 			console.log('creating new post');
@@ -102,6 +102,24 @@ function PostCtrl($scope, $http, $routeParams, Posts) {
 				console.log(err);
 			});	
 		}	
+	};
+
+	$scope.tagFinished = function() {
+		if (angular.pluckIndex($scope.post.tags, 'name', $scope.currentTag) === -1) {
+			$scope.post.tags.push({
+				name : $scope.currentTag
+			});
+		}
+		console.log($scope.post.tags);
+		$scope.currentTag = '';
+	};
+
+	$scope.removeTag = function(tagName) {
+		var index = angular.pluckIndex($scope.post.tags, 'name', tagName);
+
+		if (index !== -1) {
+			$scope.post.tags.splice(index, 1);
+		}
 	};
 
 	var getTagsAsString = function() {

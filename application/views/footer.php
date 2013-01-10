@@ -27,6 +27,7 @@
     <!-- angular files -->
     <script type="text/javascript" src="<?= base_url('assets/js/app.js') ?>"></script>
     <script type="text/javascript" src="<?= base_url('assets/js/services.js') ?>"></script>
+    <script type="text/javascript" src="<?= base_url('assets/js/directives.js') ?>"></script>
 
     <!-- angular controllers -->
     <script type="text/javascript" src="<?= base_url('assets/js/controllers/PostsCtrl.js') ?>"></script>
