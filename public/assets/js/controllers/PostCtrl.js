@@ -2,28 +2,33 @@
 
 function PostCtrl($scope, $http, $routeParams, Posts) {
 
-	if (typeof $routeParams.postId === 'undefined') {
+	$scope.tags = '';
+
+	if (typeof $routeParams.postId === 'undefined') {		
 		$scope.post = new Posts({
 			topic : '',
 			body : '',
 			user_id : '',
 			tags : []
-		});		
+		});
 	} else {
-		$scope.post = Posts.get({'postId' : $routeParams.postId});
-		console.log($scope.post);
+		$scope.post = Posts.get({'postId' : $routeParams.postId}, function() {
+			$scope.tags = getTagsAsString();
+		});
+
 	}
 
 	// fetch users
 	var usersUrl = whatUp.apiRoot + 'users';
-	var that = this;
-
+	
 	$http.get(usersUrl).success(function(users) {
 		$scope.users = users.objects;			
 	});
 
 	// submit the post to save it
 	$scope.submit = function() {
+		processTags();
+		
 		if(typeof $scope.post.id === 'undefined') {
 			console.log('creating new post');
 			createPost();
@@ -69,7 +74,9 @@ function PostCtrl($scope, $http, $routeParams, Posts) {
 			$scope.modal.image = 'assets/img/loaders/check.png';
 
 			// redirect to homepage
-			setTimeout(function() { redirectHomepage(); }, 1000);
+			setTimeout(function() { 
+				redirectHomepage(); 
+			}, 1000);
 		}, function(err) {
 			alert('Error. See console for details');
 			console.log(err);
@@ -97,11 +104,41 @@ function PostCtrl($scope, $http, $routeParams, Posts) {
 		}	
 	};
 
+	var getTagsAsString = function() {
+		var tagString = '';
+
+		if (typeof $scope.post.tags === 'undefined') {
+			return '';
+		}
+
+		$.each($scope.post.tags, function(index, tag) {
+			tagString += tag.name + " ";
+		});
+
+		return tagString;
+	};
+
+	var processTags = function() {
+		var tags = $scope.tags.split(' ');
+		
+		 $scope.post.tags = [];
+
+		$.each(tags, function(index, tag) {
+			tag = $.trim(tag);
+			if (tag === '') return;						
+			
+			$scope.post.tags.push({
+				"name" : tag
+			});
+			
+		});		
+	};
+
 	/*
 		TODO - Run validation on post inputs
 	*/
 	var validatePost = function(post) {
-
+		// validate models
 	};
 
 	var showProgressDialog = function(msg) {
@@ -117,8 +154,6 @@ function PostCtrl($scope, $http, $routeParams, Posts) {
 	var redirectHomepage = function() {
 		window.location = "/";
 	};
-
-
 }
 
 PostCtrl.$inject = ['$scope', '$http', '$routeParams', 'Posts'];

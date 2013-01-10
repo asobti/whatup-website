@@ -34,9 +34,10 @@ angular.module('whatUpServices', ['ngResource'])
 		return $resource(resourcePostsUrl, {
 			postId:"@id"
 		}, {
-			query:{
+			query: {
 				method:"GET", 
-				isArray:false},
+				isArray:false
+			},
 			save:{
 				method:"PUT"
 			},
@@ -47,6 +48,9 @@ angular.module('whatUpServices', ['ngResource'])
 	})
 	.factory('Users', function($resource){
 		return $resource(resourceUsersUrl, {}, {
-			query:{method:"GET", isArray:false}
+			query: {
+				method:"GET", 
+				isArray:false
+			}
 		})
 	});
