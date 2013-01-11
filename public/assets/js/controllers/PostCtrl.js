@@ -105,6 +105,10 @@ function PostCtrl($scope, $http, $routeParams, Posts) {
 	};
 
 	$scope.tagFinished = function() {
+		$scope.currentTag = $.trim($scope.currentTag);
+
+		if ($scope.currentTag === '') return;
+		
 		if (angular.pluckIndex($scope.post.tags, 'name', $scope.currentTag) === -1) {
 			$scope.post.tags.push({
 				name : $scope.currentTag
