@@ -57,9 +57,8 @@ whatUp.directive('autoComplete', function() {
 				//scope.currentTag = ui.item.value;				
 			},
 			focus : function(event, ui) {
-				console.log('focus');
+				scope.currentTag = ui.item.value;
 				scope.$apply();
-				console.log(scope.currentTag);
 			}
 		});
 	}
