@@ -12,6 +12,20 @@ function PostsCtrl($scope, $http, $routeParams, eventBus, Posts) {
 			}
 			eventBus.pageChanged(paginationObj);
 		});	
+		$scope.search = function() {
+			console.log("Test");
+			var searchData = $scope.searchData;
+			console.log("Search called with " + searchData);
+			Posts.query({"page":page, "q":"{\"filters\":[{\"name\":\"body\",\"op\":\"like\",\"val\":\"%"+searchData+"%\"}], \"order_by\":[{\"field\":\"created_at\",\"direction\":\"desc\"}]}"}, function(data){
+				$scope.posts = data.objects;
+				$scope.fetchingPosts = false;
+				var paginationObj = {
+					currentPage: data.page,
+					totalPages: data.total_pages
+				}
+			});	
+
+		}
 }
 
 // define injections
