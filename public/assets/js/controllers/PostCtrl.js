@@ -38,7 +38,7 @@ function PostCtrl($scope, $http, $routeParams, Posts) {
 		}
 	};
 
-	$scope.cancel = function() {		
+	$scope.cancel = function() {				
 		if (confirm("Are you sure you want to discard this post?")) {
 			redirectHomepage();
 		}		
@@ -114,8 +114,9 @@ function PostCtrl($scope, $http, $routeParams, Posts) {
 				name : $scope.currentTag
 			});
 		}
-		console.log($scope.post.tags);
-		$scope.currentTag = '';
+		
+		$scope.currentTag = '';	
+		console.log('tag finished');	
 	};
 
 	$scope.removeTag = function(tagName) {

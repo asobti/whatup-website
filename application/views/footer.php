@@ -18,7 +18,8 @@
     <!-- Dependencies -->
     <script src="<?= base_url('assets/js/libs/jquery.js') ?>"></script>
     <script src="<?= base_url('assets/js/libs/timeago.js') ?>"></script>
-    <script src="<?= base_url('assets/js/libs/bootstrap.min.js') ?>"></script>    
+    <script src="<?= base_url('assets/js/libs/bootstrap.min.js') ?>"></script>   
+    <script src="<?= base_url('assets/js/libs/jquery-ui/jquery-ui.min.js') ?>"></script> 
     
     <!-- angular -->
     <script type="text/javascript" src="<?= base_url('assets/js/angular/angular.js') ?>"></script>
