@@ -23,7 +23,6 @@ whatUp.directive('tagInput', function() {
 	}
 });
 
-
 whatUp.directive('autoComplete', function() {
 
 	return function(scope, element, attrs) {
@@ -63,4 +62,21 @@ whatUp.directive('autoComplete', function() {
 		});
 	}
 
+});
+
+whatUp.directive('enterKeyDown', function() {
+
+	return function(scope, element, attrs) {
+
+		$(element[0]).on('keydown', function(e) {
+			// enter (13) or spacebar (32) or tab (9)
+			if (e.which === 13) {
+				e.preventDefault();
+				var func = attrs.enterKeyDown;
+				scope.$eval(func);
+				
+			}
+		});
+
+	}
 });
