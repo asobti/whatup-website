@@ -53,12 +53,12 @@
 </div>
 <div id="pagination_container" ng-controller="PaginationCtrl">
 	<div class="pagination btn-group"> 
-		<a class="btn btn-info btn-small btnClass prev" ng-class="{ disabled : !$hasPreviousPage() }" href="{{ getPrevPageLink() }}" title="Previous Page"> &larr; </a>
+		<a class="btn btn-info btn-small btnClass prev" ng-class="{ disabled : !hasPreviousPage() }" href="{{ getPrevPageLink() }}" title="Previous Page"> &larr; </a>
 
 		<a ng-repeat="page in pages" class="btn btn-info btn-small btnClass {{ page.class }}" href="{{ page.link }}" title="{{ page.title }}">
 			{{ page.number }}
 		</a>
 
-		<a class="btn btn-info btn-small btnClass next" ng-class="{ disabled : !$hasNextPage() }" href="{{ getNextPageLink() }}" title="Next Page"> &rarr; </a>
-	</div>
+		<a class="btn btn-info btn-small btnClass next" ng-class="{ disabled : !hasNextPage() }" href="{{ getNextPageLink() }}" title="Next Page"> &rarr; </a>
+	</div>	
 </div>
