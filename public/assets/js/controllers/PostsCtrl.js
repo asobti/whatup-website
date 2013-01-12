@@ -3,19 +3,49 @@
 function PostsCtrl($scope, $http, $routeParams, eventBus, Posts) {
 		$scope.fetchingPosts = true;
 		var page = $routeParams.page || 1;
+
 		$scope.search = function() {
+
 			var searchData = $scope.searchData;
-			var filter = "\"filters\":[{\"name\":\"body\",\"op\":\"like\",\"val\":\"%"+searchData+"%\"}], "
-			if(typeof searchData == 'undefined' || searchData == "") {
-				filter = "";
+
+			// basic query object that we use every time
+			// gets posts in newest-to-oldest format
+			var queryObj = {
+				order_by : [
+					{
+						field : "created_at",
+						direction : "desc"
+					}
+				]
+			};
+
+			if(typeof searchData !== 'undefined' && searchData !== "") {
+				// a non-empty search term was defined
+				// create a filter and add it to the queryObj
+				var filter = [
+								{
+									name : "body",
+									op : "like",
+									val : "%" + searchData + "%"
+								}
+							];
+
+				queryObj.filters = filter;
 			}
-			Posts.query({"page":page, "q":"{"+filter+"\"order_by\":[{\"field\":\"created_at\",\"direction\":\"desc\"}]}"}, function(data){
-				$scope.posts = data.objects;
-				$scope.fetchingPosts = false;
-				var paginationObj = {
-					currentPage: data.page,
-					totalPages: data.total_pages
-				}
+
+			Posts.query({
+					"page":page, 
+					"q": JSON.stringify(queryObj)	//convert the query object to JSON
+				}, function(data){
+					$scope.posts = data.objects;
+					$scope.fetchingPosts = false;
+
+					var paginationObj = {
+						currentPage: data.page,
+						totalPages: data.total_pages
+					}
+
+					eventBus.pageChanged(paginationObj);
 			});	
 		}
 		$scope.search();

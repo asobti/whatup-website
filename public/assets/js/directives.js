@@ -69,7 +69,7 @@ whatUp.directive('enterKeyDown', function() {
 	return function(scope, element, attrs) {
 
 		$(element[0]).on('keydown', function(e) {
-			// enter (13) or spacebar (32) or tab (9)
+			// enter (13)
 			if (e.which === 13) {
 				e.preventDefault();
 				var func = attrs.enterKeyDown;
