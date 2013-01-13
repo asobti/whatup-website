@@ -42,7 +42,7 @@
 				</div>	 
 				<div class="span3 post-tags-wrapper pull-right">			
 					<!-- tags go here -->				
-					<a ng-repeat="tag in post.tags" href="#" class="label label-info post-tag" data-id="tag.id" data-content="tag.summary" data-title="tag.name" rel="popover" data-placement="top" >
+					<a ng-repeat="tag in post.tags" href="#/tags/view/{{ tag.id }}" class="label label-info post-tag" data-id="tag.id" data-content="tag.summary" data-title="tag.name" rel="popover" data-placement="top" >
 						<i class="icon-tag icon-white"></i>
 						{{ tag.name }}
 					</a>				
