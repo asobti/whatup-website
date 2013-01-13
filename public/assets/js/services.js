@@ -21,15 +21,12 @@ whatUp.factory('EventBus', function($rootScope) {
 	return bus;
 });
 
-var resourcePostsUrl = 	"http://projectwhatup.us\\:5000/api/"
-						+ 'posts/:postId';
+var resourcePostsUrl = 	whatUp.apiRoot + 'posts/:postId';
 
-var resourceUsersUrl = 	"http://projectwhatup.us\\:5000/api/"
-						+ 'users/:userId';
+var resourceUsersUrl = 	whatUp.apiRoot + 'users/:userId';
 //		+ '?q={"order_by":[{"field"\\:"created_at","direction"\\:"desc"}]}';
 
-var resourceTagsUrl = "http://projectwhatup.us\\:5000/api/"
-						+ 'tags/:tagId';
+var resourceTagsUrl = whatUp.apiRoot + 'tags/:tagId';
 
 
 angular.module('whatUpServices', ['ngResource'])
