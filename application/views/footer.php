@@ -5,7 +5,7 @@
 
       <footer>
         <p>&copy; Project WhatUp, 2012</p>
-        <p>Version 1.1.0</p>
+        <p>Version 2.0.0 Alpha</p>        
       </footer>
 
     </div> <!-- /container -->
