@@ -235,3 +235,7 @@ div.navbar-inner {
 	padding: 10px;
 	margin-right: 5px;
 }
+.tag-body > .edit-tag {
+	text-align: right;
+	font-size: 12px;
+}

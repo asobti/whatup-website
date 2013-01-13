@@ -23,6 +23,10 @@ var whatUp = angular.module('projectWhatUp', ['whatUpServices'])
 							templateUrl : 'partials/posts.html',
 							controller : PostsCtrl
 						})
+						.when('/tags/view/:tagId', {
+							templateUrl : 'partials/tag-posts.html',
+							controller : TagCtrl
+						})
 						.otherwise({
 							redirectTo : '/posts'
 						})
