@@ -42,7 +42,8 @@ function PaginationCtrl($scope, eventBus) {
 		}
 	};
 
-	var generatePages = function() {		
+	var generatePages = function() {	
+		$scope.pages = [];	
 
 		for(var i = 1; i <= $scope.totalPages; i++) {
 
