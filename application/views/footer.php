@@ -34,6 +34,7 @@
     <script type="text/javascript" src="<?= base_url('assets/js/controllers/PostsCtrl.js') ?>"></script>
     <script type="text/javascript" src="<?= base_url('assets/js/controllers/PostCtrl.js') ?>"></script>
     <script type="text/javascript" src="<?= base_url('assets/js/controllers/PaginationCtrl.js') ?>"></script>
+    <script type="text/javascript" src="<?= base_url('assets/js/controllers/TagCtrl.js') ?>"></script>
     
 
     </body>

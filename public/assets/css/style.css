@@ -90,7 +90,8 @@ body {
 .post .post-tag,
 .single-post .post-tag {
 	padding: 5px 10px;
-	margin-right: 5px;	
+	margin-right: 5px;
+	padding-left: 5px;	
 }
 .post .post-tags-wrapper,
 .single-post .post-tags-wrapper {
@@ -223,8 +224,8 @@ div.navbar-inner {
 #post_add {
 	margin-top: 40px;
 }
-.post-tag > i {
-	margin-left: 5px;
+.post-tag > i {	
+	margin-right : 5px;
 	cursor: pointer;
 }
 .tag-row {
@@ -234,4 +235,8 @@ div.navbar-inner {
 	vertical-align: top;
 	padding: 10px;
 	margin-right: 5px;
+}
+.tag-body > .edit-tag {
+	text-align: right;
+	font-size: 12px;
 }
