@@ -19,7 +19,7 @@ function PostCtrl($scope, $http, $routeParams, Posts) {
 	}
 
 	// fetch users
-	var usersUrl = whatUp.apiRoot + 'users';
+	var usersUrl = "http://projectwhatup.us:5000/api/" + 'users';
 	
 	$http.get(usersUrl).success(function(users) {
 		$scope.users = users.objects;			

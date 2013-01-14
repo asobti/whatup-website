@@ -48,7 +48,14 @@ function PostsCtrl($scope, $http, $routeParams, eventBus, Posts) {
 					eventBus.pageChanged(paginationObj);
 			});	
 		}
+
 		$scope.search();
+
+		$scope.timeAgo = function(created_at) {
+			//mark it with UTC time
+			created_at += "Z";
+			return $.timeago(created_at);
+		};
 }
 
 // define injections

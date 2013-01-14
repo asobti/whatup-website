@@ -73,8 +73,7 @@ whatUp.directive('enterKeyDown', function() {
 			if (e.which === 13) {
 				e.preventDefault();
 				var func = attrs.enterKeyDown;
-				scope.$eval(func);
-				
+				scope.$eval(func);				
 			}
 		});
 
