@@ -1,6 +1,6 @@
 'use strict';
 
-function PostCtrl($scope, $http, $routeParams, Posts) {
+function PostCtrl($scope, $http, $routeParams, Posts, Users) {
 
 	$scope.tags = '';
 
@@ -19,11 +19,10 @@ function PostCtrl($scope, $http, $routeParams, Posts) {
 	}
 
 	// fetch users
-	var usersUrl = "http://projectwhatup.us:5000/api/" + 'users';
-	
-	$http.get(usersUrl).success(function(users) {
-		$scope.users = users.objects;			
+	Users.query(function(data) {
+		$scope.users = data.objects;
 	});
+	
 
 	// submit the post to save it
 	$scope.submit = function() {
@@ -179,4 +178,4 @@ function PostCtrl($scope, $http, $routeParams, Posts) {
 	};
 }
 
-PostCtrl.$inject = ['$scope', '$http', '$routeParams', 'Posts'];
+PostCtrl.$inject = ['$scope', '$http', '$routeParams', 'Posts', "Users"];
