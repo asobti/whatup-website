@@ -1,12 +1,19 @@
 'use strict';
 
-function PostsCtrl($scope, $http, $routeParams, eventBus, Posts) {
+function PostsCtrl($scope, $http, $location, $routeParams, eventBus, Posts) {
 		$scope.fetchingPosts = true;
 		var page = $routeParams.page || 1;
 
 		$scope.search = function() {
 
-			var searchData = $scope.searchData;
+			var current = $location.search().q;
+			var newSearchObj = { q: $scope.searchData };
+
+			if (typeof $scope.searchData !== 'undefined') {
+				$location.search(newSearchObj);
+			} else if (typeof current !== 'undefined') {
+				$scope.searchData = current;
+			}
 
 			// basic query object that we use every time
 			// gets posts in newest-to-oldest format
@@ -19,14 +26,14 @@ function PostsCtrl($scope, $http, $routeParams, eventBus, Posts) {
 				]
 			};
 
-			if(typeof searchData !== 'undefined' && searchData !== "") {
+			if(typeof $scope.searchData !== 'undefined' && $scope.searchData !== "") {
 				// a non-empty search term was defined
 				// create a filter and add it to the queryObj
 				var filter = [
 								{
 									name : "body",
 									op : "like",
-									val : "%" + searchData + "%"
+									val : "%" + $scope.searchData + "%"
 								}
 							];
 
@@ -59,4 +66,5 @@ function PostsCtrl($scope, $http, $routeParams, eventBus, Posts) {
 }
 
 // define injections
-PostsCtrl.$inject = ['$scope', '$http', '$routeParams', 'EventBus', 'Posts'];
+PostsCtrl.$inject = ['$scope', '$http', '$location', '$routeParams', 'EventBus', 'Posts'];
+
