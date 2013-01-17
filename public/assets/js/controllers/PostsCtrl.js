@@ -4,6 +4,8 @@ function PostsCtrl($scope, $http, $location, $routeParams, eventBus, Posts) {
 		$scope.fetchingPosts = true;
 		var page = $routeParams.page || 1;
 
+		var converter = new Attacklab.showdown.converter();
+
 		$scope.search = function() {
 
 			var current = $location.search().q;
@@ -57,6 +59,10 @@ function PostsCtrl($scope, $http, $location, $routeParams, eventBus, Posts) {
 		}
 
 		$scope.search();
+
+		$scope.htmlFromMarkdown = function(markdown) {
+			return converter.makeHtml(markdown);
+		};
 
 		$scope.timeAgo = function(created_at) {
 			//mark it with UTC time

@@ -2,6 +2,8 @@
 
 function PostCtrl($scope, $http, $routeParams, Posts, Users) {
 
+	var converter = new Attacklab.showdown.converter();
+
 	$scope.tags = '';
 
 	if (typeof $routeParams.postId === 'undefined') {		
@@ -40,8 +42,12 @@ function PostCtrl($scope, $http, $routeParams, Posts, Users) {
 	$scope.cancel = function() {				
 		if (confirm("Are you sure you want to discard this post?")) {
 			redirectHomepage();
-		}		
+		}		post.body
 	};
+
+	$scope.postBodyAsHtml = function() {
+		return converter.makeHtml($scope.post.body);
+	}
 
 	/*
 		TODO : Replace $http with custom REST service

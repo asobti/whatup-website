@@ -1,6 +1,6 @@
 'use strict';
 
-var whatUp = angular.module('projectWhatUp', ['whatUpServices'])
+var whatUp = angular.module('projectWhatUp', ['whatUpServices', 'ngSanitize'])
 				.config(['$routeProvider', function($routeProvider) {
 					$routeProvider
 						.when('/posts', {

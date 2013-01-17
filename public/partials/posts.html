@@ -23,8 +23,7 @@
 				<a href="#/posts/view/{{post.id}}"><h4>{{ post.topic }}</h4></a>				
 			</div>
 			<div class="row-fluid">
-				<div class="span12 well post-body">
-					{{ post.body }}
+				<div class="span12 well post-body" ng-bind-html="htmlFromMarkdown(post.body)" >					
 				</div>	
 			</div>
 

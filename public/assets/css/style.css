@@ -64,7 +64,7 @@ body {
 	padding-left: 10px;
 }
 .post .post-body {
-	max-height: 150px;
+	/*max-height: 150px;*/
 	display: hidden;
 }
 .info-tags-row {
