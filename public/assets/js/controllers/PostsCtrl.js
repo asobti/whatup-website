@@ -61,6 +61,19 @@ function PostsCtrl($scope, $http, $location, $routeParams, eventBus, Posts) {
 					op = "any";
 					val = tagMatch[1];
 				}
+
+				var titlePattern = /title:(.*)|topic:(.*)/g;
+				var titleMatch = titlePattern.exec(searchData);
+				if (titleMatch  !== null) {
+					name = "topic";
+					op = "like";
+					if (typeof titleMatch[1] !== 'undefined') {
+						val = titleMatch[1];
+					} else {
+						val = titleMatch[2];
+					}
+				}
+
 	
 				if (op == "like") {
 					val = "%" + val + "%";  //other operators don't like the %
