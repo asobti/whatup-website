@@ -45,7 +45,7 @@ function PostCtrl($scope, $http, $routeParams, Posts, Users) {
 		}		post.body
 	};
 
-	$scope.postPreview = function() {
+	$scope.postBodyAsHtml = function() {
 		return converter.makeHtml($scope.post.body);
 	}
 
