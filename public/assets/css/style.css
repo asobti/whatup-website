@@ -240,3 +240,7 @@ div.navbar-inner {
 	text-align: right;
 	font-size: 12px;
 }
+.post-preview-well {
+	margin: 0;
+	padding: 15px;
+}

@@ -46,6 +46,11 @@
 			</div>			
 		</div>
 	</div>
+	<div class="row new-post-preview" ng-show="post.body">
+		<h4> Preview </h4>
+		<div class="span12 well post-preview-well" ng-bind-html="postPreview()" >
+		</div>
+	</div>
 </div>
 
 <div ng-include="'partials/working_dialog.html'"></div>
