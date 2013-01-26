@@ -7,6 +7,10 @@ function PostsCtrl($scope, $http, $location, $routeParams, eventBus, Posts) {
 		var converter = new Attacklab.showdown.converter();
 
 		$scope.search = function() {
+			
+			function isDef(vari) {
+				return typeof vari === 'undefined';
+			}
 
 			var current = $location.search().q;
 			var newSearchObj = { q: $scope.searchData };
