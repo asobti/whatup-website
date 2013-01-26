@@ -8,18 +8,40 @@ function PostsCtrl($scope, $http, $location, $routeParams, eventBus, Posts) {
 
 		$scope.search = function() {
 			
+			/*
+			Helper functions
+			*/
+			
 			function isDef(vari) {
-				return typeof vari === 'undefined';
+				return typeof vari !== 'undefined';
 			}
+		
+			/*
+			Links url param to the input box and vice versa
+			*/
 
-			var current = $location.search().q;
+			var urlSearchParam = $location.search().q;
 			var newSearchObj = { q: $scope.searchData };
 
-			if (typeof $scope.searchData !== 'undefined') {
+			if (isDef($scope.searchData)) {
 				$location.search(newSearchObj);
-			} else if (typeof current !== 'undefined') {
-				$scope.searchData = current;
+			} else if (isDef(urlSearchParam)) {
+				$scope.searchData = urlSearchParam;
 			}
+	
+			/*
+			Precedence and rules:
+				Match Exact:		"(.*)"
+				Match Tag:		\[(.*)\]
+				Match NOT:		-(.*)
+				Match OR/Default:	(.*)( OR (.*))+
+							(.*)( (.*))*
+				Match AND:		(.*)( AND (.*))+
+
+			TODO:
+				Consider combining multiple matches for combined effect.
+
+			*/
 
 			// basic query object that we use every time
 			// gets posts in newest-to-oldest format
