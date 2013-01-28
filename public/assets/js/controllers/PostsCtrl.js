@@ -56,13 +56,13 @@ function PostsCtrl($scope, $http, $location, $routeParams, eventBus, Posts) {
 						{ 
 							"name" : "body",
 							"op" : "like",
-							"val" : searchData
+							"val" : "%" + searchData + "%"
 						},
 
 						{ 
 							"name" : "title",
 							"op" : "like",
-							"val" : searchData
+							"val" : "%" + searchData + "%"
 						}
 					]
 				};
