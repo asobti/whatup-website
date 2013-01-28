@@ -15,23 +15,27 @@ function PostsCtrl($scope, $http, $location, $routeParams, eventBus, Posts) {
 			function isDef(vari) {
 				return typeof vari !== 'undefined';
 			}
+			
+			function isBlank(vari) {
+				return vari === "";
+			}
 		
 			/*
 			Links url param to the input box and vice versa
 			*/
 
 			var urlSearchParam = $location.search().q;
-			var newSearchObj = { q: $scope.searchData };
+			var newSearchObjFromURL = { q: $scope.searchData };
 
 			if (isDef($scope.searchData)) {
-				$location.search(newSearchObj);
+				$location.search(newSearchObjFromURL);
 			} else if (isDef(urlSearchParam)) {
 				$scope.searchData = urlSearchParam;
 			}
 	
 			/*
 			Precedence and rules:
-				Match Exact:		"(.*)"
+				Match Exact:		\"(.*)\"
 				Match Tag:		\[(.*)\]
 				Match NOT:		-(.*)
 				Match OR/Default:	(.*)( OR (.*))+
@@ -43,34 +47,33 @@ function PostsCtrl($scope, $http, $location, $routeParams, eventBus, Posts) {
 
 			*/
 
-			// basic query object that we use every time
-			// gets posts in newest-to-oldest format
-			var queryObj = {
-				order_by : [
-					{
-						field : "created_at",
-						direction : "desc"
-					}
-				]
-			};
-			
-			var advancedSearchObj = getAdvancedSearch($scope.searchData);
+			function getSearchObj (searchData) {
+				//\"(.*)\"
+				var searchObj = {
+					"hasFilters" : false,
+					"hasDisjunctions" : true,
+					"disjunctions" : [
+						{ 
+							"name" : "body",
+							"op" : "like",
+							"val" : searchData
+						},
 
-			if(typeof $scope.searchData !== 'undefined' && $scope.searchData !== "") {
-				// a non-empty search term was defined
-				// create a filter and add it to the queryObj
-				var filter = [
-								{
-									name : advancedSearchObj.name,
-									op : advancedSearchObj.op,
-									val : advancedSearchObj.val
-								}
-							];
+						{ 
+							"name" : "title",
+							"op" : "like",
+							"val" : searchData
+						}
+					]
+				};
+				var exactPattern = /\"(.*)\"/g;
+				var exactMatch = exactPattern.exec(searchData);
+				if (exactMatch !== null) {
+					 
 
-				queryObj.filters = filter;
+				}
+				return searchObj;
 			}
-			
-
 			function getAdvancedSearch(searchData) {
 				//need to clean this up a bit to be scalable.
 				
@@ -113,6 +116,37 @@ function PostsCtrl($scope, $http, $location, $routeParams, eventBus, Posts) {
 				console.log(search);
 				return search;
 			}
+
+
+
+			// basic query object that we use every time
+			// gets posts in newest-to-oldest format
+			var queryObj = {
+				order_by : [
+					{
+						field : "created_at",
+						direction : "desc"
+					}
+				]
+			};
+			
+			var searchObj = getSearchObj($scope.searchData);
+			console.log("<searchobj>");
+			console.log(searchObj);
+			console.log("</searchobj>");
+
+			if(isDef($scope.searchData) && !isBlank($scope.searchData)) {
+				// a non-empty search term was defined
+				// add necessary filters and disjuncts
+				if (searchObj.hasFilters) {
+					queryObj.filters = searchObj.filters;
+				}
+				if (searchObj.hasDisjunctions) {
+					queryObj.disjunctions = searchObj.disjunctions;
+				}
+			}
+	
+			
 
 			Posts.query({
 					"page":page, 
