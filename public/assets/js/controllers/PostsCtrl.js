@@ -60,7 +60,7 @@ function PostsCtrl($scope, $http, $location, $routeParams, eventBus, Posts) {
 						},
 
 						{ 
-							"name" : "title",
+							"name" : "topic",
 							"op" : "like",
 							"val" : "%" + searchData + "%"
 						}
