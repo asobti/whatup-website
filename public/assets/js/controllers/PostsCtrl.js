@@ -66,11 +66,19 @@ function PostsCtrl($scope, $http, $location, $routeParams, eventBus, Posts) {
 						}
 					]
 				};
-				var exactPattern = /\"(.*)\"/g;
-				var exactMatch = exactPattern.exec(searchData);
-				if (exactMatch !== null) {
-					 
-
+				var exactPattern = /(\"([^\"])*\")*/g;
+				var exactMatch;
+				var tmp = searchData;
+				while (exactMatch = exactPattern.exec(tmp)) {
+					console.log("init:" + tmp);
+					console.log(exactMatch);
+					var m = exactMatch[1];
+					if (!isDef(m)) {
+						break;
+					}
+					console.log(m);
+					tmp = tmp.replace(m, "");
+					console.log("rev:" + tmp);
 				}
 				return searchObj;
 			}
