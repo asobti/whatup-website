@@ -20,6 +20,10 @@ function PostsCtrl($scope, $http, $location, $routeParams, eventBus, Posts) {
 				return vari === "";
 			}
 		
+			function trimString(str) {
+				return str.replace(/^\s*/, '').replace(/\s*$/, '');
+			}
+		
 			/*
 			Links url param to the input box and vice versa
 			*/
@@ -52,34 +56,105 @@ function PostsCtrl($scope, $http, $location, $routeParams, eventBus, Posts) {
 				var searchObj = {
 					"hasFilters" : false,
 					"hasDisjunctions" : true,
-					"disjunctions" : [
-						{ 
-							"name" : "body",
-							"op" : "like",
-							"val" : "%" + searchData + "%"
-						},
-
-						{ 
-							"name" : "topic",
-							"op" : "like",
-							"val" : "%" + searchData + "%"
-						}
-					]
 				};
-				var exactPattern = /(\"([^\"])*\")*/g;
-				var exactMatch;
-				var tmp = searchData;
-				while (exactMatch = exactPattern.exec(tmp)) {
-					console.log("init:" + tmp);
-					console.log(exactMatch);
-					var m = exactMatch[1];
-					if (!isDef(m)) {
-						break;
-					}
-					console.log(m);
-					tmp = tmp.replace(m, "");
-					console.log("rev:" + tmp);
+				/*
+				if (clauses.length > 0) {
+					//use identical
+					searchObj.disjunctions = [];
+					for (var i in clauses) {
+						var clause = clauses[i];
+						searchObj.disjunctions.push(
+							{
+								"name" : "body",
+								"op" : "like",
+								"val" : "%" + clause + "%"
+							});
+						searchObj.disjunctions.push(
+							{
+								"name" : "topic",
+								"op" : "like",
+								"val" : "%" + clause + "%"
+							});
+
+					]*)
 				}
+				*/
+
+				//Exact Matching
+				var exactPattern = /\"([^\"]*)\"/g;
+				var exactMatch;
+				var exact_clauses = [];
+				while (exactMatch = exactPattern.exec(searchData)) {
+					var m = exactMatch[1];
+					exact_clauses.push(m);					
+				}
+				for (var i in exact_clauses) {
+					var clause = exact_clauses[i];
+					searchData.replace(clause, '');
+				}
+	
+			
+				/*
+				//This gives us full control but the API can't handle it ;)
+				var and_clauses = [];
+				var or_clauses = searchData.split(" OR ");
+				var moves = [];
+				for (var i in or_clauses) {
+					var clause = or_clauses[i];
+					var sub_and_clauses = clause.split(" AND ");
+					if (sub_and_clauses.length > 1) {
+						var tmp_and_clauses = [];
+						moves.push(i);
+						for (var j in sub_and_clauses) {
+							var sub_clause = sub_and_clauses[j];
+							tmp_and_clauses.push(sub_clause);
+						}
+						and_clauses.push(tmp_and_clauses);
+					}
+					
+				}
+				for (var i in moves) {
+					var shift = moves[i];
+					or_clauses[shift] = and_clauses[i];
+				}
+				*/
+			
+				var clauses = searchData.split(" ");
+				for (var i in clauses) {
+					var part = clauses[i];
+					if (part == "AND") {
+						searchObj.hasFilters = true;
+						searchObj.hasDisjunctions =  false;
+					}
+				}
+				var arr;
+				if (searchObj.hasFilters) {
+					searchObj.filters = [];
+					arr = searchObj.filters;
+				} else {
+					searchObj.disjunctions = [];
+					arr = searchObj.disjunctions;
+				}
+				var terms = clauses.concat(exact_clauses);
+				for (var i in terms) {
+					var clause = terms[i];
+					if (clause == "AND" || clause == "OR") {
+						continue;
+					}
+					arr.push({
+						"name" : "topic",
+						"op" : "like",
+						"val" : "%" + clause + "%"
+					});	
+
+					arr.push({
+						"name" : "body",
+						"op" : "like",
+						"val" : "%" + clause + "%"
+					});	
+				}
+			
+				console.log(searchObj);	
 				return searchObj;
 			}
 			function getAdvancedSearch(searchData) {
@@ -121,7 +196,6 @@ function PostsCtrl($scope, $http, $location, $routeParams, eventBus, Posts) {
 					"op" : op,
 					"val" : val
 				};
-				console.log(search);
 				return search;
 			}
 
@@ -139,9 +213,6 @@ function PostsCtrl($scope, $http, $location, $routeParams, eventBus, Posts) {
 			};
 			
 			var searchObj = getSearchObj($scope.searchData);
-			console.log("<searchobj>");
-			console.log(searchObj);
-			console.log("</searchobj>");
 
 			if(isDef($scope.searchData) && !isBlank($scope.searchData)) {
 				// a non-empty search term was defined
