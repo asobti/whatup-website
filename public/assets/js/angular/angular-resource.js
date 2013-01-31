@@ -306,11 +306,11 @@ angular.module('ngResource', ['ng']).
     };
 
 
-    function ResourceFactory(url, paramDefaults, actions) {
+    function ResourceFactory(url, paramDefaults, actions, options) {
       var route = new Route(url);
 
       actions = extend({}, DEFAULT_ACTIONS, actions);
-
+      
       function extractParams(data){
         var ids = {};
         forEach(paramDefaults || {}, function(value, key){
@@ -365,11 +365,21 @@ angular.module('ngResource', ['ng']).
           }
 
           var value = this instanceof Resource ? this : (action.isArray ? [] : new Resource(data));
-          $http({
+          var httpOptions = {
             method: action.method,
             url: route.url(extend({}, extractParams(data), action.params || {}, params)),
             data: data
-          }).then(function(response) {
+          };
+
+          // add any additional options the user might have specified
+          // but don't allow user to override any already set above
+          for (var attr in options) {
+            if (!httpOptions.hasOwnProperty(attr)) {
+              httpOptions[attr] = options[attr];
+            }              
+          }
+
+          $http(httpOptions).then(function(response) {
               var data = response.data;
 
               if (data) {

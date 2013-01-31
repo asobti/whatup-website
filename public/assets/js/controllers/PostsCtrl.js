@@ -1,6 +1,8 @@
 'use strict';
 
 function PostsCtrl($scope, $http, $location, $routeParams, eventBus, Posts) {
+		$http.defaults.withCredentials = true;
+		// console.log($http.defaults);
 		$scope.fetchingPosts = true;
 		var page = $routeParams.page || 1;
 
@@ -74,6 +76,7 @@ function PostsCtrl($scope, $http, $location, $routeParams, eventBus, Posts) {
 				}
 				return searchObj;
 			}
+
 			function getAdvancedSearch(searchData) {
 				//need to clean this up a bit to be scalable.
 				
@@ -113,7 +116,7 @@ function PostsCtrl($scope, $http, $location, $routeParams, eventBus, Posts) {
 					"op" : op,
 					"val" : val
 				};
-				console.log(search);
+				// console.log(search);
 				return search;
 			}
 
@@ -131,9 +134,9 @@ function PostsCtrl($scope, $http, $location, $routeParams, eventBus, Posts) {
 			};
 			
 			var searchObj = getSearchObj($scope.searchData);
-			console.log("<searchobj>");
-			console.log(searchObj);
-			console.log("</searchobj>");
+			// console.log("<searchobj>");
+			// console.log(searchObj);
+			// console.log("</searchobj>");
 
 			if(isDef($scope.searchData) && !isBlank($scope.searchData)) {
 				// a non-empty search term was defined
@@ -144,24 +147,37 @@ function PostsCtrl($scope, $http, $location, $routeParams, eventBus, Posts) {
 				if (searchObj.hasDisjunctions) {
 					queryObj.disjunctions = searchObj.disjunctions;
 				}
-			}
-	
-			
+			}			
 
 			Posts.query({
-					"page":page, 
-					"q": JSON.stringify(queryObj)	//convert the query object to JSON
-				}, function(data){
-					$scope.posts = data.objects;
-					$scope.fetchingPosts = false;
+				"page":page, 
+				"q": JSON.stringify(queryObj)	//convert the query object to JSON
+			}, function(data){
+				$scope.posts = data.objects;
+				$scope.fetchingPosts = false;
 
-					var paginationObj = {
-						currentPage: data.page,
-						totalPages: data.total_pages
-					}
+				var paginationObj = {
+					currentPage: data.page,
+					totalPages: data.total_pages
+				}
 
-					eventBus.pageChanged(paginationObj);
-			});	
+				eventBus.pageChanged(paginationObj);
+			}, function(err) {
+				console.log(err);
+				if (err.status === 401) {
+					//window.location = "http://projectwhatup.us:5000" + err.data.url;
+				}
+			});
+
+			/*$.ajax({
+				url : "http://projectwhatup.us:5000/api/posts",
+				dataType : 'json',
+				xhrFields : {
+					withCredentials : true
+				},
+				success : function(r) { console.log(r); },
+				error : function(e) { console.log(e); }
+			});*/
 		}
 
 		$scope.search();

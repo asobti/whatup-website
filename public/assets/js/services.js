@@ -30,7 +30,7 @@ var resourceTagsUrl = whatUp.apiRoot + 'tags/:tagId';
 
 
 angular.module('whatUpServices', ['ngResource'])
-	.factory('Posts', function($resource){
+	.factory('Posts', function($resource){		
 		return $resource(resourcePostsUrl, {
 			postId:"@id"
 		}, {
@@ -44,14 +44,18 @@ angular.module('whatUpServices', ['ngResource'])
 			create:{
 				method:"POST"
 			}
+		}, {
+			withCredentials : true
 		})
 	})
-	.factory('Users', function($resource){
+	.factory('Users', function($resource){		
 		return $resource(resourceUsersUrl, {}, {
 			query: {
 				method:"GET", 
 				isArray:false
 			}
+		}, {
+			withCredentials : true
 		})
 	})
 	.factory('Tags', function($resource) {
@@ -63,4 +67,6 @@ angular.module('whatUpServices', ['ngResource'])
 				isArray : false
 			}
 		})
+	}, {
+		withCredentials : true
 	});
