@@ -163,10 +163,8 @@ function PostsCtrl($scope, $http, $location, $routeParams, eventBus, Posts) {
 
 				eventBus.pageChanged(paginationObj);
 			}, function(err) {				
-				console.log(err);
 				if (err.status === 401) {
 					whatUp.loginRedirect(err.data.url);
-					//window.location = "http://projectwhatup.us:5000" + err.data.url;
 				}
 			});
 		}
