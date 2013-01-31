@@ -162,22 +162,13 @@ function PostsCtrl($scope, $http, $location, $routeParams, eventBus, Posts) {
 				}
 
 				eventBus.pageChanged(paginationObj);
-			}, function(err) {
+			}, function(err) {				
 				console.log(err);
 				if (err.status === 401) {
+					whatUp.loginRedirect(err.data.url);
 					//window.location = "http://projectwhatup.us:5000" + err.data.url;
 				}
 			});
-
-			/*$.ajax({
-				url : "http://projectwhatup.us:5000/api/posts",
-				dataType : 'json',
-				xhrFields : {
-					withCredentials : true
-				},
-				success : function(r) { console.log(r); },
-				error : function(e) { console.log(e); }
-			});*/
 		}
 
 		$scope.search();
