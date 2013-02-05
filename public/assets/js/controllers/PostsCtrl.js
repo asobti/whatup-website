@@ -120,13 +120,6 @@ function PostsCtrl($scope, $http, $location, $routeParams, eventBus, Posts) {
 				*/
 			
 				var clauses = searchData.split(" ");
-				for (var i in clauses) {
-					var part = clauses[i];
-					if (part == "AND") {
-						searchObj.hasFilters = true;
-						searchObj.hasDisjunctions =  false;
-					}
-				}
 				var arr;
 				if (searchObj.hasFilters) {
 					searchObj.filters = [];
@@ -138,9 +131,6 @@ function PostsCtrl($scope, $http, $location, $routeParams, eventBus, Posts) {
 				var terms = clauses.concat(exact_clauses);
 				for (var i in terms) {
 					var clause = terms[i];
-					if (clause == "AND" || clause == "OR") {
-						continue;
-					}
 					arr.push({
 						"name" : "topic",
 						"op" : "like",
