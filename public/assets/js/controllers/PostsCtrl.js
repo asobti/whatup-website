@@ -58,6 +58,7 @@ function PostsCtrl($scope, $http, $location, $routeParams, eventBus, Posts) {
 				if (!isDef(searchData)) {
 					return null;
 				}
+				//console.log(searchData);
 				var searchObj = {
 					"hasFilters" : false,
 					"hasDisjunctions" : true,
@@ -95,10 +96,11 @@ function PostsCtrl($scope, $http, $location, $routeParams, eventBus, Posts) {
 				}
 				for (var i in exact_clauses) {
 					var clause = exact_clauses[i];
-					searchData.replace(clause, '');
+					searchData = trimString(searchData.replace('"' + clause + '"', ''));
 				}
 	
 			
+				//console.log(searchData);
 				/*
 				//This gives us full control but the API can't handle it ;)
 				var and_clauses = [];
@@ -125,6 +127,7 @@ function PostsCtrl($scope, $http, $location, $routeParams, eventBus, Posts) {
 				*/
 			
 				var clauses = searchData.split(" ");
+				//console.log(clauses);
 				var arr;
 				if (searchObj.hasFilters) {
 					searchObj.filters = [];
@@ -149,53 +152,9 @@ function PostsCtrl($scope, $http, $location, $routeParams, eventBus, Posts) {
 					});	
 				}
 			
-				console.log(searchObj);	
+				//console.log(searchObj);	
 				return searchObj;
 			}
-
-			function getAdvancedSearch(searchData) {
-				//need to clean this up a bit to be scalable.
-				
-				//defaults
-				var name = "body";
-				var op = "like";
-				var val = searchData;
-
-				//check for tag
-				var tagPattern = /tag:(.*)/g;
-				var tagMatch = tagPattern.exec(searchData);
-				if (tagMatch  !== null) {
-					name = "tags__name";
-					op = "any";
-					val = tagMatch[1];
-				}
-
-				var titlePattern = /title:(.*)|topic:(.*)/g;
-				var titleMatch = titlePattern.exec(searchData);
-				if (titleMatch  !== null) {
-					name = "topic";
-					op = "like";
-					if (typeof titleMatch[1] !== 'undefined') {
-						val = titleMatch[1];
-					} else {
-						val = titleMatch[2];
-					}
-				}
-
-	
-				if (op == "like") {
-					val = "%" + val + "%";  //other operators don't like the %
-				}
-				
-				var search = {
-					"name" : name,
-					"op" : op,
-					"val" : val
-				};
-				return search;
-			}
-
-
 
 			// basic query object that we use every time
 			// gets posts in newest-to-oldest format
