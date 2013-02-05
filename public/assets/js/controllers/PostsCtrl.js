@@ -1,6 +1,8 @@
 'use strict';
 
 function PostsCtrl($scope, $http, $location, $routeParams, eventBus, Posts) {
+		$http.defaults.withCredentials = true;
+		// console.log($http.defaults);
 		$scope.fetchingPosts = true;
 		var page = $routeParams.page || 1;
 
@@ -147,6 +149,7 @@ function PostsCtrl($scope, $http, $location, $routeParams, eventBus, Posts) {
 				console.log(searchObj);	
 				return searchObj;
 			}
+
 			function getAdvancedSearch(searchData) {
 				//need to clean this up a bit to be scalable.
 				
@@ -213,24 +216,26 @@ function PostsCtrl($scope, $http, $location, $routeParams, eventBus, Posts) {
 				if (searchObj.hasDisjunctions) {
 					queryObj.disjunctions = searchObj.disjunctions;
 				}
-			}
-	
-			
+			}			
 
 			Posts.query({
-					"page":page, 
-					"q": JSON.stringify(queryObj)	//convert the query object to JSON
-				}, function(data){
-					$scope.posts = data.objects;
-					$scope.fetchingPosts = false;
+				"page":page, 
+				"q": JSON.stringify(queryObj)	//convert the query object to JSON
+			}, function(data){
+				$scope.posts = data.objects;
+				$scope.fetchingPosts = false;
 
-					var paginationObj = {
-						currentPage: data.page,
-						totalPages: data.total_pages
-					}
+				var paginationObj = {
+					currentPage: data.page,
+					totalPages: data.total_pages
+				}
 
-					eventBus.pageChanged(paginationObj);
-			});	
+				eventBus.pageChanged(paginationObj);
+			}, function(err) {				
+				if (err.status === 401) {
+					whatUp.loginRedirect(err.data.url);
+				}
+			});
 		}
 
 		$scope.search();

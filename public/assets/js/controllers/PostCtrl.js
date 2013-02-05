@@ -14,9 +14,15 @@ function PostCtrl($scope, $http, $routeParams, Posts, Users) {
 			tags : []
 		});
 	} else {
-		$scope.post = Posts.get({'postId' : $routeParams.postId}, function() {
-			$scope.tags = getTagsAsString();
-		});
+		$scope.post = 	Posts.get({
+							'postId' : $routeParams.postId
+						}, function() {
+							$scope.tags = getTagsAsString();
+						}, function(err) {
+							if (err.status === 401) {
+								whatUp.loginRedirect(err.data.url);
+							}
+						});
 
 	}
 
