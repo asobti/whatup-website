@@ -55,6 +55,9 @@ function PostsCtrl($scope, $http, $location, $routeParams, eventBus, Posts) {
 
 			function getSearchObj (searchData) {
 				//\"(.*)\"
+				if (!isDef(searchData)) {
+					return null;
+				}
 				var searchObj = {
 					"hasFilters" : false,
 					"hasDisjunctions" : true,
