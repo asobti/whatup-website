@@ -40,10 +40,17 @@
           <a class="brand" href="#">WhatUp</a>
           <div id="new_post_btn_container">
             <div class="nav-collapse collapse">
-              <a href="#posts/new" class="btn btn-primary pull-right" id="new_post_btn">
+              <a href="#posts/new" class="btn btn-primary pull-right" style="margin-left: 10px;" id="new_post_btn">
                 <i class="icon-pencil"></i>
                 New Post
               </a>
+              <a href="http://projectwhatup.us:5000/logout" class="btn btn-primary pull-right" id="logout_btn">
+                <i class="icon-remove-circle"></i>
+		Logout
+              </a>
+
+
+
             </div>
           </div>
         </div>

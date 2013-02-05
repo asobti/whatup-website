@@ -211,10 +211,21 @@ div.navbar-inner {
 #new_post_btn {
 	padding-bottom: 8px;
 }
+
+#logout_btn {
+	padding-bottom: 8px;
+}
+
 #new_post_btn > i.icon-pencil {
 	margin-top: 4px;
 	margin-right: 5px;	
 }
+
+#logout_btn > i.icon-remove-circle {
+	margin-top: 4px;
+	margin-right: 5px;	
+}
+
 .new-post-attachment {	
 	margin-left: 30px;
 }
