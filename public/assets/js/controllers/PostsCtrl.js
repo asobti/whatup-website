@@ -98,6 +98,21 @@ function PostsCtrl($scope, $http, $location, $routeParams, eventBus, Posts) {
 					var clause = exact_clauses[i];
 					searchData = trimString(searchData.replace('"' + clause + '"', ''));
 				}
+				
+				
+				//Tag Matching
+				var tagPattern = /\[([^\]]*)\]/g;
+				var tagMatch;
+				var tag_clauses = [];
+				while (tagMatch = tagPattern.exec(searchData)) {
+					var m = tagMatch[1];
+					tag_clauses.push(m);
+				}
+				for (var i in tag_clauses) {
+					var clause = tag_clauses[i];
+					searchData = trimString(searchData.replace('[' + clause + ']', ''));
+				}
+				
 	
 			
 				//console.log(searchData);
@@ -125,16 +140,29 @@ function PostsCtrl($scope, $http, $location, $routeParams, eventBus, Posts) {
 					or_clauses[shift] = and_clauses[i];
 				}
 				*/
-			
-				var clauses = searchData.split(" ");
 				//console.log(clauses);
-				var arr;
+				
+				var andCheck = searchData.split(" ");
+				for (var i in andCheck) {
+					var clause = andCheck[i];
+					if (clause == "AND") {
+						searchData = trimString(searchData.replace("AND", ''));
+						searchObj.hasFilters = true;
+						searchObj.hasDisjunctions = false;
+					}
+				}
+				
+				var arr = [];
 				if (searchObj.hasFilters) {
 					searchObj.filters = [];
 					arr = searchObj.filters;
 				} else {
 					searchObj.disjunctions = [];
 					arr = searchObj.disjunctions;
+				}
+				var clauses = [];
+				if (searchData.length > 0) {
+					var clauses = searchData.split(" ");
 				}
 				var terms = clauses.concat(exact_clauses);
 				for (var i in terms) {
@@ -151,8 +179,17 @@ function PostsCtrl($scope, $http, $location, $routeParams, eventBus, Posts) {
 						"val" : "%" + clause + "%"
 					});	
 				}
+				for (var i in tag_clauses) {
+					var clause = tag_clauses[i];
+					arr.push({
+						"name" : "tags__name",
+						"op" : "any",
+						"val" : clause
+					});
+				}	
+				console.log(arr);
 			
-				//console.log(searchObj);	
+				console.log(searchObj);	
 				return searchObj;
 			}
 
