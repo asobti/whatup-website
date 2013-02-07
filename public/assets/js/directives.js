@@ -13,13 +13,6 @@ whatUp.directive('tagInput', function() {
 				scope.$apply();
 			}
 		});
-
-		/*
-		$(element[0]).on('blur', function(e) {
-			scope.tagFinished();
-			scope.$apply();
-		});
-		*/
 	}
 });
 
@@ -44,12 +37,20 @@ whatUp.directive('autoComplete', function() {
 				};
 
 				var finalUrl = encodeURI(url + JSON.stringify(query));
-				$.getJSON(finalUrl, function(obj) {
-					var suggestions = [];
-					$.each(obj.objects, function(index, item) {
-						suggestions.push(item.name);
-					});
-					response(suggestions);
+				$.ajax({
+					url  : finalUrl,
+					type : 'GET',
+					dataType : 'json',
+					success : function(obj) {
+						var suggestions = [];
+						$.each(obj.objects, function(index, item) {
+							suggestions.push(item.name);
+						});
+						response(suggestions);
+					},
+					xhrFields : {
+						withCredentials : true
+					}
 				});
 			},
 			select : function(event, ui) {								

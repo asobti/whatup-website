@@ -66,6 +66,8 @@ angular.module('whatUpServices', ['ngResource'])
 				method : 'GET',
 				isArray : false
 			}
+		}, {
+			withCredentials : true
 		})
 	}, {
 		withCredentials : true
