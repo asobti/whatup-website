@@ -44,7 +44,7 @@
                 <i class="icon-pencil"></i>
                 New Post
               </a>
-              <a href="http://projectwhatup.us:5000/logout" class="btn btn-primary pull-right" id="logout_btn">
+              <a href="http://api.projectwhatup.us/logout" class="btn btn-primary pull-right" id="logout_btn">
                 <i class="icon-remove-circle"></i>
 		Logout
               </a>
