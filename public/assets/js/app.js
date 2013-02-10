@@ -34,10 +34,10 @@ var whatUp = angular.module('projectWhatUp', ['whatUpServices', 'ngSanitize'])
 
 
 // define API root url
-whatUp.apiRoot = "http://projectwhatup.us\\:5000/api/";
+whatUp.apiRoot = "http://api.projectwhatup.us/";
 
 // define Base URL for login page
-whatUp.loginRoot = "http://projectwhatup.us:5000";
+whatUp.loginRoot = "http://projectwhatup.us/login";
 
 // function that redirects user to login page if not logged in
 whatUp.loginRedirect = function(path) {
