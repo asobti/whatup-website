@@ -34,7 +34,7 @@ var whatUp = angular.module('projectWhatUp', ['whatUpServices', 'ngSanitize'])
 
 
 // define API root url
-whatUp.apiRoot = "http://projectwhatup.us\\:5000/api/";
+whatUp.apiRoot = "http://api.projectwhatup.us";
 
 
 /*
