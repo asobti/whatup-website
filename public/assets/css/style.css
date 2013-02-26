@@ -255,3 +255,46 @@ div.navbar-inner {
 	margin: 0;
 	padding: 15px;
 }
+.fileinput-button input {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  opacity: 0;
+  filter: alpha(opacity=0);
+  transform: translate(-300px, 0) scale(4);
+  font-size: 23px;
+  direction: ltr;
+  cursor: pointer;
+}
+.fileinput-button {
+	position: relative;
+}
+.file-upload-modal h3 {
+	display: inline-block;
+	vertical-align: middle;
+}
+.file-upload-modal form {
+	display: inline-block;
+	float: right;
+}
+.file-input-close {
+	float: right;
+	margin-left: 20px; 
+}
+div#fileUpload .modal-body {
+	width: 530px;
+}
+#single-listing .filename {
+	vertical-align: top;
+	width: 300px;
+	display: inline-block;
+}
+#single-listing .progress {
+	width: 225px;
+	display: inline-block;
+}
+#single-listing-template {
+	display: none;
+
+}

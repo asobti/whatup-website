@@ -55,6 +55,45 @@ function PostCtrl($scope, $http, $routeParams, Posts, Users) {
 		return converter.makeHtml($scope.post.body);
 	}
 
+	$scope.uploadAttachment = function() {
+		var elem = $('form#attachment');
+		var target = $('#file-listings');
+		var template = $('#single-listing-template');
+		// upload via ajax here
+		elem.ajaxSubmit({
+			clearForm : true,
+			dataType : 'json',
+			type : 'POST',
+			url : whatUp.apiRoot + 'upload',
+			xhrFields : {
+				withCredentials : true
+			},
+			beforeSubmit : function() {
+				var t = template.clone();
+				var filename = elem.find('input').val();
+				t.find('.filename').text(filename);
+				target.append(t.attr('id', 'single-listing').show());
+				$scope.$apply();
+				return false;
+			},
+			error : function(e) {
+				alert('error. See console');
+				console.log(e);
+			},
+			success : function(s) {
+				alert('success');
+				console.log(s);
+			},
+			uploadProgress : function(e, p, t, per) {
+				console.log('uploadProgress');
+				console.log(p);
+				console.log(t);
+				console.log(per);
+			}
+
+		});
+	}
+
 	/*
 		TODO : Replace $http with custom REST service
 	*/

@@ -25,7 +25,7 @@
 				</a>
 				<ul class="dropdown-menu">
 					<li>						
-						<a href="#"> 
+						<a href="#fileUpload" role="button" data-toggle="modal"> 
 							<i class="icon-hdd"></i>
 							Upload from computer
 						</a>
@@ -52,5 +52,30 @@
 		</div>
 	</div>
 </div>
-
+<div id="fileUpload" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="fileUploadLabel" aria-hidden="true">
+	<div class="modal-header file-upload-modal">
+		<span class="btn btn-warning file-input-close" data-dismiss="modal">
+			<i class="icon-ban-circle icon-white"></i>
+			<span>Done</span>
+		</span>
+		<h3>Add Attachments</h3>
+		<form id="attachment" method="post">
+			<span class="btn btn-success fileinput-button">
+                <i class="icon-plus icon-white"></i>
+                <span>Add files...</span>
+                <input id="attachments-files" type="file" name="file" attachment-watch="#file-listings">
+            </span>
+		</form>
+	</div>	
+	<div class="modal-body">
+		<div id="file-listings">
+			<div id="single-listing-template">
+				<span class="filename">C:\fakepath\foobar.png</span>
+				<div class="progress">
+				  <div class="bar" style="width: 0%;"></div>
+				</div>
+			</div>			
+		</div>
+	</div>
+</div>
 <div ng-include="'partials/working_dialog.html'"></div>
