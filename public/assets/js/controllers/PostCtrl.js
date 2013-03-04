@@ -121,21 +121,20 @@ function PostCtrl($scope, $http, $routeParams, Posts, Users) {
 		console.log(idx);
 
 		if (idx !== -1) {
-			if (confirm ('Are you sure you want to delete ' + $scope.attachments.files[idx].filename)) {
-				$scope.attachments.files.splice(idx, 1);
-				/*$.ajax({
-					url : whatUp.apiRoot + 'attachments/',
+			if (confirm ('Are you sure you want to delete ' + $scope.attachments.files[idx].filename)) {				
+				$.ajax({
+					url : whatUp.apiRoot + 'attachments/' + id,
 					type : 'DELETE',
-					dataTye : 'json',
-					data : {
-						id : id
+					xhrFields : {
+						withCredentials: true
 					},
+					dataTye : 'json',
 					success : function(s) {
 						console.log(s);
 						$scope.attachments.files.splice(idx, 1);
 						$scope.$apply();
 					}
-				});*/
+				});
 			}
 		}
 	};
