@@ -10,8 +10,12 @@ function PostsCtrl($scope, $http, $location, $routeParams, eventBus, Posts, Subs
 
 		$scope.showSubscriptions = function() {
 			var subscriptions;
+			var posts;
 			Subscriptions.query({}, function(data) { 
 				subscriptions = data.objects;
+			});
+			Posts.query({"page": page}, function(data) {
+				posts = data.objects;
 			});
 		}
 
