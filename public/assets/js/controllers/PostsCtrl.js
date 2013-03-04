@@ -1,12 +1,19 @@
 'use strict';
 
-function PostsCtrl($scope, $http, $location, $routeParams, eventBus, Posts) {
+function PostsCtrl($scope, $http, $location, $routeParams, eventBus, Posts, Subscriptions) {
 		$http.defaults.withCredentials = true;
 		// console.log($http.defaults);
 		$scope.fetchingPosts = true;
 		var page = $routeParams.page || 1;
 
 		var converter = new Attacklab.showdown.converter();
+
+		$scope.showSubscriptions() {
+			var subscriptions;
+			Subscriptions.query({}, function(data) { 
+				subscriptions = data.objects;
+			});
+		}
 
 		$scope.search = function() {
 			
@@ -52,6 +59,7 @@ function PostsCtrl($scope, $http, $location, $routeParams, eventBus, Posts) {
 				Consider combining multiple matches for combined effect.
 
 			*/
+			
 
 			function getSearchObj (searchData) {
 				//\"(.*)\"
@@ -236,6 +244,20 @@ function PostsCtrl($scope, $http, $location, $routeParams, eventBus, Posts) {
 				}
 			});
 		}
+		
+		/*
+		var sub1 = new Subscriptions({
+					tags: [
+							{
+								name:"api"
+							}
+						]
+					});
+		sub1.$create(function(resp){ console.log(resp); }, function(err){ console.log(err); });
+		*/
+		Subscriptions.query({}, function(data){
+				console.log(data);
+			});
 
 		$scope.search();
 
@@ -251,5 +273,5 @@ function PostsCtrl($scope, $http, $location, $routeParams, eventBus, Posts) {
 }
 
 // define injections
-PostsCtrl.$inject = ['$scope', '$http', '$location', '$routeParams', 'EventBus', 'Posts'];
+PostsCtrl.$inject = ['$scope', '$http', '$location', '$routeParams', 'EventBus', 'Posts', 'Subscriptions'];
 
