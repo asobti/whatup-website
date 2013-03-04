@@ -8,7 +8,7 @@ function PostsCtrl($scope, $http, $location, $routeParams, eventBus, Posts, Subs
 
 		var converter = new Attacklab.showdown.converter();
 
-		$scope.showSubscriptions() {
+		$scope.showSubscriptions = function() {
 			var subscriptions;
 			Subscriptions.query({}, function(data) { 
 				subscriptions = data.objects;
