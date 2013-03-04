@@ -55,7 +55,7 @@
 <div id="fileUpload" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="fileUploadLabel" aria-hidden="true">
 	<div class="modal-header file-upload-modal">
 		<span class="btn btn-warning file-input-close" data-dismiss="modal">
-			<i class="icon-ban-circle icon-white"></i>
+			<i class="icon-ok icon-white"></i>
 			<span>Done</span>
 		</span>
 		<h3>Add Attachments</h3>
@@ -69,10 +69,14 @@
 	</div>	
 	<div class="modal-body">
 		<div id="file-listings">
-			<div id="single-listing-template">
-				<span class="filename">C:\fakepath\foobar.png</span>
-				<div class="progress">
-				  <div class="bar" style="width: 0%;"></div>
+			<div id="single-listing" ng-repeat="file in attachments.files">
+				<span class="filename">{{ file.filename }}</span>
+				<div class="progress" ng-hide="file.uploaded" >
+				  <div class="bar" style="width: {{ file.progress }}%;"></div>
+				</div>
+				<div class="attachment-actions" ng-show="file.uploaded" >
+					<a class="btn btn-danger" ng-click="deleteFileAttachment(file.id)"><i class="icon-ban-circle icon-white"></i>Delete</a>
+					<a class="btn btn-info" href="http://assets.projectwhatup.us?id={{file.response.location}}&name={{file.response.name}}" target="_blank"><i class="icon-download icon-white"></i>Download</a>
 				</div>
 			</div>			
 		</div>

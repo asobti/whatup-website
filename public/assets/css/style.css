@@ -294,7 +294,15 @@ div#fileUpload .modal-body {
 	width: 225px;
 	display: inline-block;
 }
-#single-listing-template {
-	display: none;
-
+.attachment-actions {
+	display: inline-block;
+	width: 225px;
+	text-align: right;
+}
+.attachment-actions .btn {
+	margin-left: 10px;
+}
+i {
+	vertical-align: -2px !important;
+	margin-right: 5px;
 }

@@ -5,6 +5,10 @@ function PostCtrl($scope, $http, $routeParams, Posts, Users) {
 	var converter = new Attacklab.showdown.converter();
 
 	$scope.tags = '';
+	$scope.attachments = {
+		files : [],
+		links : []
+	};
 
 	if (typeof $routeParams.postId === 'undefined') {		
 		$scope.post = new Posts({
@@ -35,8 +39,17 @@ function PostCtrl($scope, $http, $routeParams, Posts, Users) {
 
 	// submit the post to save it
 	$scope.submit = function() {
-		//processTags();
+		// add file attachments to post		
+		$.each($scope.attachments.files, function() {
+			$scope.post.attachments.push(this.response);
+		});
+
+		// add link attachments to post
+		$.each($scope.attachments.links, function() {
+			$scope.post.attachments.push(this.response);
+		});
 		
+
 		if(typeof $scope.post.id === 'undefined') {
 			console.log('creating new post');
 			createPost();
@@ -62,6 +75,8 @@ function PostCtrl($scope, $http, $routeParams, Posts, Users) {
 		var template = $('#single-listing-template');
 		var elem = null;
 
+		var attachment = null;
+
 		// upload via ajax here
 		form.ajaxSubmit({
 			clearForm : true,
@@ -72,28 +87,58 @@ function PostCtrl($scope, $http, $routeParams, Posts, Users) {
 				withCredentials : true
 			},
 			beforeSubmit : function() {
-				elem = template.clone().attr('id', 'single-listing');
-				var filename = form.find('input').val();
-				elem.find('.filename').text(filename);
-				target.append(elem.show());
-				$scope.$apply();				
+				attachment = {
+					filename : form.find('input').val(),
+					progress : 0,
+					uploaded : false,
+					response : null,
+					id : -1
+				};
+
+				$scope.attachments.files.push(attachment);
+				$scope.$apply();
 			},
 			error : function(e) {
 				alert('error. See console');
 				console.log(e);
 			},
 			success : function(s) {
-				console.log(s);
-				elem.find('.progress .bar').css('width', '100%');
-				$scope.post.attachments.push(s);
+				attachment.uploaded = true;
+				attachment.id = s.id;
+				attachment.response = s;
+				$scope.$apply();
+				console.log($scope.attachments.files);				
 			},
 			uploadProgress : function(e, p, t, per) {
-				elem.find('.progress .bar').css({
-					'width' : per + '%'
-				});
+				attachment.progress = per;
+				$scope.$apply();
 			}
 		});
 	}
+
+	$scope.deleteFileAttachment = function(id) {
+		var idx = angular.pluckIndex($scope.attachments.files, 'id', id);
+		console.log(idx);
+
+		if (idx !== -1) {
+			if (confirm ('Are you sure you want to delete ' + $scope.attachments.files[idx].filename)) {
+				$scope.attachments.files.splice(idx, 1);
+				/*$.ajax({
+					url : whatUp.apiRoot + 'attachments/',
+					type : 'DELETE',
+					dataTye : 'json',
+					data : {
+						id : id
+					},
+					success : function(s) {
+						console.log(s);
+						$scope.attachments.files.splice(idx, 1);
+						$scope.$apply();
+					}
+				});*/
+			}
+		}
+	};
 
 	/*
 		TODO : Replace $http with custom REST service
