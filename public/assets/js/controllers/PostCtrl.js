@@ -11,7 +11,8 @@ function PostCtrl($scope, $http, $routeParams, Posts, Users) {
 			topic : '',
 			body : '',
 			user_id : '',
-			tags : []
+			tags : [],
+			attachments : []
 		});
 	} else {
 		$scope.post = 	Posts.get({
@@ -56,11 +57,13 @@ function PostCtrl($scope, $http, $routeParams, Posts, Users) {
 	}
 
 	$scope.uploadAttachment = function() {
-		var elem = $('form#attachment');
+		var form = $('form#attachment');
 		var target = $('#file-listings');
 		var template = $('#single-listing-template');
+		var elem = null;
+
 		// upload via ajax here
-		elem.ajaxSubmit({
+		form.ajaxSubmit({
 			clearForm : true,
 			dataType : 'json',
 			type : 'POST',
@@ -69,28 +72,26 @@ function PostCtrl($scope, $http, $routeParams, Posts, Users) {
 				withCredentials : true
 			},
 			beforeSubmit : function() {
-				var t = template.clone();
-				var filename = elem.find('input').val();
-				t.find('.filename').text(filename);
-				target.append(t.attr('id', 'single-listing').show());
-				$scope.$apply();
-				return false;
+				elem = template.clone().attr('id', 'single-listing');
+				var filename = form.find('input').val();
+				elem.find('.filename').text(filename);
+				target.append(elem.show());
+				$scope.$apply();				
 			},
 			error : function(e) {
 				alert('error. See console');
 				console.log(e);
 			},
 			success : function(s) {
-				alert('success');
 				console.log(s);
+				elem.find('.progress .bar').css('width', '100%');
+				$scope.post.attachments.push(s);
 			},
 			uploadProgress : function(e, p, t, per) {
-				console.log('uploadProgress');
-				console.log(p);
-				console.log(t);
-				console.log(per);
+				elem.find('.progress .bar').css({
+					'width' : per + '%'
+				});
 			}
-
 		});
 	}
 
