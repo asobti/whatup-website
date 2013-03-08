@@ -1,0 +1,64 @@
+<div id="subscription_dialog">
+	<h4>User</h4>	
+	<input type="text" placeholder="User" auto-complete/>
+	<h4>Tags</h4>	
+	<input type="text" placeholder="Tags" auto-complete/>
+	<div id="clearfix"></div>
+	<div class="pull-right">			
+		<div class="button_containter pull-right new-post-buttons">
+			<button class="btn btn-primary" id="post_add_submit" ng-click="saveSubscription()">Save</button>	
+			<button class="btn btn-primary" id="post_add_cancel" ng-click="cancelSubscription()">Cancel</button>	
+		</div>			
+	</div>
+</div>
+
+<div id="post_add">
+	<div class="row">		
+		<input type="text" id="post_title" placeholder="Post Title" ng-model="post.topic" />
+		<textarea id="post_content" class="field span12" placeholder="Insert your content here" ng-model="post.body" ></textarea>
+		<div class="row tag-row">
+			<span ng-repeat="tag in post.tags" class="label label-success post-tag">				
+				{{ tag.name }}
+				<i title="Remove tag" class="icon-remove icon-white" ng-click="removeTag(tag.name)"></i>
+			</span>				
+			<input type="text" id="post_tags" placeholder="Tags" ng-model="currentTag" tag-input="currentTag" auto-complete/>
+		</div>
+	</div>
+	<div class="row new-post-footer">
+		<div class="pull-left">
+			<select id="new-post-user" ng-model="post.user_id" >
+				<option ng-repeat="user in users" value="{{ user.id }}">@{{ user.alias }}</option>				
+			</select>
+		</div>   
+		<div class="pull-left new-post-attachment">
+			<div class="btn-group dropup">
+				<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+					<i class="icon-folder-open"></i>
+					Add attachments
+					<span class="caret"></span>
+				</a>
+				<ul class="dropdown-menu">
+					<li>						
+						<a href="#"> 
+							<i class="icon-hdd"></i>
+							Upload from computer
+						</a>
+					</li>
+					<li>						
+						<a href="#"> 
+							<i class="icon-globe"></i>
+							Upload from URL
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>   
+		<div class="pull-right">			
+			<div class="button_containter pull-right new-post-buttons">
+				<button class="btn btn-primary" id="post_add_submit" ng-click="submit()">Submit</button>	
+				<button class="btn btn-primary" id="post_add_cancel" ng-click="cancel()">Cancel</button>	
+			</div>			
+		</div>
+	</div>
+	<div class="row new-post-preview" ng-show="post.body">
+		<h4> Preview </h4>

@@ -19,6 +19,12 @@ var whatUp = angular.module('projectWhatUp', ['whatUpServices', 'ngSanitize'])
 							templateUrl : 'partials/new_post.html',
 							controller : PostCtrl
 						})
+
+						.when('/posts/new/test', {
+							templateUrl : 'partials/subscriptions_dialog.html',
+							controller : PostCtrl
+						})
+
 						.when('/posts/:page', {
 							templateUrl : 'partials/posts.html',
 							controller : PostsCtrl
