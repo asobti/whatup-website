@@ -41,13 +41,13 @@
           <div id="new_post_btn_container">
             <div class="nav-collapse collapse">
               <a href="#posts/new" class="btn btn-primary pull-right header-btn" style="margin-left: 10px;" id="new_post_btn" title="New Post">
-                <i class="icon-pencil"></i>                
+                <i class="icon-pencil icon-white"></i>                
               </a>
               <a href="#/subscriptions" class="btn btn-primary pull-right  header-btn" style="margin-left: 10px;" id="settings_btn" title="Settings">
-                <i class="icon-wrench"></i>                
+                <i class="icon-wrench icon-white"></i>                
               </a>
               <a href="http://api.projectwhatup.us/logout" class="btn btn-primary pull-right  header-btn" id="logout_btn" title="Logout">
-                <i class="icon-off"></i>		            
+                <i class="icon-off icon-white"></i>		            
               </a>
             </div>
           </div>
