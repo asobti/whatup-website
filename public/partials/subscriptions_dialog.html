@@ -1,8 +1,15 @@
+
 <div id="subscription_dialog">
 	<h4>User</h4>	
-	<input type="text" placeholder="User" ng-model="subUser" auto-complete/>
-	<h4>Tags</h4>	
-	<input type="text" placeholder="Tags" ng-model="subTag" auto-complete/>
+	<input type="text" placeholder="User" ng-model="subUser" />
+	<h4>Tags</h4>
+	<div class="row tag-row">
+		<span ng-repeat="tag in post.tags" class="label label-success post-tag">				
+			{{ tag.name }}
+			<i title="Remove tag" class="icon-remove icon-white" ng-click="removeTag(tag.name)"></i>
+		</span>				
+		<input type="text" id="post_tags" placeholder="Tags" ng-model="currentTag" tag-input="currentTag" auto-complete/>
+	</div>
 	<div id="clearfix"></div>
 	<div class="pull-right">			
 		<div class="button_containter pull-right new-post-buttons">
@@ -12,9 +19,10 @@
 	</div>
 </div>
 
-<table class="table" id="subscriptions_list">
+<!-- <table class="table" id="subscriptions_list">
 	<tr class="subscription" ng-repeat="subscription in subscriptions">
 		<td>{{$subscription.user}}</td>		
 		<td ng-repeat="tag in subscription.tags">{{tag}}</td>
 	</tr>
 </table>
+ -->
