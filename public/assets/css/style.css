@@ -208,24 +208,12 @@ img.main-loader {
 div.navbar-inner {
 	height: 60px;
 }
-#new_post_btn {
+.header-btn {
 	padding-bottom: 8px;
 }
-
-#logout_btn {
-	padding-bottom: 8px;
-}
-
-#new_post_btn > i.icon-pencil {
+.header-btn > i {
 	margin-top: 4px;
-	margin-right: 5px;	
 }
-
-#logout_btn > i.icon-remove-circle {
-	margin-top: 4px;
-	margin-right: 5px;	
-}
-
 .new-post-attachment {	
 	margin-left: 30px;
 }
