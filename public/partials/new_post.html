@@ -11,11 +11,13 @@
 		</div>
 	</div>
 	<div class="row new-post-footer">
-		<div class="pull-left">
-			<select id="new-post-user" ng-model="post.user_id" >
-				<option ng-repeat="user in users" value="{{ user.id }}">@{{ user.alias }}</option>				
-			</select>
-		</div>   
+		<div id="attachment-listings" ng-show="post.attachments.length">
+			<h5 class="attachments-header"> Attachments </h5>
+			<div class="single-attachment-listing" ng-repeat="att in post.attachments">
+				<a href="javascript:void()" ng-click="deleteAttachment(att.id)"><i class="icon-trash"></i></a>
+				<a href="#" target="_blank">{{ att.name }}</a>
+			</div>
+		</div>		
 		<div class="pull-left new-post-attachment">
 			<div class="btn-group dropup">
 				<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
@@ -38,7 +40,7 @@
 					</li>
 				</ul>
 			</div>
-		</div>   
+		</div>
 		<div class="pull-right">			
 			<div class="button_containter pull-right new-post-buttons">
 				<button class="btn btn-primary" id="post_add_submit" ng-click="submit()">Submit</button>	

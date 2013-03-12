@@ -185,10 +185,6 @@ span.post-action-delete:hover {
 img.main-loader {
 	margin: 30px;	
 }
-.new-post-footer {
-	margin-top: 30px;
-	margin-bottom: 60px;
-}
 .new-post-buttons button {
 	margin-left : 5px;
 }
@@ -225,12 +221,8 @@ div.navbar-inner {
 	margin-top: 4px;
 	margin-right: 5px;	
 }
-
-.new-post-attachment {	
-	margin-left: 30px;
-}
 .new-post-attachment .btn {
-	width: 175px;	
+	width: 195px;	
 }
 #post_add {
 	margin-top: 40px;
@@ -250,6 +242,9 @@ div.navbar-inner {
 .tag-body > .edit-tag {
 	text-align: right;
 	font-size: 12px;
+}
+div.new-post-preview {
+	margin-top: 30px;
 }
 .post-preview-well {
 	margin: 0;
@@ -305,4 +300,15 @@ div#fileUpload .modal-body {
 i {
 	vertical-align: -2px !important;
 	margin-right: 5px;
+}
+div#attachment-listings {
+	margin-bottom: 20px;
+	margin-top: 10px;
+}
+div.view-post-footer {
+	margin-left: 10px;
+	margin-top: 20px;
+}
+.attachments-header {
+	text-decoration: underline;
 }

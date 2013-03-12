@@ -34,7 +34,15 @@
 				{{ tag.name }}
 			</a>			
 		</div>	
-	</div>	
+	</div>
+	<div class="row view-post-footer" ng-show="post.attachments.length">
+		<h5 class="attachments-header"> Attachments </h5>
+		<div id="attachment-listings">
+			<div class="single-attachment-listing" ng-repeat="att in post.attachments">				
+				<a href="#" target="_blank">{{ att.name }}</a>
+			</div>
+		</div>
+	</div>
 </div>
 
 <div ng-include="'partials/working_dialog.html'"></div>

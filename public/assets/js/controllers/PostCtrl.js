@@ -29,13 +29,8 @@ function PostCtrl($scope, $http, $routeParams, Posts, Users) {
 							}
 						});
 
+		console.log($scope.post);
 	}
-
-	// fetch users
-	Users.query(function(data) {
-		$scope.users = data.objects;
-	});
-	
 
 	// submit the post to save it
 	$scope.submit = function() {
@@ -115,6 +110,28 @@ function PostCtrl($scope, $http, $routeParams, Posts, Users) {
 			}
 		});
 	}
+
+	$scope.deleteAttachment = function(id) {
+		var idx = angular.pluckIndex($scope.post.attachments, 'id', id);
+
+		if (idx !== -1) {
+			if (confirm ('Are you sure you want to delete ' + $scope.post.attachments[idx].name)) {
+				$.ajax({
+					url : whatUp.apiRoot + 'attachments/' + id,
+					type : 'DELETE',
+					xhrFields : {
+						withCredentials: true
+					},
+					dataTye : 'json',
+					success : function(s) {
+						console.log(s);
+						$scope.post.attachments.splice(idx, 1);
+						$scope.$apply();
+					}
+				});
+			}
+		}
+	};
 
 	$scope.deleteFileAttachment = function(id) {
 		var idx = angular.pluckIndex($scope.attachments.files, 'id', id);
