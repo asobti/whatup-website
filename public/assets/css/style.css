@@ -185,10 +185,6 @@ span.post-action-delete:hover {
 img.main-loader {
 	margin: 30px;	
 }
-.new-post-footer {
-	margin-top: 30px;
-	margin-bottom: 60px;
-}
 .new-post-buttons button {
 	margin-left : 5px;
 }
@@ -218,7 +214,7 @@ div.navbar-inner {
 	margin-left: 30px;
 }
 .new-post-attachment .btn {
-	width: 175px;	
+	width: 195px;	
 }
 #post_add {
 	margin-top: 40px;
@@ -239,11 +235,106 @@ div.navbar-inner {
 	text-align: right;
 	font-size: 12px;
 }
+div.new-post-preview {
+	margin-top: 30px;
+}
 .post-preview-well {
 	margin: 0;
 	padding: 15px;
 }
-
 #subscription_dialog {
 	width: 500px;
+}
+.fileinput-button input {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  opacity: 0;
+  filter: alpha(opacity=0);
+  transform: translate(-300px, 0) scale(4);
+  font-size: 23px;
+  direction: ltr;
+  cursor: pointer;
+}
+.fileinput-button {
+	position: relative;
+}
+.file-upload-modal h3 {
+	display: inline-block;
+	vertical-align: middle;
+}
+.file-upload-modal form {
+	display: inline-block;
+	float: right;
+}
+.file-input-close {
+	float: right;
+	margin-left: 20px; 
+}
+div#fileUpload .modal-body {
+	width: 530px;
+}
+#single-listing .filename {
+	vertical-align: top;
+	width: 300px;
+	display: inline-block;
+}
+#single-listing .progress {
+	width: 225px;
+	display: inline-block;
+}
+.attachment-actions {
+	display: inline-block;
+	width: 225px;
+	text-align: right;
+}
+.attachment-actions .btn {
+	margin-left: 10px;
+}
+i {
+	vertical-align: -2px !important;
+	margin-right: 5px;
+}
+div#attachment-listings {
+	margin-bottom: 20px;
+	margin-top: 10px;
+}
+div.view-post-footer {
+	margin-left: 10px;
+	margin-top: 20px;
+}
+.attachments-header {
+	text-decoration: underline;
+}
+form#attachment {
+	text-align: center;
+	margin-top: 10px;
+}
+.attachment-button {
+	padding: 10px 20px;
+}
+.attachment-modal-body {
+	text-align: center;
+}
+#link-attachment {
+	width: 450px;
+	margin-top: 25px;
+	margin-bottom: 25px;
+}
+.attachment-result {
+	text-align: center;
+	font-weight: bold;	
+	padding : 10px;
+	color: white;
+	display: none;
+}
+.attachment-result-success {
+	background: rgba(250, 167, 50, 1.0);
+}
+.attachment-result-error {
+	background: rgba(218, 79, 73, 1.0);	
+}
+.attachment-result-container {
+	height: 30px;
 }
