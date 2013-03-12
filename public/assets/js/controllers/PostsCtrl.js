@@ -10,7 +10,7 @@ function PostsCtrl($scope, $http, $location, $routeParams, eventBus, Posts, Subs
 
 		$scope.mode = "recent";
 
-		scope.subscriptions = function() {
+		$scope.subscriptions = function() {
 			$scope.mode = "subscribed";
 			Subscribed.query({}, function(data) { 
 				$scope.posts = data.objects;
@@ -24,24 +24,9 @@ function PostsCtrl($scope, $http, $location, $routeParams, eventBus, Posts, Subs
 			});
 
 		};
-
-		$scope.posts = function() {
-			$scope.mode = "subscribed";
-			Subscribed.query({}, function(data) { 
-				$scope.posts = data.objects;
-				var paginationObj = {
-					currentPage: data.page,
-					totalPages: data.total_pages
-				}
-
-				eventBus.pageChanged(paginationObj);
-
-			});
-		};
-
 
 		$scope.search = function() {
-			
+			$scope.mode = "recent";
 			/*
 			Helper functions
 			*/

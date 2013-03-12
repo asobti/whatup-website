@@ -1,6 +1,6 @@
 <div class="row content-header">
 	<div class="span2">
-		<button class="btn btn-large" ng-click="subscriptions()">Subscriptions</button>
+		<button class="btn btn-large" ng-class="{recent:'', subscribed:'btn-primary'}[mode]" ng-click="subscriptions()">Subscriptions</button>
 	</div>
 	<div class="span5" id="search_container">
 		<form class="navbar-search offset2">
@@ -8,7 +8,7 @@
 		</form>
 	</div>
 	<div class="span2 pull-right" style="text-align:right">
-		<button class="btn btn-large btn-primary">Recent</button>
+		<button class="btn btn-large" ng-class="{recent:'btn-primary', subscribed:''}[mode]" ng-click="search()">Recent</button>
 	</div>
 </div>
 <div class="wrapper">
