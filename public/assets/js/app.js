@@ -41,15 +41,15 @@ var whatUp = angular.module('projectWhatUp', ['whatUpServices', 'ngSanitize'])
 whatUp.apiRoot = "http://s-api.projectwhatup.us/";
 
 // define Base URL for login page
-whatUp.loginRoot = "http://s-api.projectwhatup.us/";
+whatUp.loginRoot = "http://s-api.projectwhatup.us";
 
 // function that redirects user to login page if not logged in
 whatUp.loginRedirect = function(path) {
 	var redirectTo =  whatUp.loginRoot
 					+ path
-					+ "?redir="
+					+ "?next="
 					+ window.location;
-					
+	
 	window.location = redirectTo;
 };				
 

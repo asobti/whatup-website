@@ -250,6 +250,7 @@ function PostsCtrl($scope, $http, $location, $routeParams, eventBus, Posts, Subs
 				eventBus.pageChanged(paginationObj);
 			}, function(err) {				
 				if (err.status === 401) {
+					console.log(err);
 					whatUp.loginRedirect(err.data.url);
 				}
 			});

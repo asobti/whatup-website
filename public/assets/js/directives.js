@@ -67,3 +67,11 @@ whatUp.directive('enterKeyDown', function() {
 		});
 	}
 });
+
+whatUp.directive('attachmentWatch', function() {
+	return function(scope, element, attrs) {
+		$(element[0]).on('change', function() {
+			scope.uploadAttachment();		
+		});
+	}
+});
