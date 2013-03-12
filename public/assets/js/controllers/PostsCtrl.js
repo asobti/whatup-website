@@ -1,6 +1,6 @@
 'use strict';
 
-function PostsCtrl($scope, $http, $location, $routeParams, eventBus, Posts, Subscriptions) {
+function PostsCtrl($scope, $http, $location, $routeParams, eventBus, Posts, Subscribed) {
 		$http.defaults.withCredentials = true;
 		// console.log($http.defaults);
 		$scope.fetchingPosts = true;
@@ -8,16 +8,17 @@ function PostsCtrl($scope, $http, $location, $routeParams, eventBus, Posts, Subs
 
 		var converter = new Attacklab.showdown.converter();
 
-		$scope.showSubscriptions = function() {
+		$scope.subscriptions = function() {
 			var subscriptions;
 			var posts;
-			Subscriptions.query({}, function(data) { 
+			Subscribed.query({}, function(data) { 
 				subscriptions = data.objects;
 			});
 			Posts.query({"page": page}, function(data) {
 				posts = data.objects;
 			});
-		}
+		};
+
 
 		$scope.search = function() {
 			
@@ -277,5 +278,5 @@ function PostsCtrl($scope, $http, $location, $routeParams, eventBus, Posts, Subs
 }
 
 // define injections
-PostsCtrl.$inject = ['$scope', '$http', '$location', '$routeParams', 'EventBus', 'Posts', 'Subscriptions'];
+PostsCtrl.$inject = ['$scope', '$http', '$location', '$routeParams', 'EventBus', 'Posts', 'Subscribed'];
 
