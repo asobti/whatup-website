@@ -327,3 +327,19 @@ form#attachment {
 	margin-top: 25px;
 	margin-bottom: 25px;
 }
+.attachment-result {
+	text-align: center;
+	font-weight: bold;	
+	padding : 10px;
+	color: white;
+	display: none;
+}
+.attachment-result-success {
+	background: rgba(250, 167, 50, 1.0);
+}
+.attachment-result-error {
+	background: rgba(218, 79, 73, 1.0);	
+}
+.attachment-result-container {
+	height: 30px;
+}

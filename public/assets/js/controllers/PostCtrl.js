@@ -11,6 +11,11 @@ function PostCtrl($scope, $http, $routeParams, Posts, Users) {
 		progress : 0
 	};
 
+	$scope.linkUpload = {
+		link : '',
+		uploading : false
+	};
+
 	if (typeof $routeParams.postId === 'undefined') {		
 		$scope.post = new Posts({
 			topic : '',
@@ -74,14 +79,15 @@ function PostCtrl($scope, $http, $routeParams, Posts, Users) {
 				$scope.fileUpload.uploading = true;				
 				$scope.$apply();
 			},
-			error : function(e) {
-				alert('error. See console');
+			error : function(e) {				
 				console.log(e);
+				uploadMsg('error');
 			},
 			success : function(s) {				
 				$scope.fileUpload.uploading = false;
 				$scope.post.attachments.push(s);
-				$scope.$apply();			
+				$scope.$apply();	
+				uploadMsg('success');		
 			},			
 			uploadProgress : function(e, p, t, per) {
 				$scope.fileUpload.progress = per;
@@ -89,6 +95,41 @@ function PostCtrl($scope, $http, $routeParams, Posts, Users) {
 			}
 		});
 	}
+
+	$scope.attachLink = function() {
+		$scope.linkUpload.link = $.trim($scope.linkUpload.link);
+
+		if ($scope.linkUpload.link !== '') {
+			$.ajax({
+				url : whatUp.apiRoot + 'upload',
+				dataTye : 'json',
+				type : 'POST',
+				data : {
+					url : $scope.linkUpload.link
+				},
+				xhrFields : {
+					withCredentials : true
+				},
+				beforeSubmit : function() {
+					$scope.linkUpload.uploading = true;
+					$scope.$apply();
+				},
+				error : function(e) {
+					console.log(e);				
+					$scope.linkUpload.uploading = false;
+					$scope.$apply();
+					uploadMsg('error');
+				},
+				success : function(s) {
+					$scope.post.attachments.push(s);
+					$scope.linkUpload.uploading = false;
+					$scope.linkUpload.link = '';
+					$scope.$apply();
+					uploadMsg('success');					
+				}
+			});
+		}
+	};
 
 	$scope.deleteAttachment = function(id) {
 		var idx = angular.pluckIndex($scope.post.attachments, 'id', id);
@@ -110,6 +151,18 @@ function PostCtrl($scope, $http, $routeParams, Posts, Users) {
 				});
 			}
 		}
+	};
+
+	var uploadMsg = function(result) {
+		var target = null;
+
+		if (result === 'success') {
+			target = $('.attachment-result-success');
+		} else if (result === 'error') {
+			target = $('.attachment-result-error');
+		}
+
+		target.fadeIn('fast').delay(1500).fadeOut('slow');
 	};
 
 	/*

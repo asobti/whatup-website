@@ -61,12 +61,27 @@
 				OR
 			</span>
 		</div>
-		<input type="text" id="link-attachment" />
-		<br />
-		<span class="btn btn-success attachment-button">
-            <i class="icon-plus icon-white"></i>
-            <span>Add Link</span>            
-        </span>
+		<div class="link-attachment-container">
+			<div class="link-attachment-container-input" ng-hide="linkUpload.uploading">
+				<input type="text" id="link-attachment" ng-model="linkUpload.link"/>
+				<br />
+				<span class="btn btn-success attachment-button" ng-click="attachLink()">
+		            <i class="icon-plus icon-white"></i>
+		            <span>Add Link</span>            
+		        </span>
+	    	</div>
+	    	<div class="link-attachment-container-progress" ng-show="linkUpload.uploading">
+	    		<span>Uploading...</span>
+	    	</div>
+    	</div>    	
+	</div>
+	<div class="attachment-result-container">
+		<div class="attachment-result attachment-result-success">
+			Attachment added successfully
+		</div>
+		<div class="attachment-result attachment-result-error">
+			Error uploading attachment
+		</div>
 	</div>
 </div>
 <div ng-include="'partials/working_dialog.html'"></div>
