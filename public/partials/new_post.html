@@ -18,28 +18,11 @@
 				<a href="#" target="_blank">{{ att.name }}</a>
 			</div>
 		</div>		
-		<div class="pull-left new-post-attachment">
-			<div class="btn-group dropup">
-				<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-					<i class="icon-folder-open"></i>
-					Add attachments
-					<span class="caret"></span>
-				</a>
-				<ul class="dropdown-menu">
-					<li>						
-						<a href="#fileUpload" role="button" data-toggle="modal"> 
-							<i class="icon-hdd"></i>
-							Upload from computer
-						</a>
-					</li>
-					<li>						
-						<a href="#"> 
-							<i class="icon-globe"></i>
-							Upload from URL
-						</a>
-					</li>
-				</ul>
-			</div>
+		<div class="pull-left new-post-attachment">			
+			<a href="#fileUpload" class="btn" data-toggle="modal"> 
+				<i class="icon-hdd"></i>
+				Add attachment
+			</a>			
 		</div>
 		<div class="pull-right">			
 			<div class="button_containter pull-right new-post-buttons">
@@ -60,28 +43,30 @@
 			<i class="icon-ok icon-white"></i>
 			<span>Done</span>
 		</span>
-		<h3>Add Attachments</h3>
-		<form id="attachment" method="post">
-			<span class="btn btn-success fileinput-button">
+		<h3>Add Attachments</h3>		
+	</div>	
+	<div class="modal-body attachment-modal-body">
+		<form id="attachment" method="post" ng-hide="fileUpload.uploading">
+			<span class="btn btn-success fileinput-button attachment-button">
                 <i class="icon-plus icon-white"></i>
-                <span>Add files...</span>
+                <span>Add File</span>
                 <input id="attachments-files" type="file" name="file" attachment-watch="#file-listings">
             </span>
 		</form>
-	</div>	
-	<div class="modal-body">
-		<div id="file-listings">
-			<div id="single-listing" ng-repeat="file in attachments.files">
-				<span class="filename">{{ file.filename }}</span>
-				<div class="progress" ng-hide="file.uploaded" >
-				  <div class="bar" style="width: {{ file.progress }}%;"></div>
-				</div>
-				<div class="attachment-actions" ng-show="file.uploaded" >
-					<a class="btn btn-danger" ng-click="deleteFileAttachment(file.id)"><i class="icon-ban-circle icon-white"></i>Delete</a>
-					<a class="btn btn-info" href="http://assets.projectwhatup.us?id={{file.id}}&name={{file.response.name}}" target="_blank"><i class="icon-download icon-white"></i>Download</a>
-				</div>
-			</div>			
+		<div class="progress" ng-show="fileUpload.uploading" >
+		  <div class="bar" style="width: {{ fileUpload.progress }}%;"></div>
 		</div>
+		<div style="height: 1px; background-color: rgb(202, 201, 201); text-align: center; margin: 7px 0;">
+			<span style="background-color: white; position: relative; top: -0.7em;padding: 0 10px; font-weight: bold">
+				OR
+			</span>
+		</div>
+		<input type="text" id="link-attachment" />
+		<br />
+		<span class="btn btn-success attachment-button">
+            <i class="icon-plus icon-white"></i>
+            <span>Add Link</span>            
+        </span>
 	</div>
 </div>
 <div ng-include="'partials/working_dialog.html'"></div>

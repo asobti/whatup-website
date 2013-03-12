@@ -312,3 +312,18 @@ div.view-post-footer {
 .attachments-header {
 	text-decoration: underline;
 }
+form#attachment {
+	text-align: center;
+	margin-top: 10px;
+}
+.attachment-button {
+	padding: 10px 20px;
+}
+.attachment-modal-body {
+	text-align: center;
+}
+#link-attachment {
+	width: 450px;
+	margin-top: 25px;
+	margin-bottom: 25px;
+}
