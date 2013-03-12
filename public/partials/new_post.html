@@ -15,7 +15,7 @@
 			<h5 class="attachments-header"> Attachments </h5>
 			<div class="single-attachment-listing" ng-repeat="att in post.attachments">
 				<a href="javascript:void()" ng-click="deleteAttachment(att.id)"><i class="icon-trash"></i></a>
-				<a href="#" target="_blank">{{ att.name }}</a>
+				<a href="http://assets.projectwhatup.us?location={{att.location}}" target="_blank">{{ att.name }}</a>
 			</div>
 		</div>		
 		<div class="pull-left new-post-attachment">			
