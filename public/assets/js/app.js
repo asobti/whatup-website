@@ -19,6 +19,10 @@ var whatUp = angular.module('projectWhatUp', ['whatUpServices', 'ngSanitize'])
 							templateUrl : 'partials/new_post.html',
 							controller : PostCtrl
 						})
+						.when('/subscriptions', {
+							templateUrl : 'partials/subscriptions_dialog.html',
+							controller : SubscriptionsCtrl
+						})
 						.when('/posts/:page', {
 							templateUrl : 'partials/posts.html',
 							controller : PostsCtrl
@@ -34,16 +38,17 @@ var whatUp = angular.module('projectWhatUp', ['whatUpServices', 'ngSanitize'])
 
 
 // define API root url
+
 whatUp.apiRoot = "http://api.projectwhatup.us/";
-whatUp.loginRoot = whatUp.apiRoot;
+whatUp.loginRoot = "http://api.projectwhatup.us/";
 
 // function that redirects user to login page if not logged in
 whatUp.loginRedirect = function(path) {
 	var redirectTo =  whatUp.loginRoot
 					+ path
-					+ "?redir="
+					+ "?next="
 					+ window.location;
-					
+	
 	window.location = redirectTo;
 };
 			

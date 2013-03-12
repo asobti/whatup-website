@@ -5,13 +5,24 @@ function PostCtrl($scope, $http, $routeParams, Posts, Users) {
 	var converter = new Attacklab.showdown.converter();
 
 	$scope.tags = '';
+	
+	$scope.fileUpload = {
+		uploading : false,
+		progress : 0
+	};
+
+	$scope.linkUpload = {
+		link : '',
+		uploading : false
+	};
 
 	if (typeof $routeParams.postId === 'undefined') {		
 		$scope.post = new Posts({
 			topic : '',
 			body : '',
 			user_id : '',
-			tags : []
+			tags : [],
+			attachments : []
 		});
 	} else {
 		$scope.post = 	Posts.get({
@@ -24,18 +35,11 @@ function PostCtrl($scope, $http, $routeParams, Posts, Users) {
 							}
 						});
 
+		console.log($scope.post);
 	}
-
-	// fetch users
-	Users.query(function(data) {
-		$scope.users = data.objects;
-	});
-	
 
 	// submit the post to save it
 	$scope.submit = function() {
-		//processTags();
-		
 		if(typeof $scope.post.id === 'undefined') {
 			console.log('creating new post');
 			createPost();
@@ -54,6 +58,112 @@ function PostCtrl($scope, $http, $routeParams, Posts, Users) {
 	$scope.postBodyAsHtml = function() {
 		return converter.makeHtml($scope.post.body);
 	}
+
+	$scope.uploadAttachment = function() {
+		var form = $('form#attachment');	
+		
+		var elem = null;
+
+		var attachment = null;
+
+		// upload via ajax here
+		form.ajaxSubmit({
+			clearForm : true,
+			dataType : 'json',
+			type : 'POST',
+			url : whatUp.apiRoot + 'upload',
+			xhrFields : {
+				withCredentials : true
+			},
+			beforeSubmit : function() {
+				$scope.fileUpload.uploading = true;				
+				$scope.$apply();
+			},
+			error : function(e) {				
+				console.log(e);
+				uploadMsg('error');
+			},
+			success : function(s) {				
+				$scope.fileUpload.uploading = false;
+				$scope.post.attachments.push(s);
+				$scope.$apply();	
+				uploadMsg('success');		
+			},			
+			uploadProgress : function(e, p, t, per) {
+				$scope.fileUpload.progress = per;
+				$scope.$apply();
+			}
+		});
+	}
+
+	$scope.attachLink = function() {
+		$scope.linkUpload.link = $.trim($scope.linkUpload.link);
+
+		if ($scope.linkUpload.link !== '') {
+			$.ajax({
+				url : whatUp.apiRoot + 'upload',
+				dataTye : 'json',
+				type : 'POST',
+				data : {
+					url : $scope.linkUpload.link
+				},
+				xhrFields : {
+					withCredentials : true
+				},
+				beforeSubmit : function() {
+					$scope.linkUpload.uploading = true;
+					$scope.$apply();
+				},
+				error : function(e) {
+					console.log(e);				
+					$scope.linkUpload.uploading = false;
+					$scope.$apply();
+					uploadMsg('error');
+				},
+				success : function(s) {
+					$scope.post.attachments.push(s);
+					$scope.linkUpload.uploading = false;
+					$scope.linkUpload.link = '';
+					$scope.$apply();
+					uploadMsg('success');					
+				}
+			});
+		}
+	};
+
+	$scope.deleteAttachment = function(id) {
+		var idx = angular.pluckIndex($scope.post.attachments, 'id', id);
+		console.log('deleteAttachment');
+		console.log(idx);
+		if (idx !== -1) {
+			if (confirm ('Are you sure you want to delete ' + $scope.post.attachments[idx].name)) {
+				$.ajax({
+					url : whatUp.apiRoot + 'attachments/' + id,
+					type : 'DELETE',
+					xhrFields : {
+						withCredentials: true
+					},
+					dataTye : 'json',
+					success : function(s) {
+						$scope.post.attachments.splice(idx, 1);
+						$scope.$apply();
+					}
+				});
+			}
+		}
+	};
+
+	var uploadMsg = function(result) {
+		var target = null;
+
+		if (result === 'success') {
+			target = $('.attachment-result-success');
+		} else if (result === 'error') {
+			target = $('.attachment-result-error');
+		}
+
+		target.fadeIn('fast').delay(1500).fadeOut('slow');
+	};
 
 	/*
 		TODO : Replace $http with custom REST service

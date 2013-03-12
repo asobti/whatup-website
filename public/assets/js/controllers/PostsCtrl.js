@@ -1,6 +1,6 @@
 'use strict';
 
-function PostsCtrl($scope, $http, $location, $routeParams, eventBus, Posts) {
+function PostsCtrl($scope, $http, $location, $routeParams, eventBus, Posts, Subscribed) {
 		$http.defaults.withCredentials = true;
 		// console.log($http.defaults);
 		$scope.fetchingPosts = true;
@@ -8,8 +8,25 @@ function PostsCtrl($scope, $http, $location, $routeParams, eventBus, Posts) {
 
 		var converter = new Attacklab.showdown.converter();
 
+		$scope.mode = "recent";
+
+		$scope.subscriptions = function() {
+			$scope.mode = "subscribed";
+			Subscribed.query({}, function(data) { 
+				$scope.posts = data.objects;
+				var paginationObj = {
+					currentPage: data.page,
+					totalPages: data.total_pages
+				}
+
+				eventBus.pageChanged(paginationObj);
+
+			});
+
+		};
+
 		$scope.search = function() {
-			
+			$scope.mode = "recent";
 			/*
 			Helper functions
 			*/
@@ -52,6 +69,7 @@ function PostsCtrl($scope, $http, $location, $routeParams, eventBus, Posts) {
 				Consider combining multiple matches for combined effect.
 
 			*/
+			
 
 			function getSearchObj (searchData) {
 				//\"(.*)\"
@@ -232,11 +250,22 @@ function PostsCtrl($scope, $http, $location, $routeParams, eventBus, Posts) {
 				eventBus.pageChanged(paginationObj);
 			}, function(err) {				
 				if (err.status === 401) {
+					console.log(err);
 					whatUp.loginRedirect(err.data.url);
 				}
 			});
 		}
-
+		
+		/*
+		var sub1 = new Subscriptions({
+					tags: [
+							{
+								name:"api"
+							}
+						]
+					});
+		sub1.$create(function(resp){ console.log(resp); }, function(err){ console.log(err); });
+		*/
 		$scope.search();
 
 		$scope.htmlFromMarkdown = function(markdown) {
@@ -251,5 +280,5 @@ function PostsCtrl($scope, $http, $location, $routeParams, eventBus, Posts) {
 }
 
 // define injections
-PostsCtrl.$inject = ['$scope', '$http', '$location', '$routeParams', 'EventBus', 'Posts'];
+PostsCtrl.$inject = ['$scope', '$http', '$location', '$routeParams', 'EventBus', 'Posts', 'Subscribed'];
 

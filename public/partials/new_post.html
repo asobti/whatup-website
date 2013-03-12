@@ -11,34 +11,19 @@
 		</div>
 	</div>
 	<div class="row new-post-footer">
-		<div class="pull-left">
-			<select id="new-post-user" ng-model="post.user_id" >
-				<option ng-repeat="user in users" value="{{ user.id }}">@{{ user.alias }}</option>				
-			</select>
-		</div>   
-		<div class="pull-left new-post-attachment">
-			<div class="btn-group dropup">
-				<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-					<i class="icon-folder-open"></i>
-					Add attachments
-					<span class="caret"></span>
-				</a>
-				<ul class="dropdown-menu">
-					<li>						
-						<a href="#"> 
-							<i class="icon-hdd"></i>
-							Upload from computer
-						</a>
-					</li>
-					<li>						
-						<a href="#"> 
-							<i class="icon-globe"></i>
-							Upload from URL
-						</a>
-					</li>
-				</ul>
+		<div id="attachment-listings" ng-show="post.attachments.length">
+			<h5 class="attachments-header"> Attachments </h5>
+			<div class="single-attachment-listing" ng-repeat="att in post.attachments">
+				<a href="javascript:void()" ng-click="deleteAttachment(att.id)"><i class="icon-trash"></i></a>
+				<a href="http://assets.projectwhatup.us?location={{att.location}}" target="_blank">{{ att.name }}</a>
 			</div>
-		</div>   
+		</div>		
+		<div class="pull-left new-post-attachment">			
+			<a href="#fileUpload" class="btn" data-toggle="modal"> 
+				<i class="icon-hdd"></i>
+				Add attachment
+			</a>			
+		</div>
 		<div class="pull-right">			
 			<div class="button_containter pull-right new-post-buttons">
 				<button class="btn btn-primary" id="post_add_submit" ng-click="submit()">Submit</button>	
@@ -52,5 +37,51 @@
 		</div>
 	</div>
 </div>
-
+<div id="fileUpload" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="fileUploadLabel" aria-hidden="true">
+	<div class="modal-header file-upload-modal">
+		<span class="btn btn-warning file-input-close" data-dismiss="modal">
+			<i class="icon-ok icon-white"></i>
+			<span>Done</span>
+		</span>
+		<h3>Add Attachments</h3>		
+	</div>	
+	<div class="modal-body attachment-modal-body">
+		<form id="attachment" method="post" ng-hide="fileUpload.uploading">
+			<span class="btn btn-success fileinput-button attachment-button">
+                <i class="icon-plus icon-white"></i>
+                <span>Add File</span>
+                <input id="attachments-files" type="file" name="file" attachment-watch="#file-listings">
+            </span>
+		</form>
+		<div class="progress" ng-show="fileUpload.uploading" >
+		  <div class="bar" style="width: {{ fileUpload.progress }}%;"></div>
+		</div>
+		<div style="height: 1px; background-color: rgb(202, 201, 201); text-align: center; margin: 7px 0;">
+			<span style="background-color: white; position: relative; top: -0.7em;padding: 0 10px; font-weight: bold">
+				OR
+			</span>
+		</div>
+		<div class="link-attachment-container">
+			<div class="link-attachment-container-input" ng-hide="linkUpload.uploading">
+				<input type="text" id="link-attachment" ng-model="linkUpload.link"/>
+				<br />
+				<span class="btn btn-success attachment-button" ng-click="attachLink()">
+		            <i class="icon-plus icon-white"></i>
+		            <span>Add Link</span>            
+		        </span>
+	    	</div>
+	    	<div class="link-attachment-container-progress" ng-show="linkUpload.uploading">
+	    		<span>Uploading...</span>
+	    	</div>
+    	</div>    	
+	</div>
+	<div class="attachment-result-container">
+		<div class="attachment-result attachment-result-success">
+			Attachment added successfully
+		</div>
+		<div class="attachment-result attachment-result-error">
+			Error uploading attachment
+		</div>
+	</div>
+</div>
 <div ng-include="'partials/working_dialog.html'"></div>

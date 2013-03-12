@@ -27,6 +27,8 @@ var resourceUsersUrl = 	whatUp.apiRoot + 'users/:userId';
 //		+ '?q={"order_by":[{"field"\\:"created_at","direction"\\:"desc"}]}';
 
 var resourceTagsUrl = whatUp.apiRoot + 'tags/:tagId';
+var resourceSubscriptionsUrl = whatUp.apiRoot + 'subscriptions/';
+var resourceSubscribedUrl = whatUp.apiRoot + 'subscribed/';
 
 
 angular.module('whatUpServices', ['ngResource'])
@@ -50,6 +52,32 @@ angular.module('whatUpServices', ['ngResource'])
 	})
 	.factory('Users', function($resource){		
 		return $resource(resourceUsersUrl, {}, {
+			query: {
+				method:"GET", 
+				isArray:false
+			}
+		}, {
+			withCredentials : true
+		})
+	})
+	.factory('Subscriptions', function($resource){		
+		return $resource(resourceSubscriptionsUrl, {}, {
+			query: {
+				method:"GET", 
+				isArray:false
+			},
+			create:{
+				method:"POST"
+			},
+			save:{
+				method:"PUT"
+			}
+		}, {
+			withCredentials : true
+		})
+	})
+	.factory('Subscribed', function($resource){		
+		return $resource(resourceSubscribedUrl, {}, {
 			query: {
 				method:"GET", 
 				isArray:false
