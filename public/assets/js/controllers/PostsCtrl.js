@@ -8,10 +8,10 @@ function PostsCtrl($scope, $http, $location, $routeParams, eventBus, Posts, Subs
 
 		var converter = new Attacklab.showdown.converter();
 
-		$scope.subscriptions = function() {
-			console.log("subscribed");
-			var subscriptions;
-			var posts;
+		$scope.mode = "recent";
+
+		scope.subscriptions = function() {
+			$scope.mode = "subscribed";
 			Subscribed.query({}, function(data) { 
 				$scope.posts = data.objects;
 				var paginationObj = {
@@ -23,6 +23,20 @@ function PostsCtrl($scope, $http, $location, $routeParams, eventBus, Posts, Subs
 
 			});
 
+		};
+
+		$scope.posts = function() {
+			$scope.mode = "subscribed";
+			Subscribed.query({}, function(data) { 
+				$scope.posts = data.objects;
+				var paginationObj = {
+					currentPage: data.page,
+					totalPages: data.total_pages
+				}
+
+				eventBus.pageChanged(paginationObj);
+
+			});
 		};
 
 
