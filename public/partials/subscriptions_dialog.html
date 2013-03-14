@@ -19,6 +19,10 @@
 	</div>
 </div>
 
+<ul ng-repeat="subscription in subscriptions">
+	<li ng-repeat="tag in subscription.tags">{{tag.name}}</li>
+</ul>
+
 <!-- <table class="table" id="subscriptions_list">
 	<tr class="subscription" ng-repeat="subscription in subscriptions">
 		<td>{{$subscription.user}}</td>		
