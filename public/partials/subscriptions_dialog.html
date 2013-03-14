@@ -4,24 +4,24 @@
 	<input type="text" placeholder="User" ng-model="subUser" />
 	<h4>Tags</h4>
 	<div class="row tag-row">
-		<span ng-repeat="tag in post.tags" class="label label-success post-tag">				
+		<span ng-repeat="tag in tags" class="label label-success post-tag">				
 			{{ tag.name }}
 			<i title="Remove tag" class="icon-remove icon-white" ng-click="removeTag(tag.name)"></i>
 		</span>				
 		<input type="text" id="post_tags" placeholder="Tags" ng-model="currentTag" tag-input="currentTag" auto-complete/>
 	</div>
 	<div id="clearfix"></div>
-	<div class="pull-right">			
-		<div class="button_containter pull-right new-post-buttons">
+		<div class="button_containter new-post-buttons">
 			<button class="btn btn-primary" id="post_add_submit" ng-click="save()">Save</button>	
 			<button class="btn btn-primary" id="post_add_cancel" ng-click="cancel()">Cancel</button>	
 		</div>			
-	</div>
 </div>
 
-<ul ng-repeat="subscription in subscriptions">
-	<li ng-repeat="tag in subscription.tags">{{tag.name}}</li>
-</ul>
+
+<div class="row tag-row subscription-tags" ng-repeat="subscription in subscriptions">
+	<span class="label label-warning post-tag" ng-show="subscription.subscribee.alias">@{{subscription.subscribee.alias}}</span>
+	<span class="label label-success post-tag" ng-repeat="tag in subscription.tags">{{tag.name}}</span>
+</div>
 
 <!-- <table class="table" id="subscriptions_list">
 	<tr class="subscription" ng-repeat="subscription in subscriptions">
