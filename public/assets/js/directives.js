@@ -20,7 +20,7 @@ whatUp.directive('autoComplete', function() {
 			minLength : 2,
 			source : function(request, response) {
 				console.log('Term being searched for: ' + request.term);
-				var url = "http://api.projectwhatup.us/tags?q=";
+				var url = whatUp.apiRoot + "tags?q=";
 				var query = {
 					filters : [
 						{
