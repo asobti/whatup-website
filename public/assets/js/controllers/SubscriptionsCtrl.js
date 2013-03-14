@@ -30,9 +30,6 @@ function SubscriptionsCtrl($scope, $http, $location, $routeParams, Subscriptions
 					name : $scope.currentTag
 				});
 			}
-			
-			$scope.currentTag = '';	
-			console.log('tag finished');	
 		};
 
 		$scope.removeTag = function(tagName) {
