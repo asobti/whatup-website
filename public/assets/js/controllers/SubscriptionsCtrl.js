@@ -1,17 +1,34 @@
 'use strict';
 
-function SubscriptionsCtrl($scope, $http, $location, $routeParams, Subscriptions) {
+function SubscriptionsCtrl($scope, $http, $location, $routeParams, Subscriptions, Users) {
 		$scope.currentTag = '';	
 		$scope.tags = [];
 
 		$http.defaults.withCredentials = true;
-		Subscriptions.query({}, function(data){
+		var update = function() {
+			Subscriptions.query({}, function(data){
+					console.log(data);
+					$scope.subscriptions = data.objects;
+			});	
+		};
+
+
+		update();
+
+
+		Users.query({}, function(data){
 				console.log(data);
-				$scope.subscriptions = data.objects;
-		});	
+				
+		});
 
 		$scope.save = function() {
-			console.log("called save()");
+			Subscriptions.create({
+					"subscribee": {
+						"alias":$scope.subUser
+					}, 
+					"tags" : $scope.tags
+			});
+			update();
 		};
 
 		$scope.cancel = function() {				
@@ -42,5 +59,5 @@ function SubscriptionsCtrl($scope, $http, $location, $routeParams, Subscriptions
 }
 
 // define injections
-SubscriptionsCtrl.$inject = ['$scope', '$http', '$location', '$routeParams', 'Subscriptions'];
+SubscriptionsCtrl.$inject = ['$scope', '$http', '$location', '$routeParams', 'Subscriptions', 'Users'];
 

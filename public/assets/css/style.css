@@ -347,3 +347,24 @@ form#attachment {
 .subscription-tags:first-child {
 	margin-top: 0;
 }
+
+.subscription-user {
+	display: block;
+	margin-bottom: 10px;
+}
+
+.subscription-break {
+	border-bottom: 1px solid #000000;
+	padding: 1px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.subscription-center {
+	text-align: center;
+}
+
+.subscription-inner {
+	text-align: left;
+	display: inline-block;
+}
