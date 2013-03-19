@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="projectWhatUp">
   <head>
     <meta charset="utf-8">
     <title>WhatUp</title>
@@ -16,6 +16,7 @@
       }
     </style>
     <link href="<?= base_url('assets/css/bootstrap-responsive.css') ?>" rel="stylesheet">
+    <link href="<?= base_url('assets/js/libs/jquery-ui/jquery-ui.min.css') ?>" rel="stylesheet">
     <link href="<?= base_url('assets/css/style.css') ?>" rel="stylesheet">
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -35,14 +36,20 @@
 
     <header class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
-        <div class="header-container">
-          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </a>
+        <div class="header-container">          
           <a class="brand" href="#">WhatUp</a>
           <div id="new_post_btn_container">
+            <div class="nav-collapse collapse">
+              <a href="#posts/new" class="btn btn-primary pull-right header-btn" style="margin-left: 10px;" id="new_post_btn" title="New Post">
+                <i class="icon-pencil icon-white"></i>                
+              </a>
+              <a href="#/subscriptions" class="btn btn-primary pull-right  header-btn" style="margin-left: 10px;" id="settings_btn" title="Settings">
+                <i class="icon-wrench icon-white"></i>                
+              </a>
+              <a href="http://s-api.projectwhatup.us/logout" class="btn btn-primary pull-right  header-btn" id="logout_btn" title="Logout">
+                <i class="icon-off icon-white"></i>		            
+              </a>
+            </div>
           </div>
         </div>
       </div>

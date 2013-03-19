@@ -6,6 +6,9 @@ body {
 .container {
 	margin-top: 100px;
 }
+.new-post-container {
+	margin-top: 50px;
+}
 .header-container {
 	padding: 10px 20px;
 
@@ -50,8 +53,7 @@ body {
 }
 .single-post {
 	padding: 10px;
-	padding-bottom: 20px;
-	margin-top: 50px;	
+	padding-bottom: 20px;		
 	border-radius: 4px;
 	background: #D8E4E6;
 }
@@ -64,7 +66,7 @@ body {
 	padding-left: 10px;
 }
 .post .post-body {
-	max-height: 150px;
+	/*max-height: 150px;*/
 	display: hidden;
 }
 .info-tags-row {
@@ -90,7 +92,8 @@ body {
 .post .post-tag,
 .single-post .post-tag {
 	padding: 5px 10px;
-	margin-right: 5px;	
+	margin-right: 5px;
+	padding-left: 5px;	
 }
 .post .post-tags-wrapper,
 .single-post .post-tags-wrapper {
@@ -134,6 +137,7 @@ body {
 footer {
 	border-top: 1px solid #CCC;
 	padding-top: 10px;
+	margin-top: 30px;
 	text-align: center;
 	font-size: 12px;
 }
@@ -175,16 +179,13 @@ span.post-action-delete:hover {
 }
 .post-delete-alert {
 	text-align: center;
+	margin-top: 20px;
 }
 .post-delete-alert .alert-buttons {
 	margin-top: 20px;
 }
 img.main-loader {
 	margin: 30px;	
-}
-.new-post-footer {
-	margin-top: 30px;
-	margin-bottom: 60px;
 }
 .new-post-buttons button {
 	margin-left : 5px;
@@ -199,25 +200,215 @@ img.main-loader {
 	width: 100%; 
 	padding: 10px
 }
+#post_tags {
+	padding: 6px;
+}
 div.navbar-inner {
 	height: 60px;
 }
-#new_post_btn {
+.header-btn {
 	padding-bottom: 8px;
 }
-#new_post_btn > i.icon-pencil {
+.header-btn > i {
 	margin-top: 4px;
-	margin-right: 5px;	
-}
-.new-post-attachment {	
-	margin-left: 30px;
 }
 .new-post-attachment .btn {
-	width: 175px;	
+	width: 195px;	
 }
 #post_add {
 	margin-top: 40px;
 }
-.post-tag > i {
+.post-tag > i {	
+	margin-right : 5px;
+	cursor: pointer;
+}
+.tag-row {
+	margin-left: 0px;
+}
+.tag-row > .post-tag {
+	vertical-align: top;
+	padding: 10px;
 	margin-right: 5px;
+}
+.tag-body > .edit-tag {
+	text-align: right;
+	font-size: 12px;
+}
+div.new-post-preview {
+	margin-top: 30px;
+}
+.post-preview-well {
+	margin: 0;
+	padding: 15px;
+}
+#subscription_dialog {
+	margin: 0 auto;
+}
+.fileinput-button input {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  opacity: 0;
+  filter: alpha(opacity=0);
+  transform: translate(-300px, 0) scale(4);
+  font-size: 23px;
+  direction: ltr;
+  cursor: pointer;
+}
+.fileinput-button {
+	position: relative;
+}
+.file-upload-modal h3 {
+	display: inline-block;
+	vertical-align: middle;
+}
+.file-upload-modal form {
+	display: inline-block;
+	float: right;
+}
+.file-input-close {
+	float: right;
+	margin-left: 20px; 
+}
+div#fileUpload .modal-body {
+	width: 530px;
+}
+#single-listing .filename {
+	vertical-align: top;
+	width: 300px;
+	display: inline-block;
+}
+#single-listing .progress {
+	width: 225px;
+	display: inline-block;
+}
+.attachment-actions {
+	display: inline-block;
+	width: 225px;
+	text-align: right;
+}
+.attachment-actions .btn {
+	margin-left: 10px;
+}
+i {
+	vertical-align: -2px !important;
+	margin-right: 5px;
+}
+div#attachment-listings {
+	margin-bottom: 20px;
+	margin-top: 10px;
+}
+div.view-post-footer {
+	margin-left: 10px;
+	margin-top: 20px;	
+}
+.attachments-header {
+	text-decoration: underline;
+}
+.revisions-header {
+	padding-right: 5px;
+}
+.revisions-header i {
+	margin-left: 5px;
+}
+form#attachment {
+	text-align: center;
+	margin-top: 10px;
+}
+.attachment-button {
+	padding: 10px 20px;
+}
+.attachment-modal-body {
+	text-align: center;
+}
+#link-attachment {
+	width: 450px;
+	margin-top: 25px;
+	margin-bottom: 25px;
+}
+.attachment-result,
+.revision-result {
+	text-align: center;
+	font-weight: bold;	
+	padding : 10px;
+	color: white;
+	display: none;
+}
+.attachment-result-success,
+.revision-result-success {
+	background: rgba(250, 167, 50, 1.0);
+}
+.attachment-result-error,
+.revision-result-error {
+	background: rgba(218, 79, 73, 1.0);	
+}
+.attachment-result-container,
+.revision-result-container {
+	height: 30px;
+}
+table#revisions-table {
+	margin-top: 15px;
+	width: 40%;
+}
+div#revision-modal {
+	width: 800px;
+	margin-left: -400px;
+}
+div#revision-modal .modal-body {
+	max-height: 600px;
+}
+table#revisions-table td {
+	line-height: 30px;
+}
+.subscription-tags {
+	margin-top: 10px;
+	border: 1px solid #c0c0c0;
+	border-radius: 4px;
+	padding: 10px;
+	
+}
+
+.subscription-tags:first-child {
+	margin-top: 0;
+}
+
+.subscription-user {
+	display: block;
+	margin-bottom: 10px;
+}
+
+.subscription-break {
+	border-bottom: 2px solid #000000;
+	padding: 1px;
+	margin-top: 5px;
+	margin-bottom: 20px;
+}
+
+.subscription-center {
+	text-align: center;
+}
+
+.subscription-inner {
+	text-align: left;
+	display: inline-block;
+}
+.sub-header {
+	margin: 0;
+	margin-top: 30px;
+}
+.no-subscriptions-msg {
+	font-weight: bold;
+}
+.new-sub-buttons {
+	text-align: center;
+	margin: 0;
+	padding: 0;
+	margin-top: 20px;
+}
+.new-sub-buttons button {
+	width: 80px;
+}
+.new-sub-buttons button:last-child {
+	margin-left: 20px;
 }

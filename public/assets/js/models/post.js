@@ -1,14 +1,15 @@
 Post = Backbone.Model.extend({	
-
-	urlRoot : "http://projectwhatup.us:5000/api/posts",
+	//urlRoot: "http://projectwhatup.us:5000/api/posts",	
+	url: function() {
+		if (typeof this.id === 'undefined') {
+			return 'http://api.projectwhatup.us/posts';
+		} else {
+			return 'http://api.projectwhatup.us/posts/' + this.id;
+		}    	
+  	},
 
 	initialize : function(){			
 		//this.on("error", this.error, this);	
-	},
-
-	defaults : {
-		topic : "",
-		body : ""
 	},
 
 	validate : function(attrs){
@@ -31,7 +32,7 @@ Post = Backbone.Model.extend({
 
 Posts = Backbone.Collection.extend({
 	model: Post,
-	url: 'http://projectwhatup.us:5000/api/posts?q={"order_by":[{"field":"created_at","direction":"desc"}]}',
+	url: 'http://api.projectwhatup.us:/posts?q={"order_by":[{"field":"created_at","direction":"desc"}]}',
 
 	parse: function(data) {
 		return data.objects;
@@ -52,7 +53,7 @@ Posts = Backbone.Collection.extend({
 		// store reference of this for use within setInterval
 		var that = this;
 		
-		this.watcher = setInterval(function() {
+		setInterval(function() {
 			that.refetch();
 		}, 5000);
 	},
@@ -69,14 +70,6 @@ Posts = Backbone.Collection.extend({
 			console.log("refetching page 1");
 			this.fetch({ data : { page : page_num }});
 		}
-	},
-
-	stopWatch : function() {
-		if (typeof this.watcher === 'undefined') {
-			return;
-		}
-
-		clearInterval(this.watcher);
 	}
 });
 
@@ -87,7 +80,7 @@ Posts = Backbone.Collection.extend({
 	collection and will never be used by itself.
 */
 PaginationModel = Backbone.Model.extend({
-	url: "http://projectwhatup.us:5000/api/posts",	
+	url: "http://api.projectwhatup.us:/posts",	
 
 	parse:function(data) {
 		var pageObj = {
@@ -127,6 +120,6 @@ PaginationModel = Backbone.Model.extend({
 	},
 
 	changeCurrentPage : function(page) {
-		this.set("currentPage") = page;
+		this.currentPage = page;
 	}
 });
