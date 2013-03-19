@@ -81,28 +81,6 @@ function PostsCtrl($scope, $http, $location, $routeParams, eventBus, Posts, Subs
 					"hasFilters" : false,
 					"hasDisjunctions" : true,
 				};
-				/*
-				if (clauses.length > 0) {
-					//use identical
-					searchObj.disjunctions = [];
-					for (var i in clauses) {
-						var clause = clauses[i];
-						searchObj.disjunctions.push(
-							{
-								"name" : "body",
-								"op" : "like",
-								"val" : "%" + clause + "%"
-							});
-						searchObj.disjunctions.push(
-							{
-								"name" : "topic",
-								"op" : "like",
-								"val" : "%" + clause + "%"
-							});
-
-					]*)
-				}
-				*/
 
 				//Exact Matching
 				var exactPattern = /\"([^\"]*)\"/g;
@@ -129,36 +107,9 @@ function PostsCtrl($scope, $http, $location, $routeParams, eventBus, Posts, Subs
 				for (var i in tag_clauses) {
 					var clause = tag_clauses[i];
 					searchData = trimString(searchData.replace('[' + clause + ']', ''));
-				}
-				
-	
+				}	
 			
-				//console.log(searchData);
-				/*
-				//This gives us full control but the API can't handle it ;)
-				var and_clauses = [];
-				var or_clauses = searchData.split(" OR ");
-				var moves = [];
-				for (var i in or_clauses) {
-					var clause = or_clauses[i];
-					var sub_and_clauses = clause.split(" AND ");
-					if (sub_and_clauses.length > 1) {
-						var tmp_and_clauses = [];
-						moves.push(i);
-						for (var j in sub_and_clauses) {
-							var sub_clause = sub_and_clauses[j];
-							tmp_and_clauses.push(sub_clause);
-						}
-						and_clauses.push(tmp_and_clauses);
-					}
-					
-				}
-				for (var i in moves) {
-					var shift = moves[i];
-					or_clauses[shift] = and_clauses[i];
-				}
-				*/
-				//console.log(clauses);
+				// See commented our code block at bottom
 				
 				var andCheck = searchData.split(" ");
 				for (var i in andCheck) {
@@ -282,3 +233,30 @@ function PostsCtrl($scope, $http, $location, $routeParams, eventBus, Posts, Subs
 // define injections
 PostsCtrl.$inject = ['$scope', '$http', '$location', '$routeParams', 'EventBus', 'Posts', 'Subscribed'];
 
+
+//console.log(searchData);
+/*
+//This gives us full control but the API can't handle it ;)
+var and_clauses = [];
+var or_clauses = searchData.split(" OR ");
+var moves = [];
+for (var i in or_clauses) {
+	var clause = or_clauses[i];
+	var sub_and_clauses = clause.split(" AND ");
+	if (sub_and_clauses.length > 1) {
+		var tmp_and_clauses = [];
+		moves.push(i);
+		for (var j in sub_and_clauses) {
+			var sub_clause = sub_and_clauses[j];
+			tmp_and_clauses.push(sub_clause);
+		}
+		and_clauses.push(tmp_and_clauses);
+	}
+	
+}
+for (var i in moves) {
+	var shift = moves[i];
+	or_clauses[shift] = and_clauses[i];
+}
+*/
+//console.log(clauses);

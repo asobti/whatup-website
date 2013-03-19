@@ -50,8 +50,7 @@ body {
 }
 .single-post {
 	padding: 10px;
-	padding-bottom: 20px;
-	margin-top: 50px;	
+	padding-bottom: 20px;		
 	border-radius: 4px;
 	background: #D8E4E6;
 }
@@ -240,7 +239,7 @@ div.new-post-preview {
 	padding: 15px;
 }
 #subscription_dialog {
-	width: 500px;
+	margin: 0 auto;
 }
 .fileinput-button input {
   position: absolute;
@@ -299,10 +298,16 @@ div#attachment-listings {
 }
 div.view-post-footer {
 	margin-left: 10px;
-	margin-top: 20px;
+	margin-top: 20px;	
 }
 .attachments-header {
 	text-decoration: underline;
+}
+.revisions-header {
+	padding-right: 5px;
+}
+.revisions-header i {
+	margin-left: 5px;
 }
 form#attachment {
 	text-align: center;
@@ -319,19 +324,69 @@ form#attachment {
 	margin-top: 25px;
 	margin-bottom: 25px;
 }
-.attachment-result {
+.attachment-result,
+.revision-result {
 	text-align: center;
 	font-weight: bold;	
 	padding : 10px;
 	color: white;
 	display: none;
 }
-.attachment-result-success {
+.attachment-result-success,
+.revision-result-success {
 	background: rgba(250, 167, 50, 1.0);
 }
-.attachment-result-error {
+.attachment-result-error,
+.revision-result-error {
 	background: rgba(218, 79, 73, 1.0);	
 }
-.attachment-result-container {
+.attachment-result-container,
+.revision-result-container {
 	height: 30px;
+}
+table#revisions-table {
+	margin-top: 15px;
+	width: 40%;
+}
+div#revision-modal {
+	width: 800px;
+	margin-left: -400px;
+}
+div#revision-modal .modal-body {
+	max-height: 600px;
+}
+table#revisions-table td {
+	line-height: 30px;
+}
+.subscription-tags {
+	margin-top: 10px;
+	border: 1px solid #c0c0c0;
+	border-radius: 4px;
+	padding: 10px;
+	
+}
+
+.subscription-tags:first-child {
+	margin-top: 0;
+}
+
+.subscription-user {
+	display: block;
+	margin-bottom: 10px;
+}
+
+.subscription-break {
+	border-bottom: 1px solid #000000;
+	padding: 1px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.subscription-center {
+	text-align: center;
+}
+
+.subscription-inner {
+	text-align: left;
+	display: inline-block;
 }

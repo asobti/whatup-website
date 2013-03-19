@@ -3,15 +3,61 @@ whatUp.directive('tagInput', function() {
 	return function(scope, element, attrs) {
 		$(element[0]).on('keydown', function(e) {
 			// enter (13) or spacebar (32) or tab (9)
+			var arg = attrs.inputRole;
+			console.log(arg);
 			if (e.which === 13 || e.which === 32 || e.which === 9) {
-				console.log('enter pressed');				
 				e.preventDefault();
-				scope.tagFinished();				
+				scope.tagFinished(arg);				
 				scope.$apply();
 			}
 		});
 	}
 });
+
+whatUp.directive('autoCompleteUsers', function() {
+	return function(scope, element, attrs) {
+		$(element[0]).autocomplete({
+			delay : 500,
+			minLength : 2,
+			source : function(request, response) {
+				var url = whatUp.apiRoot + "users?q=";
+				var query = {
+					filters : [
+						{
+							name : "alias",
+							op : "like",
+							val : "%" + request.term + "%"
+						}
+					]
+				};
+				var finalUrl = encodeURI(url + JSON.stringify(query));
+
+
+				$.ajax({
+					url  : finalUrl,
+					type : 'GET',
+					dataType : 'json',
+					success : function(obj) {
+						var users = [];
+						$.each(obj.objects, function(index, item) {
+							users.push(item.alias);
+						});
+						console.log(users);
+						response(users);
+					},
+					xhrFields : {
+						withCredentials : true
+					}
+				});
+			},
+			focus : function(event, ui) {
+				scope.sub.subscribee.alias = ui.item.value;
+				scope.$apply();
+			}
+		});
+	}
+});
+
 
 whatUp.directive('autoComplete', function() {
 	return function(scope, element, attrs) {
@@ -20,7 +66,7 @@ whatUp.directive('autoComplete', function() {
 			minLength : 2,
 			source : function(request, response) {
 				console.log('Term being searched for: ' + request.term);
-				var url = "http://api.projectwhatup.us/tags?q=";
+				var url = whatUp.apiRoot + "tags?q=";
 				var query = {
 					filters : [
 						{

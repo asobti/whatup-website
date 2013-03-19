@@ -24,7 +24,7 @@
 					<a href="#">@{{ post.author.name }}</a>
 				</p>
 				<p class="post-info post-user-time timeago" title="{{ created_at }}">
-					{{ post.created_at }}
+					{{ timeAgo(post.created_at) }}
 				</p>
 			</div>
 		</div>	 
@@ -36,13 +36,59 @@
 		</div>	
 	</div>
 	<div class="row view-post-footer" ng-show="post.attachments.length">
-		<h5 class="attachments-header"> Attachments </h5>
+		<h5 class="attachments-header"> Attachments </h5>		
 		<div id="attachment-listings">
 			<div class="single-attachment-listing" ng-repeat="att in post.attachments">				
 				<a href="http://assets.projectwhatup.us?location={{att.location}}" target="_blank">{{ att.name }}</a>
 			</div>
 		</div>
 	</div>
+	<div class="row view-post-footer" ng-show="post.revisions.length">
+		<h5 class="revisions-header btn btn-warning" ng-click="revisionsToggle()">
+			{{ revisions.text }}<i class="{{ revisions.icon }}"></i>
+		</h5>
+		<table id="revisions-table" class="table" ng-show="revisions.viewing">
+			<thead>
+				<tr>
+					<th></th>
+					<th>Modified By</th>
+					<th>Modified At</th>					
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="revision in post.revisions.slice().reverse()">
+					<td style="width: 55px">
+						<button href="#revision-modal" class="btn" data-toggle="modal" ng-click="revisions.currentRevision=revision">View</button>						
+					</td>
+					<td>{{ revision.user.alias || "Placeholder Name" }}</td>
+					<td>{{ timeAgo(revision.modified_at) }}</td>					
+				</tr>
+			</tbody>
+		</table>
+	</div>	
+</div>
+
+<div id="revision-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="revisionLabel" aria-hidden="true">
+	<div class="modal-header file-upload-modal">		
+		<h4>{{ revisions.currentRevision.topic }}</h4>
+	</div>	
+	<div class="modal-body revisions-modal-body">
+		<div class="well post-body" ng-bind-html="revisionBodyAsHtml()" >			
+		</div>
+		<span class="btn btn-warning file-input-close" data-dismiss="modal">
+			<i class="icon-ok icon-white"></i>
+			Done
+		</span>
+		<span class="btn btn-danger file-input-close" ng-click="rollback()">
+			<i class="icon-repeat icon-white"></i>
+			Rollback
+		</span>
+	</div>	
+	<div class="revision-result-container">
+		<div class="revision-result revision-result-success">
+			Post rolled back successfully!
+		</div>
+	</div>	
 </div>
 
 <div ng-include="'partials/working_dialog.html'"></div>
