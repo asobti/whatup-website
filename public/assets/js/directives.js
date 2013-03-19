@@ -1,4 +1,23 @@
 'use strict';
+
+whatUp.directive('popOverLeft', function() {
+	return function(scope, element, attrs) {
+		$(element).popover({
+			placement: "left",
+			html: true
+		});
+	};
+});
+
+whatUp.directive('popOverBottom', function() {
+	return function(scope, element, attrs) {
+		$(element).popover({
+			placement: "bottom",
+			html: true
+		});
+	};
+});
+
 whatUp.directive('tagInput', function() {
 	return function(scope, element, attrs) {
 		$(element[0]).on('keydown', function(e) {
