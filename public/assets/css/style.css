@@ -50,8 +50,7 @@ body {
 }
 .single-post {
 	padding: 10px;
-	padding-bottom: 20px;
-	margin-top: 50px;	
+	padding-bottom: 20px;		
 	border-radius: 4px;
 	background: #D8E4E6;
 }
@@ -299,10 +298,16 @@ div#attachment-listings {
 }
 div.view-post-footer {
 	margin-left: 10px;
-	margin-top: 20px;
+	margin-top: 20px;	
 }
 .attachments-header {
 	text-decoration: underline;
+}
+.revisions-header {
+	padding-right: 5px;
+}
+.revisions-header i {
+	margin-left: 5px;
 }
 form#attachment {
 	text-align: center;
@@ -319,19 +324,37 @@ form#attachment {
 	margin-top: 25px;
 	margin-bottom: 25px;
 }
-.attachment-result {
+.attachment-result,
+.revision-result {
 	text-align: center;
 	font-weight: bold;	
 	padding : 10px;
 	color: white;
 	display: none;
 }
-.attachment-result-success {
+.attachment-result-success,
+.revision-result-success {
 	background: rgba(250, 167, 50, 1.0);
 }
-.attachment-result-error {
+.attachment-result-error,
+.revision-result-error {
 	background: rgba(218, 79, 73, 1.0);	
 }
-.attachment-result-container {
+.attachment-result-container,
+.revision-result-container {
 	height: 30px;
+}
+table#revisions-table {
+	margin-top: 15px;
+	width: 40%;
+}
+div#revision-modal {
+	width: 800px;
+	margin-left: -400px;
+}
+div#revision-modal .modal-body {
+	max-height: 600px;
+}
+table#revisions-table td {
+	line-height: 30px;
 }

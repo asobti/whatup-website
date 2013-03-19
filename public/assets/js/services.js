@@ -99,4 +99,14 @@ angular.module('whatUpServices', ['ngResource'])
 		})
 	}, {
 		withCredentials : true
+	})
+	.factory('Revisions', function($resource) {
+		return $resource(resourceRevisionsUrl, {}, {
+			rollback : {
+				method : 'POST',
+				isArray : false
+			}
+		}, {
+			withCredentials : true
+		})
 	});

@@ -16,26 +16,33 @@ function PostCtrl($scope, $http, $routeParams, Posts, Users) {
 		uploading : false
 	};
 
+	$scope.revisions = {
+		text : 'View Past Revisions',
+		viewing : false,
+		icon : 'icon-plus',		
+		currentRevision : null
+	};
+
 	if (typeof $routeParams.postId === 'undefined') {		
 		$scope.post = new Posts({
 			topic : '',
 			body : '',
 			user_id : '',
 			tags : [],
-			attachments : []
+			attachments : [],
+			revisions : []
 		});
 	} else {
 		$scope.post = 	Posts.get({
 							'postId' : $routeParams.postId
 						}, function() {
 							$scope.tags = getTagsAsString();
+							console.log($scope.post.revisions);
 						}, function(err) {
 							if (err.status === 401) {
 								whatUp.loginRedirect(err.data.url);
 							}
 						});
-
-		console.log($scope.post);
 	}
 
 	// submit the post to save it
@@ -52,11 +59,15 @@ function PostCtrl($scope, $http, $routeParams, Posts, Users) {
 	$scope.cancel = function() {				
 		if (confirm("Are you sure you want to discard this post?")) {
 			redirectHomepage();
-		}		post.body
+		}
 	};
 
 	$scope.postBodyAsHtml = function() {
 		return converter.makeHtml($scope.post.body);
+	}
+
+	$scope.revisionBodyAsHtml = function() {		
+		return converter.makeHtml($scope.revisions.currentRevision.body);
 	}
 
 	$scope.uploadAttachment = function() {
@@ -276,6 +287,33 @@ function PostCtrl($scope, $http, $routeParams, Posts, Users) {
 			});
 			
 		});		
+	};
+
+	/*
+		Revisions
+	*/
+
+	$scope.revisionsToggle = function(){
+		$scope.revisions.viewing = !$scope.revisions.viewing;
+		$scope.revisions.text = ($scope.revisions.viewing) ? 'Hide Past Revisions' : 'View Past Revisions';		
+		$scope.revisions.icon = ($scope.revisions.viewing) ? 'icon-minus' : 'icon-plus';
+	}
+
+	$scope.timeAgo = function(created_at) {
+		// mark it with UTC time
+		created_at += "Z";
+		return $.timeago(created_at);
+	};
+
+	$scope.rollback = function() {
+		if (confirm('Are you sure you want to rollback')) {
+			$scope.post.topic = $scope.revisions.currentRevision.topic;
+			$scope.post.body = $scope.revisions.currentRevision.body;
+
+			$scope.post = $scope.post.$save(function(){
+				window.location.reload();
+			});
+		}
 	};
 
 	/*
