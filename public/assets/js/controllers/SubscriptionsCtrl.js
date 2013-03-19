@@ -22,12 +22,21 @@ function SubscriptionsCtrl($scope, $http, $location, $routeParams, Subscriptions
 		});
 
 		$scope.save = function() {
-			Subscriptions.create({
+			var obj = {};
+			if($scope.subUser) {
+				obj = {
 					"subscribee": {
-						"alias":$scope.subUser
-					}, 
-					"tags" : $scope.tags
-			}, function(){ 
+							"alias":$scope.subUser
+						},
+					 "tags" : $scope.tags
+				};
+			} else {
+				obj = {
+					 "tags" : $scope.tags
+				};
+			}
+
+			Subscriptions.create(obj, function(){ 
 				clearForm();
 				update();
 			});
