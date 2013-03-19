@@ -58,7 +58,7 @@ function PostCtrl($scope, $http, $routeParams, Posts, Users) {
 
 	$scope.cancel = function() {				
 		if (confirm("Are you sure you want to discard this post?")) {
-			redirectHomepage();
+			goBack();
 		}
 	};
 
@@ -187,7 +187,7 @@ function PostCtrl($scope, $http, $routeParams, Posts, Users) {
 			$scope.modal.image = 'assets/img/loaders/check.png';
 
 			// redirect to homepage
-			setTimeout(function() { redirectHomepage(); }, 1000);
+			setTimeout(function() { goBack(); }, 1000);
 		}, function(err){
 			alert('Error. See console for details');
 			console.log(err);
@@ -207,7 +207,7 @@ function PostCtrl($scope, $http, $routeParams, Posts, Users) {
 
 			// redirect to homepage
 			setTimeout(function() { 
-				redirectHomepage(); 
+				goBack();
 			}, 1000);
 		}, function(err) {
 			alert('Error. See console for details');
@@ -306,7 +306,7 @@ function PostCtrl($scope, $http, $routeParams, Posts, Users) {
 	};
 
 	$scope.rollback = function() {
-		if (confirm('Are you sure you want to rollback')) {
+		if (confirm('Are you sure you want to rollback this post?')) {
 			$scope.post.topic = $scope.revisions.currentRevision.topic;
 			$scope.post.body = $scope.revisions.currentRevision.body;
 
@@ -335,6 +335,10 @@ function PostCtrl($scope, $http, $routeParams, Posts, Users) {
 
 	var redirectHomepage = function() {
 		window.location = "/";
+	};
+
+	var goBack = function() {
+		window.history.back();
 	};
 }
 
