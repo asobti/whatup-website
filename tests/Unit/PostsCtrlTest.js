@@ -30,18 +30,19 @@ describe("WhatUp Controllers", function(){
 		}));
 	
 	
-	it("Checks for sunscriptions", function() {
-			console.log("Logfile");
-			expect(scope.mode).toBe("subscribed");
-			expect(scope.posts).toEqualData(data.objects);
-			expect(paginationObj.currentPage).toBe(data.page);
-			expect(paginationObj.totalPages).toEqual(data.total_pages);
-		});
-	
-	it("Fetch users", function() {
-			console.log("Logfile");
-			expect(scope.users).toBe(data.objects);
+		it("Checks for subscriptions", function() {
+				console.log("Logfile");
+				expect(scope.mode).toBe("subscribed");
+				expect(scope.posts).toEqualData(data.objects);
+				expect(paginationObj.currentPage).toBe(data.page);
+				expect(paginationObj.totalPages).toEqual(data.total_pages);
+			});
+		
+		it("Fetch users", function() {
+				console.log("Logfile");
+				expect(scope.users).toBe(data.objects);
 		});
 	});
 	
+	//need to add more
 });
