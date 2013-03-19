@@ -1,22 +1,57 @@
 'use strict';
 
-function SubscriptionsCtrl($scope, $http, $location, $routeParams, Subscriptions) {
+function SubscriptionsCtrl($scope, $http, $location, $routeParams, Subscriptions, Users) {
 		$scope.currentTag = '';	
 		$scope.tags = [];
 
 		$http.defaults.withCredentials = true;
-		Subscriptions.query({}, function(data){
+		var update = function() {
+			Subscriptions.query({}, function(data){
+					console.log(data);
+					$scope.subscriptions = data.objects;
+			});	
+		};
+
+
+		update();
+
+
+		Users.query({}, function(data){
 				console.log(data);
-				$scope.subscriptions = data.objects;
-		});	
+				
+		});
 
 		$scope.save = function() {
-			console.log("called save()");
+			var obj = {};
+			if($scope.subUser) {
+				obj = {
+					"subscribee": {
+							"alias":$scope.subUser
+						},
+					 "tags" : $scope.tags
+				};
+			} else {
+				obj = {
+					 "tags" : $scope.tags
+				};
+			}
+
+			Subscriptions.create(obj, function(){ 
+				clearForm();
+				update();
+			});
+		};
+		
+		var clearForm = function() {
+			$scope.subUser = "";
+			$scope.currentTag = "";
+			$scope.tags = [];
 		};
 
 		$scope.cancel = function() {				
 			if (confirm("Are you sure you want to discard this subscription?")) {
 				//clear fields.
+				clearForm();
 			}
 		};
 
@@ -30,9 +65,6 @@ function SubscriptionsCtrl($scope, $http, $location, $routeParams, Subscriptions
 					name : $scope.currentTag
 				});
 			}
-			
-			$scope.currentTag = '';	
-			console.log('tag finished');	
 		};
 
 		$scope.removeTag = function(tagName) {
@@ -45,5 +77,5 @@ function SubscriptionsCtrl($scope, $http, $location, $routeParams, Subscriptions
 }
 
 // define injections
-SubscriptionsCtrl.$inject = ['$scope', '$http', '$location', '$routeParams', 'Subscriptions'];
+SubscriptionsCtrl.$inject = ['$scope', '$http', '$location', '$routeParams', 'Subscriptions', 'Users'];
 
