@@ -28,7 +28,7 @@ describe("WhatUp Controllers", function(){
 		  
 		it("Creates new post", function() {
 			console.log("Logfile");
-			expect($routeParams.postID).toBeUndefined();
+			//expect($routeParams.postID).toBeUndefined();
 			expect(scope.post).toBe(new Posts({
 				topic : '',
 				body : '',

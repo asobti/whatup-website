@@ -12,23 +12,24 @@ describe("WhatUp Controllers", function(){
 	
 	beforeEach(module('WhatUpServices'));
 	
-	describe("PostCtrl", function() {
+	describe("TagCtrl", function() {
 		
 		var scope, ctrl, $httpBackend;
 		var converter;
 		
 		beforeEach(inject(function($rootScope, _$httpBackend_, $routeParams, Tags) {
-		  $httpBackend = _$httpBackend_;
+			$httpBackend = _$httpBackend_;
 		  
-		  $routeParams = {tagID:};
-		  scope = $rootScope.$new();
-		  ctrl = $controller(TagCtrl, {$scope: scope});
+			$routeParams = {tagID:};
+			scope = $rootScope.$new();
+			scope.tag = [];
+			ctrl = $controller(TagCtrl, {$scope: scope});
 		 // convertor = new Attacklab.showdown.converter();
-	}));
-	
-	describe("Tag Controller", function(){
+		}));
 	
 		it("Tag Controller Test", function(){
+			expect(scope.tag).toBe();
+			//http	
 			expect(scope.tag).toBe(Tags.get({tagId : $routeParams.tagId}));
 		});
 
