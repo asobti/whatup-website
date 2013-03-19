@@ -10,17 +10,28 @@ describe("WhatUp Controllers", function(){
 		});
 	});
   
-	beforeEach(module('WhatUpServices'));
+	//beforeEach(module('WhatUpServices'));
 	
 	describe("PostCtrl", function() {
 		
 		var scope, ctrl, $httpBackend;
 		var converter;
+		// var newPostData = function(){			
+          // return {
+			  // new Posts({
+					// topic : '',
+					// body : '',
+					// user_id : '',
+					// tags : []
+				// });
+			// }
+		// };
 		
 		beforeEach(inject(function($rootScope, _$httpBackend_, $routeParams, Posts, Users) {
 		  $httpBackend = _$httpBackend_;
-		  
-		  $routeParams = {postID: 'undefined'};
+		  $httpBackend.expectGET('#/posts/').respond(newPostData);
+					
+		  $routeParams.postID = 'undefined';
 		  scope = $rootScope.$new();
 		  ctrl = $controller(PostCtrl, {$scope: scope});
 		 // convertor = new Attacklab.showdown.converter();
@@ -28,12 +39,9 @@ describe("WhatUp Controllers", function(){
 		  
 		it("Creates new post", function() {
 			console.log("Logfile");
-			//expect($routeParams.postID).toBeUndefined();
-			expect(scope.post).toBe(new Posts({
-				topic : '',
-				body : '',
-				user_id : '',
-				tags : []}));		
+			//$httpBackend.flush();
+			expect($routeParams.postID).toBe('undefined');
+			expect(scope.post).toEqualData(newPostData());		
 		});
 		
 		it("Fetch users", function() {
@@ -57,22 +65,19 @@ describe("WhatUp Controllers", function(){
 		});
 		
 		it("Saves post", function(post){
-			console.log("Logfile");
 			expect(scope.modal.body).toMatch('Post edited successfully. Redirecting...');
-			//expect(scope.modal.image).toMatch('assets/img/loaders/check.png');
+			expect(scope.modal.image).toMatch('assets/img/loaders/check.png');
 		});
 		
 		it("Deletes post", function(){
-			console.log("Logfile");
 			expect(scope.modal.body).toMatch('Post deleted successfully. Redirecting...');
-			//expect(scope.modal.image).toMatch('assets/img/loaders/check.png');
+			expect(scope.modal.image).toMatch('assets/img/loaders/check.png');
 		});
 		
-		it("Processes dialogue", function(){
-			console.log("Logfile");
+		it("Processes dialogue", function(msg){
 			expect(scope.modal.header).toMatch("Project WhatUp");
-			expect(scope.modal.body).toBe();
-			//expect(scope.modal.image).toMatch('assets/img/loaders/working.gif');
+			expect(scope.modal.body).toBe(msg);
+			expect(scope.modal.image).toMatch('assets/img/loaders/working.gif');
 		});
 	});
 });

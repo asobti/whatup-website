@@ -28,7 +28,7 @@ describe("WhatUp Controllers", function(){
 		}));
 	
 		it("Tag Controller Test", function(){
-			expect(scope.tag).toBe();
+			//expect(scope.tag).toBe();
 			//http	
 			expect(scope.tag).toBe(Tags.get({tagId : $routeParams.tagId}));
 		});
