@@ -37,7 +37,7 @@ function SubscriptionsCtrl($scope, $http, $location, $routeParams, Subscriptions
 
 		$scope.save = function() {
 			console.log($scope.sub);
-			if($scope.sub.subscribee.alias == "") {
+			if($scope.sub.subscribee === null || $scope.sub.subscribee.alias == "") {
 				delete $scope.sub.subscribee;
 			}	
 			if(typeof $scope.sub.id === 'undefined') {
