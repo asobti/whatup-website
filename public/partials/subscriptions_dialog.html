@@ -25,10 +25,11 @@
 	</div>
 </div>
 
-
+<h4 class="sub-header"> Your subscriptions </h5>
 <div class="subscription-break">
 </div>
 
+<div class="row tag-row no-subscriptions-msg" ng-hide="subscriptions.objects.length">You have no subscriptions added.</div>
 <div class="row tag-row subscription-tags" ng-repeat="subscription in subscriptions.objects">
 	<button class="btn btn-primary pull-right header-btn" style="margin-left: 10px;" id="delete_sub" title="Remove Subscription" ng-click="deleteSub(subscription)">
 		<i class="icon-trash icon-white"></i>
@@ -40,11 +41,3 @@
 	<div class="subscription-user" ng-show="subscription.subscribee.alias"></div>
 	<span class="label label-success post-tag" ng-repeat="tag in subscription.tags">{{tag.name}}</span>
 </div>
-
-<!-- <table class="table" id="subscriptions_list">
-	<tr class="subscription" ng-repeat="subscription in subscriptions">
-		<td>{{$subscription.user}}</td>		
-		<td ng-repeat="tag in subscription.tags">{{tag}}</td>
-	</tr>
-</table>
- -->
