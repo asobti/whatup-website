@@ -46,7 +46,7 @@
               <a href="#/subscriptions" class="btn btn-primary pull-right  header-btn" style="margin-left: 10px;" id="settings_btn" title="Settings">
                 <i class="icon-wrench icon-white"></i>                
               </a>
-              <a href="http://s-api.projectwhatup.us/logout" class="btn btn-primary pull-right  header-btn" id="logout_btn" title="Logout">
+              <a href="http://api.projectwhatup.us/logout" class="btn btn-primary pull-right  header-btn" id="logout_btn" title="Logout">
                 <i class="icon-off icon-white"></i>		            
               </a>
             </div>
