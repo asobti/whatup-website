@@ -51,7 +51,7 @@ whatUp.directive('autoCompleteUsers', function() {
 				});
 			},
 			focus : function(event, ui) {
-				scope.subUser = ui.item.value;
+				scope.sub.subscribee.alias = ui.item.value;
 				scope.$apply();
 			}
 		});

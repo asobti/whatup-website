@@ -4,16 +4,16 @@
 		<div id="subscription_dialog">
 			<h4>User</h4>	
 			<div class="row tag-row">
-				<input type="text" placeholder="User" ng-model="subUser" tag-input input-role="subUser" auto-complete-users/>
+				<input type="text" placeholder="User" ng-model="sub.subscribee.alias" tag-input input-role="subUser" auto-complete-users/>
 			</div>
 			<h4>Tags</h4>
 			<div class="row tag-row">
-				<span ng-repeat="tag in tags" class="label label-success post-tag">				
+				<span ng-repeat="tag in sub.tags" class="label label-success post-tag">				
 					{{ tag.name }}
 					<i title="Remove tag" class="icon-remove icon-white" ng-click="removeTag(tag.name)"></i>
 				</span>				
-				<br ng-show="tags.length"/>
-				<br ng-show="tags.length"/>
+				<br ng-show="sub.tags.length"/>
+				<br ng-show="sub.tags.length"/>
 				<input type="text" id="post_tags" placeholder="Tags" ng-model="currentTag" tag-input input-role="currentTag" auto-complete/>
 			</div>
 			<div id="clearfix"></div>
@@ -29,11 +29,11 @@
 <div class="subscription-break">
 </div>
 
-<div class="row tag-row subscription-tags" ng-repeat="subscription in subscriptions">
-	<button class="btn btn-primary pull-right header-btn" style="margin-left: 10px;" id="delete_sub" title="Remove Subscription" ng-click="deleteSub(subscription.id)">
+<div class="row tag-row subscription-tags" ng-repeat="subscription in subscriptions.objects">
+	<button class="btn btn-primary pull-right header-btn" style="margin-left: 10px;" id="delete_sub" title="Remove Subscription" ng-click="deleteSub(subscription)">
 		<i class="icon-trash icon-white"></i>
 	</button>
-	<button class="btn btn-primary pull-right header-btn" style="margin-left: 10px;" id="edit_sub" title="Edit Subscription" ng-click="editSub(subscription.id)">
+	<button class="btn btn-primary pull-right header-btn" style="margin-left: 10px;" id="edit_sub" title="Edit Subscription" ng-click="editSub(subscription)">
 		<i class="icon-edit icon-white"></i>
 	</button>
 	<span class="label label-warning post-tag" ng-show="subscription.subscribee.alias">@{{subscription.subscribee.alias}}</span>
