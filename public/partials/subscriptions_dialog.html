@@ -30,6 +30,12 @@
 </div>
 
 <div class="row tag-row subscription-tags" ng-repeat="subscription in subscriptions">
+	<button class="btn btn-primary pull-right header-btn" style="margin-left: 10px;" id="delete_sub" title="Remove Subscription" ng-click="deleteSub(subscription.id)">
+		<i class="icon-trash icon-white"></i>
+	</button>
+	<button class="btn btn-primary pull-right header-btn" style="margin-left: 10px;" id="edit_sub" title="Edit Subscription" ng-click="editSub(subscription.id)">
+		<i class="icon-edit icon-white"></i>
+	</button>
 	<span class="label label-warning post-tag" ng-show="subscription.subscribee.alias">@{{subscription.subscribee.alias}}</span>
 	<div class="subscription-user" ng-show="subscription.subscribee.alias"></div>
 	<span class="label label-success post-tag" ng-repeat="tag in subscription.tags">{{tag.name}}</span>
