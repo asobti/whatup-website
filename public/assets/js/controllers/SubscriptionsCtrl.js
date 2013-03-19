@@ -27,13 +27,22 @@ function SubscriptionsCtrl($scope, $http, $location, $routeParams, Subscriptions
 						"alias":$scope.subUser
 					}, 
 					"tags" : $scope.tags
+			}, function(){ 
+				clearForm();
+				update();
 			});
-			update();
+		};
+		
+		var clearForm = function() {
+			$scope.subUser = "";
+			$scope.currentTag = "";
+			$scope.tags = [];
 		};
 
 		$scope.cancel = function() {				
 			if (confirm("Are you sure you want to discard this subscription?")) {
 				//clear fields.
+				clearForm();
 			}
 		};
 
