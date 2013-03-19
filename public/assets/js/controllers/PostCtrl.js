@@ -203,7 +203,7 @@ function PostCtrl($scope, $http, $routeParams, Posts, Users) {
 			$scope.modal.image = 'assets/img/loaders/check.png';
 
 			// redirect to homepage
-			setTimeout(function() { goBack(); }, 1000);
+			setTimeout(function() { redirectHomepage(); }, 1000);
 		}, function(err){
 			alert('Error. See console for details');
 			console.log(err);
