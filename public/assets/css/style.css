@@ -400,3 +400,15 @@ table#revisions-table td {
 .no-subscriptions-msg {
 	font-weight: bold;
 }
+.new-sub-buttons {
+	text-align: center;
+	margin: 0;
+	padding: 0;
+	margin-top: 20px;
+}
+.new-sub-buttons button {
+	width: 80px;
+}
+.new-sub-buttons button:last-child {
+	margin-left: 20px;
+}
