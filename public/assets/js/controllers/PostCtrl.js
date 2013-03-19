@@ -338,6 +338,7 @@ function PostCtrl($scope, $http, $routeParams, Posts, Users) {
 	};
 
 	var goBack = function() {
+		$('#working-dialog').modal('hide');
 		window.history.back();
 	};
 }

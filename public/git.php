@@ -49,7 +49,7 @@ file_put_contents($log_file, $deploy_result, FILE_APPEND);
 // if there was a failure, send email
 if (!$deploy_success) {
         $to = implode(',', $report_to);
-        mail($to, "ProjectWhatUp Deployment Failure", $deploy_result);
+       // mail($to, "ProjectWhatUp Deployment Failure", $deploy_result);
 }
 
 ?>
