@@ -60,7 +60,7 @@
 					<td style="width: 55px">
 						<button href="#revision-modal" class="btn" data-toggle="modal" ng-click="revisions.currentRevision=revision">View</button>						
 					</td>
-					<td>{{ revision.user.alias || "Placeholder Name" }}</td>
+					<td>{{ users[revision.user_id].name }}</td>
 					<td>{{ timeAgo(revision.modified_at) }}</td>					
 				</tr>
 			</tbody>

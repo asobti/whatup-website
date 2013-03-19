@@ -23,6 +23,8 @@ function PostCtrl($scope, $http, $routeParams, Posts, Users) {
 		currentRevision : null
 	};
 
+	$scope.users = {};
+
 	if (typeof $routeParams.postId === 'undefined') {		
 		$scope.post = new Posts({
 			topic : '',
@@ -37,13 +39,25 @@ function PostCtrl($scope, $http, $routeParams, Posts, Users) {
 							'postId' : $routeParams.postId
 						}, function() {
 							$scope.tags = getTagsAsString();
-							console.log($scope.post.revisions);
+							getRevisionUsers();
 						}, function(err) {
 							if (err.status === 401) {
 								whatUp.loginRedirect(err.data.url);
 							}
 						});
 	}
+
+	var getRevisionUsers = function() {
+		$.each($scope.post.revisions, function(idx, revision) {
+			if (typeof $scope.users[revision.user_id] === 'undefined') {
+				var user = Users.get({userId : revision.user_id}, function(data) {
+					$scope.users[revision.user_id] = data;
+				});
+			} else {
+				console.log('defined');
+			}
+		});
+	};
 
 	// submit the post to save it
 	$scope.submit = function() {
@@ -63,11 +77,13 @@ function PostCtrl($scope, $http, $routeParams, Posts, Users) {
 	};
 
 	$scope.postBodyAsHtml = function() {
-		return converter.makeHtml($scope.post.body);
+		if ($scope.post.body)
+			return converter.makeHtml($scope.post.body);
 	}
 
-	$scope.revisionBodyAsHtml = function() {		
-		return converter.makeHtml($scope.revisions.currentRevision.body);
+	$scope.revisionBodyAsHtml = function() {	
+		if ($scope.revisions.currentRevision) 	
+			return converter.makeHtml($scope.revisions.currentRevision.body);
 	}
 
 	$scope.uploadAttachment = function() {
@@ -294,6 +310,7 @@ function PostCtrl($scope, $http, $routeParams, Posts, Users) {
 	*/
 
 	$scope.revisionsToggle = function(){
+		console.log($scope.users);
 		$scope.revisions.viewing = !$scope.revisions.viewing;
 		$scope.revisions.text = ($scope.revisions.viewing) ? 'Hide Past Revisions' : 'View Past Revisions';		
 		$scope.revisions.icon = ($scope.revisions.viewing) ? 'icon-minus' : 'icon-plus';
@@ -304,6 +321,8 @@ function PostCtrl($scope, $http, $routeParams, Posts, Users) {
 		created_at += "Z";
 		return $.timeago(created_at);
 	};
+
+
 
 	$scope.rollback = function() {
 		if (confirm('Are you sure you want to rollback this post?')) {
