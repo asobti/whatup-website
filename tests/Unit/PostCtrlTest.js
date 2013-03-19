@@ -16,16 +16,16 @@ describe("WhatUp Controllers", function(){
 		
 		var scope, ctrl, $httpBackend;
 		var converter;
-		// var newPostData = function(){			
-          // return {
-			  // new Posts({
-					// topic : '',
-					// body : '',
-					// user_id : '',
-					// tags : []
-				// });
-			// }
-		// };
+		var newPostData = function(){			
+			return {
+			   new Posts({
+					 topic : '',
+					 body : '',
+					 user_id : '',
+					 tags : []
+				 });
+			 }
+		};
 		
 		beforeEach(inject(function($rootScope, _$httpBackend_, $routeParams, Posts, Users) {
 		  $httpBackend = _$httpBackend_;
