@@ -228,35 +228,12 @@ function PostsCtrl($scope, $http, $location, $routeParams, eventBus, Posts, Subs
 			created_at += "Z";
 			return $.timeago(created_at);
 		};
+
+		$scope.md5 = function(word) { 
+			console.log(word);
+			return md5(word.toLowerCase().trim()); 
+		};
 }
 
 // define injections
 PostsCtrl.$inject = ['$scope', '$http', '$location', '$routeParams', 'EventBus', 'Posts', 'Subscribed'];
-
-
-//console.log(searchData);
-/*
-//This gives us full control but the API can't handle it ;)
-var and_clauses = [];
-var or_clauses = searchData.split(" OR ");
-var moves = [];
-for (var i in or_clauses) {
-	var clause = or_clauses[i];
-	var sub_and_clauses = clause.split(" AND ");
-	if (sub_and_clauses.length > 1) {
-		var tmp_and_clauses = [];
-		moves.push(i);
-		for (var j in sub_and_clauses) {
-			var sub_clause = sub_and_clauses[j];
-			tmp_and_clauses.push(sub_clause);
-		}
-		and_clauses.push(tmp_and_clauses);
-	}
-	
-}
-for (var i in moves) {
-	var shift = moves[i];
-	or_clauses[shift] = and_clauses[i];
-}
-*/
-//console.log(clauses);
