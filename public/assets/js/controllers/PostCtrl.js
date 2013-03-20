@@ -316,14 +316,6 @@ function PostCtrl($scope, $http, $routeParams, Posts, Users) {
 		$scope.revisions.icon = ($scope.revisions.viewing) ? 'icon-minus' : 'icon-plus';
 	}
 
-	$scope.timeAgo = function(created_at) {
-		// mark it with UTC time
-		created_at += "Z";
-		return $.timeago(created_at);
-	};
-
-
-
 	$scope.rollback = function() {
 		if (confirm('Are you sure you want to rollback this post?')) {
 			$scope.post.topic = $scope.revisions.currentRevision.topic;
@@ -359,6 +351,20 @@ function PostCtrl($scope, $http, $routeParams, Posts, Users) {
 	var goBack = function() {
 		$('#working-dialog').modal('hide');
 		window.history.back();
+	};
+
+	/*
+		Helper Function
+	*/
+
+	$scope.timeAgo = function(created_at) {
+		// mark it with UTC time
+		created_at += "Z";
+		return $.timeago(created_at);
+	};
+
+	$scope.md5 = function(word) { 
+		return md5(word.toLowerCase().trim()); 
 	};
 }
 

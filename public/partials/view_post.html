@@ -18,7 +18,7 @@
 
 	<div class="row-fluid info-tags-row">
 		<div class="span3 post-image-info-wrap">
-			<img src="http://placehold.it/80" class="post-user-image" />
+			<img src="http://gravatar.com/avatar/{{md5(post.author.email)}}" class="post-user-image" />
 			<div class="post-info-wrap">
 				<p class="post-info post-user-name">
 					<a href="#">@{{ post.author.name }}</a>
