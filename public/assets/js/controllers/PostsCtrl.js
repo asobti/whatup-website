@@ -230,7 +230,9 @@ function PostsCtrl($scope, $http, $location, $routeParams, eventBus, Posts, Subs
 		};
 
 		$scope.md5 = function(word) { 
-			console.log(word);
+			if (word === null || typeof word === 'undefined') {
+				word = 'null';
+			}
 			return md5(word.toLowerCase().trim()); 
 		};
 }
