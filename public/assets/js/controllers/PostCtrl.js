@@ -364,6 +364,10 @@ function PostCtrl($scope, $http, $routeParams, Posts, Users) {
 	};
 
 	$scope.md5 = function(word) { 
+		if (word === null || typeof word === 'undefined') {
+			word = 'null';
+		}
+		
 		return md5(word.toLowerCase().trim()); 
 	};
 }
