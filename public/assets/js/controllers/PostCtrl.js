@@ -28,8 +28,7 @@ function PostCtrl($scope, $http, $routeParams, Posts, Users) {
 	if (typeof $routeParams.postId === 'undefined') {		
 		$scope.post = new Posts({
 			topic : '',
-			body : '',
-			user_id : '',
+			body : '',			
 			tags : [],
 			attachments : [],
 			revisions : []
