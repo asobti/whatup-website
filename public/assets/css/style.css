@@ -70,9 +70,16 @@ body {
 	display: hidden;
 }
 .info-tags-row {
-	padding: 0 10px;
+	padding: 0;
+}
+.post .post-user-modified {
+	font-weight: bold;
+	margin: 0;
+	margin-top: 10px;	
 }
 .post .post-info-wrap,
+.post .post-info-wrap-modified,
+.post-image-info-wrap-modified,
 .single-post .post-info-wrap {
 	padding-left: 10px;
 	display: inline-block;
@@ -102,9 +109,13 @@ body {
 	margin-right: 10px;
 	text-align: right;
 }
-.post .post-image-info-wrap,
-.single-post .post-image-info-wrap {
-	width: 30%;
+.post .post-image-info-wrap-modified {
+	display: inline-block;
+}
+.post .post-image-info-wrap {
+	display: inline-block;
+	margin-left: 20px;
+	vertical-align: top;
 }
 .pagination {
 	margin-top: 40px;
