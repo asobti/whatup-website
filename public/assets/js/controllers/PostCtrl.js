@@ -29,7 +29,7 @@ function PostCtrl($scope, $http, $routeParams, Posts, Users) {
 		$scope.post = new Posts({
 			topic : '',
 			body : '',
-			user_id : '',
+			created_by_id : '',
 			tags : [],
 			attachments : [],
 			revisions : []
