@@ -1,13 +1,13 @@
 <div class="row content-header">
-	<div class="span2">
+	<div class="span2" style="margin: 5px 0;">
 		<button class="btn btn-large" ng-class="{recent:'', subscribed:'btn-primary'}[mode]" ng-click="subscriptions()">Subscriptions</button>
 	</div>
-	<div class="span5" id="search_container">
+	<div class="span5" style="margin: 5px 0;" id="search_container">
 		<form class="navbar-search offset2">
 		  <input type="text" class="search-query" id="search_form" placeholder="Search" ng-model="searchData" enter-key-down="search()">
 		</form>
 	</div>
-	<div class="span2 pull-right" style="text-align:right">
+	<div class="span2 pull-right" style="text-align:right; margin: 5px 0;">
 		<button class="btn btn-large" ng-class="{recent:'btn-primary', subscribed:''}[mode]" ng-click="search()">Recent</button>
 	</div>
 </div>
