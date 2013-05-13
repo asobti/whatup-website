@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>WhatUp</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
 
@@ -38,6 +38,12 @@
       <div class="navbar-inner">
         <div class="header-container">          
           <a class="brand" href="#">WhatUp</a>
+	  <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+	
           <div id="new_post_btn_container">
             <div class="nav-collapse collapse">
               <a href="#posts/new" class="btn btn-primary pull-right header-btn" style="margin-left: 10px;" id="new_post_btn" title="New Post">
